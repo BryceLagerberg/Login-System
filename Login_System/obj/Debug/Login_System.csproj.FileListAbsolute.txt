@@ -1,0 +1,9 @@
+C:\Users\Naaro\Documents\Visual Studio 2017\Projects\Login_System\Login_System\bin\Debug\Login_System.exe.config
+C:\Users\Naaro\Documents\Visual Studio 2017\Projects\Login_System\Login_System\bin\Debug\Login_System.exe
+C:\Users\Naaro\Documents\Visual Studio 2017\Projects\Login_System\Login_System\bin\Debug\Login_System.pdb
+C:\Users\Naaro\Documents\Visual Studio 2017\Projects\Login_System\Login_System\obj\Debug\Login_System.csprojAssemblyReference.cache
+C:\Users\Naaro\Documents\Visual Studio 2017\Projects\Login_System\Login_System\obj\Debug\Login_System.Properties.Resources.resources
+C:\Users\Naaro\Documents\Visual Studio 2017\Projects\Login_System\Login_System\obj\Debug\Login_System.csproj.GenerateResource.cache
+C:\Users\Naaro\Documents\Visual Studio 2017\Projects\Login_System\Login_System\obj\Debug\Login_System.csproj.CoreCompileInputs.cache
+C:\Users\Naaro\Documents\Visual Studio 2017\Projects\Login_System\Login_System\obj\Debug\Login_System.exe
+C:\Users\Naaro\Documents\Visual Studio 2017\Projects\Login_System\Login_System\obj\Debug\Login_System.pdb
