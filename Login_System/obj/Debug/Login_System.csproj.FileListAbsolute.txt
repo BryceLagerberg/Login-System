@@ -16,3 +16,12 @@ C:\Users\bryce\Desktop\Login-System\Login_System\obj\Debug\Login_System.csproj.G
 C:\Users\bryce\Desktop\Login-System\Login_System\obj\Debug\Login_System.exe
 C:\Users\bryce\Desktop\Login-System\Login_System\obj\Debug\Login_System.pdb
 C:\Users\bryce\Desktop\Login-System\Login_System\obj\Debug\Login_System.LoginWindow1.resources
+C:\Users\bryce\Login-System\Login_System\bin\Debug\Login_System.exe.config
+C:\Users\bryce\Login-System\Login_System\bin\Debug\Login_System.exe
+C:\Users\bryce\Login-System\Login_System\bin\Debug\Login_System.pdb
+C:\Users\bryce\Login-System\Login_System\obj\Debug\Login_System.csprojAssemblyReference.cache
+C:\Users\bryce\Login-System\Login_System\obj\Debug\Login_System.LoginWindow1.resources
+C:\Users\bryce\Login-System\Login_System\obj\Debug\Login_System.Properties.Resources.resources
+C:\Users\bryce\Login-System\Login_System\obj\Debug\Login_System.csproj.GenerateResource.cache
+C:\Users\bryce\Login-System\Login_System\obj\Debug\Login_System.exe
+C:\Users\bryce\Login-System\Login_System\obj\Debug\Login_System.pdb

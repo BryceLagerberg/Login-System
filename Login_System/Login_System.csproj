@@ -52,6 +52,12 @@
     <Compile Include="LoginWindow1.Designer.cs">
       <DependentUpon>LoginWindow1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ProfileWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ProfileWindow.Designer.cs">
+      <DependentUpon>ProfileWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="LoginWindow1.resx">
