@@ -13,7 +13,7 @@ namespace Login_System
         public const string SQLServer = "BRYCELOGERBURG\\SQLEXPRESS";
         
         //Create Account Function
-        public void CreateAccount(String username, String password, String email)
+        public void CreateAccount(String username, String password, String email, String firstname, String lastname)
         {
             // a visual textbox telling username and password after creating an account
             //MessageBox.Show("Username : " + username + " Password : " + password);
@@ -28,7 +28,7 @@ namespace Login_System
             string connString = csb.ToString();
 
             //sql command to enter data into our sql database
-            string queryString = "INSERT INTO [Login Stats](Username, Password, LoggedIn, AccountCreated, LastLogin, Email) VALUES ('" + username + "', '" + password + "', 0, GETDATE(), NULL, '" + email + "');";
+            string queryString = "INSERT INTO [Login Stats](Username, Password, LoggedIn, AccountCreated, LastLogin, Email, FirstName, LastName) VALUES ('" + username + "', '" + password + "', 0, GETDATE(), NULL, '" + email + "', '"+firstname+ "', '" + lastname + "');";
             //string queryString = "select * from [Login Stats]";
 
             using (SqlConnection connection = new SqlConnection(connString))
