@@ -13,10 +13,7 @@ namespace Login_System
 {
     public partial class LoginWindow1 : Form
     {
-        private const string DataBase = "BrycesDB";
-        private const string SQLServer = "BRYCELOGERBURG\\SQLEXPRESS";
 
-        private List<ProfileData> Accounts = new List<ProfileData>();
         private ProfileWindow PW = new ProfileWindow();
         private AccountInfo AI = new AccountInfo();
         public LoginWindow1()
@@ -44,22 +41,5 @@ namespace Login_System
 
     }
 
-    public class ProfileData{
-        public string Username;
-        public string Password;
-        public bool LoggedIn;
-        public DateTime LastLogin;
 
-
-        public ProfileData()
-        {
-
-        }
-
-        public ProfileData(string username, string password, bool loggedin)
-        {
-
-        }
-
-    }
 }
