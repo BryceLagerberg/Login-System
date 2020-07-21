@@ -74,6 +74,9 @@
     <EmbeddedResource Include="LoginWindow1.resx">
       <DependentUpon>LoginWindow1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ProfileWindow.resx">
+      <DependentUpon>ProfileWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

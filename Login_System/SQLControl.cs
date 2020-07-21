@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,7 @@ namespace Login_System
     class SQLControl
     {
         public const string DataBase = "BrycesDB";
-        public const string SQLServer = "BRYCELOGERBURG\\SQLEXPRESS";
+        public const string SQLServer = "MSI";
         
         //Create Account Function
         public void CreateAccount(String username, String password, String email, String firstname, String lastname)

@@ -23,5 +23,15 @@ namespace Login_System
             SC.CreateAccount(textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text);
             this.Hide();
         }
+
+        private void AccountInfo_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

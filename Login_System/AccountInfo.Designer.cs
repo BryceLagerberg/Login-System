@@ -44,42 +44,48 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox1.Location = new System.Drawing.Point(109, 10);
+            this.textBox1.Location = new System.Drawing.Point(145, 12);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(159, 23);
+            this.textBox1.Size = new System.Drawing.Size(211, 26);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox2.Location = new System.Drawing.Point(109, 39);
+            this.textBox2.Location = new System.Drawing.Point(145, 48);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(159, 23);
+            this.textBox2.Size = new System.Drawing.Size(211, 26);
             this.textBox2.TabIndex = 1;
             // 
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox3.Location = new System.Drawing.Point(109, 68);
+            this.textBox3.Location = new System.Drawing.Point(145, 84);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(159, 23);
+            this.textBox3.Size = new System.Drawing.Size(211, 26);
             this.textBox3.TabIndex = 2;
             // 
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox4.Location = new System.Drawing.Point(109, 97);
+            this.textBox4.Location = new System.Drawing.Point(145, 119);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(159, 23);
+            this.textBox4.Size = new System.Drawing.Size(211, 26);
             this.textBox4.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(12, 103);
+            this.label1.Location = new System.Drawing.Point(16, 127);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 17);
+            this.label1.Size = new System.Drawing.Size(97, 20);
             this.label1.TabIndex = 4;
             this.label1.Text = "First Name:";
             // 
@@ -87,9 +93,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label2.Location = new System.Drawing.Point(12, 131);
+            this.label2.Location = new System.Drawing.Point(16, 161);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 17);
+            this.label2.Size = new System.Drawing.Size(96, 20);
             this.label2.TabIndex = 5;
             this.label2.Text = "Last Name:";
             // 
@@ -97,17 +104,19 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label3.Location = new System.Drawing.Point(12, 74);
+            this.label3.Location = new System.Drawing.Point(16, 91);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 17);
+            this.label3.Size = new System.Drawing.Size(56, 20);
             this.label3.TabIndex = 6;
             this.label3.Text = "Email:";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(14, 162);
+            this.button1.Location = new System.Drawing.Point(19, 199);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(254, 44);
+            this.button1.Size = new System.Drawing.Size(339, 54);
             this.button1.TabIndex = 5;
             this.button1.Text = "Save";
             this.button1.UseVisualStyleBackColor = true;
@@ -116,20 +125,19 @@
             // textBox5
             // 
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox5.Location = new System.Drawing.Point(109, 125);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox5.Location = new System.Drawing.Point(145, 154);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(159, 23);
+            this.textBox5.Size = new System.Drawing.Size(211, 26);
             this.textBox5.TabIndex = 4;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label5.Location = new System.Drawing.Point(11, 44);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(15, 54);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 17);
+            this.label5.Size = new System.Drawing.Size(88, 20);
             this.label5.TabIndex = 12;
             this.label5.Text = "Password:";
             // 
@@ -137,18 +145,17 @@
             // 
             this.LoginWindow.AutoSize = true;
             this.LoginWindow.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.LoginWindow.Location = new System.Drawing.Point(11, 16);
-            this.LoginWindow.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LoginWindow.Location = new System.Drawing.Point(15, 20);
             this.LoginWindow.Name = "LoginWindow";
-            this.LoginWindow.Size = new System.Drawing.Size(77, 17);
+            this.LoginWindow.Size = new System.Drawing.Size(91, 20);
             this.LoginWindow.TabIndex = 10;
             this.LoginWindow.Text = "Username:";
             // 
             // AccountInfo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 221);
+            this.ClientSize = new System.Drawing.Size(372, 272);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.LoginWindow);
@@ -160,8 +167,10 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "AccountInfo";
             this.Text = "AccountInfo";
+            this.Load += new System.EventHandler(this.AccountInfo_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
