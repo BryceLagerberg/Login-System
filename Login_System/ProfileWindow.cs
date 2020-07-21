@@ -17,25 +17,21 @@ namespace Login_System
             InitializeComponent();
         }
 
-        private void ProfileWindow_Load(object sender, EventArgs e)
-        {
 
+        // Version 1
+        public void LoadProfile(string UsernameValue, string Password)
+        {
+            textBox1.Text = UsernameValue;
+            textBox2.Text = Password;
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        // Version 2
+        public void LoadProfile(Profile User)
         {
-
+            textBox1.Text = User.Username;
+            textBox2.Text = User.Password;
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            textBox1.Tag = "default text";
-            textBox1.Text = (string)textBox1.Tag;
-        }
     }
 }

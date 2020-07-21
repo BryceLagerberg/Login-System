@@ -8,11 +8,18 @@ using System.Data.SqlClient;
 
 namespace Login_System
 {
-    class SQLControl
+    public class SQLControl
     {
-        public const string DataBase = "BrycesDB";
-        public const string SQLServer = "MSI";
-        
+        public string DataBase = "BrycesDB";
+        public string SQLServer = "MSI";
+
+
+        public SQLControl(string _DataBase, string _SQLServer)
+        {
+            DataBase = _DataBase;
+            SQLServer = _SQLServer;
+        }
+
         //Create Account Function
         public void CreateAccount(String username, String password, String email, String firstname, String lastname)
         {
@@ -68,5 +75,23 @@ namespace Login_System
                  */
             }
         }
+
+        public Profile Login(string Username, string Password)
+        {
+            // Check that the user exists in the SQL DB with the correct Username / Password
+
+            // if they match
+                // Pull all the information about the user and load it into a Profile
+                Profile User = new Profile();
+                User.Username = Username;
+                User.Password = Password;
+                User.Name = "MyName";
+                return User;
+
+            // If they dont
+            return null;
+
+        }
+
     }
 }

@@ -9,4 +9,12 @@ namespace Login_System
     class Functions
     {
     }
+
+    public class Profile
+    {
+        public string Username;
+        public string Password;
+        public string Name;
+    }
+
 }

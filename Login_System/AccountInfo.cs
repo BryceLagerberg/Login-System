@@ -12,10 +12,13 @@ namespace Login_System
 {
     public partial class AccountInfo : Form
     {
-        SQLControl SC = new SQLControl();
-        public AccountInfo()
+
+        SQLControl SC;
+
+        public AccountInfo(SQLControl SControl)
         {
             InitializeComponent();
+            SC = SControl;
         }
 
         private void button1_Click(object sender, EventArgs e)

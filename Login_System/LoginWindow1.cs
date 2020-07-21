@@ -15,7 +15,16 @@ namespace Login_System
     {
 
         private ProfileWindow PW = new ProfileWindow();
-        private AccountInfo AI = new AccountInfo();
+        SQLControl SC;
+        private AccountInfo AI;
+        
+        // When the form loads
+        private void LoginWindow1_Load(object sender, EventArgs e)
+        {
+            SC = new SQLControl("BrycesDB", "MSI");
+        }
+
+
         public LoginWindow1()
         {
             InitializeComponent();
@@ -24,6 +33,7 @@ namespace Login_System
         // Create Account Button
         private void button2_Click(object sender, EventArgs e)
         {
+            AI = new AccountInfo(SC);
             AI.Show();   
         }
         // Login Button
@@ -32,12 +42,31 @@ namespace Login_System
             Login(textBox1.Text, textBox2.Text);
         }
 
+
+
         // Login Function
         private void Login(String username, String password)
         {
-            PW.Visible = true;
-            this.Visible = false; 
+            // Attempt  Login
+            Profile User = SC.Login(username, password);
+
+
+            // If Success
+            if (User != null)
+            {
+                this.Visible = false;
+                PW.Visible = true;
+                PW.LoadProfile(User);
+            }
+            else
+            {
+                this.Text = "Bad Login";
+                MessageBox.Show("Error Loggin In, \n\n Invalid Username / Password");
+
+            }
+
         }
+
 
     }
 
