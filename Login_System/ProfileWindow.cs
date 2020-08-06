@@ -17,7 +17,7 @@ namespace Login_System
             InitializeComponent();
         }
 
-
+        // having version 1 and 2 for LoadProfile is called overloading
         // Version 1
         public void LoadProfile(string UsernameValue, string Password)
         {
@@ -31,7 +31,6 @@ namespace Login_System
             textBox1.Text = User.Username;
             textBox2.Text = User.Password;
         }
-
 
     }
 }

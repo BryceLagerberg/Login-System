@@ -13,11 +13,14 @@ namespace Login_System
 {
     public partial class LoginWindow1 : Form
     {
+        // global variables-------------------------------------------------------------
 
         private ProfileWindow PW = new ProfileWindow();
         SQLControl SC;
-        private AccountInfo AI;
+        private AccountInfo AI = null;
         
+        // events ---------------------------------------------------------------------
+
         // When the form loads
         private void LoginWindow1_Load(object sender, EventArgs e)
         {
@@ -33,16 +36,23 @@ namespace Login_System
         // Create Account Button
         private void button2_Click(object sender, EventArgs e)
         {
-            AI = new AccountInfo(SC);
-            AI.Show();   
+            if(AI == null )
+            {
+                AI = new AccountInfo(SC);
+            }
+            
+            AI.Show();
+            AI.Location = new Point(this.Location.X + this.Width -10, this.Location.Y);
+
         }
         // Login Button
         private void button1_Click(object sender, EventArgs e)
         {
-            Login(textBox1.Text, textBox2.Text);
+            Login(textBox2.Text, textBox1.Text);
         }
 
 
+        //functions----------------------------------------------------------------------
 
         // Login Function
         private void Login(String username, String password)
@@ -66,8 +76,17 @@ namespace Login_System
             }
 
         }
+        // changes the database address
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            SC.DataBase = textBox3.Text;
+        }
+        //changes the SQL server address
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            SC.DataBase = textBox4.Text;
 
-
+        }
     }
 
 
