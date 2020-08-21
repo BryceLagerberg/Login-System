@@ -17,7 +17,7 @@ namespace Login_System
 
         private ProfileWindow PW = new ProfileWindow();
         SQLControl SC;
-        private AccountInfo AI = null;
+        private CreateAccount AI = null;
         
         // events ---------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ namespace Login_System
         {
             if(AI == null )
             {
-                AI = new AccountInfo(SC);
+                AI = new CreateAccount(SC);
             }
             
             AI.Show();
@@ -66,7 +66,7 @@ namespace Login_System
             {
                 this.Visible = false;
                 PW.Visible = true;
-                PW.LoadProfile(User);
+                PW.LoadProfile(User,SC);
             }
             else
             {

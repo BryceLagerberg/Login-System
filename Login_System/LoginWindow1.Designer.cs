@@ -122,7 +122,7 @@
             this.groupBox1.Controls.Add(this.textBox4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Location = new System.Drawing.Point(364, 16);
+            this.groupBox1.Location = new System.Drawing.Point(399, 20);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(237, 165);
             this.groupBox1.TabIndex = 7;
@@ -182,7 +182,7 @@
             this.groupBox2.Controls.Add(this.textBox2);
             this.groupBox2.Location = new System.Drawing.Point(12, 16);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(346, 281);
+            this.groupBox2.Size = new System.Drawing.Size(381, 281);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Login";
@@ -191,13 +191,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(616, 305);
+            this.ClientSize = new System.Drawing.Size(677, 305);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "LoginWindow1";
-            this.Text = "Login Window";
+            this.Opacity = 0.5D;
+            this.Text = " Login Window";
             this.Load += new System.EventHandler(this.LoginWindow1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

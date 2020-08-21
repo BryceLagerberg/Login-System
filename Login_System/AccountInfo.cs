@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace Login_System
 {
-    public partial class AccountInfo : Form
+    public partial class CreateAccount : Form
     {
 
         SQLControl SC;
 
-        public AccountInfo(SQLControl SControl)
+        public CreateAccount(SQLControl SControl)
         {
             InitializeComponent();
             SC = SControl;
@@ -23,16 +23,11 @@ namespace Login_System
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SC.CreateAccount(textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text);
+            SC.CreateAccount(textBox1.Text, textBox2.Text);
             this.Hide();
         }
 
         private void AccountInfo_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
