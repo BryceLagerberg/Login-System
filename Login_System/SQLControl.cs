@@ -20,13 +20,97 @@ namespace Login_System
         #endregion
 
 
-        public SQLControl(string _DataBase, string _SQLServer)
+        public SQLControl(string _SQLServer, string _DataBase)
         {
             DataBase = _DataBase;
             SQLServer = _SQLServer;
         }
 
         #region Functions
+        public Boolean TestConnection()
+        {
+            //setup for connection to sql server and database
+            SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
+            csb.DataSource = SQLServer;
+            csb.InitialCatalog = DataBase;
+            csb.IntegratedSecurity = true;
+
+            string connString = csb.ToString();
+
+            SqlConnection connection = new SqlConnection(connString);
+
+            try
+            {
+                connection.Open();
+                connection.Close();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
+        // Check For Tables
+        public void TableCheck()
+        {
+            //setup for connection to sql server and database
+            SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
+            csb.DataSource = SQLServer;
+            csb.InitialCatalog = DataBase;
+            csb.IntegratedSecurity = true;
+
+            string connString = csb.ToString();
+
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                command.CommandText = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Account Logins' or TABLE_NAME = 'Account Information'";
+                //makes connection to sql server
+                connection.Open();
+
+                //Check to see what tables exist
+                bool AccountLogins = false;
+                bool AccountInformation = false;
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+
+                    while (reader.Read())
+                    {               
+                        string Table = reader["TABLE_NAME"].ToString();
+                        if(Table == "Account Information")
+                        {
+                            //what needs to be in each table? check for that
+                            AccountInformation = true;
+                        }
+                        else if(Table == "Account Logins")
+                        {
+                            AccountLogins = true;
+                        }
+                        
+  
+                         
+                    }
+                }
+
+                // Create Missing Tables
+                //
+                if (!AccountLogins)
+                {
+                    command.CommandText = "CREATE TABLE BrycesDB.dbo.[Account Logins] (Username varchar(50), Password varchar(50), AccountNumber int,);";
+                    command.ExecuteReader();
+                }
+                else if (AccountInformation == false)
+                {
+                    command.CommandText = "CREATE TABLE BrycesDB.dbo.[Account Information](AccountNumber int, FirstName varchar(50), LastName varchar(50), Email varchar(50), LoggedIn bit, LastLogin datetime, CreatedOn datetime,);";
+                    command.ExecuteReader();
+                }
+
+                connection.Close();
+            }
+        }
+
         //Create Account Function
         public void CreateAccount(String username, String password)
         {
@@ -111,9 +195,10 @@ namespace Login_System
 
                 }
                 
-                // Pulls in the Profile data for the Logging In User
+                
                 if (LoggingInUser != null)
                 {
+                    // Pulls in the Profile data for the Logging In User
                     using (SqlCommand command = connection.CreateCommand())
                     {
 
@@ -135,6 +220,20 @@ namespace Login_System
                                 UserProfile.LastLogin = (reader.IsDBNull(4)) ? DateTime.Now : DateTime.Parse(reader["LastLogin"].ToString());
                             }
                         }
+
+                        connection.Close();
+                    }
+
+                    // Update SQL Values For Login
+                    using (SqlCommand command = connection.CreateCommand())
+                    {
+
+                        string InformationQuery = "SELECT Email, FirstName, LastName, CreatedOn, LastLogin  FROM [Account Information] WHERE AccountNumber = " + LoggingInUser.AccountNumber;
+                        command.CommandText = InformationQuery;
+
+                        //reads sql server output from command execution
+                        Update("UPDATE [Account Information] SET LoggedIn = 1, LastLogin = '" + DateTime.Now.ToString() + "'  WHERE AccountNumber = " + LoggingInUser.AccountNumber);
+
 
                         connection.Close();
                     }
