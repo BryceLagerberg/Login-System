@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace Login_System
 {
+
     public class SQLControl
     {
         #region Global Variables
@@ -162,7 +163,8 @@ namespace Login_System
             // Pull Profile
             using (SqlConnection connection = new SqlConnection(connString))
             {
-                // Compares Username / Password with SQL DB and creates a profile if a match is found
+
+                // Compares Username / Password with SQL DB and grabs the profile if a match is found
                 using (SqlCommand command = connection.CreateCommand())
                 {
                     //sql command to pull username and password from our sql table
@@ -195,14 +197,14 @@ namespace Login_System
 
                 }
                 
-                
+                // Pull in Account Information if a matching Username & Password was found.
                 if (LoggingInUser != null)
                 {
                     // Pulls in the Profile data for the Logging In User
                     using (SqlCommand command = connection.CreateCommand())
                     {
 
-                        string InformationQuery = "SELECT Email, FirstName, LastName, CreatedOn, LastLogin  FROM [Account Information] WHERE AccountNumber = " + LoggingInUser.AccountNumber;
+                        string InformationQuery = "SELECT Email, FirstName, LastName, CreatedOn, LastLogin, ProfilePicture  FROM [Account Information] WHERE AccountNumber = " + LoggingInUser.AccountNumber;
                         command.CommandText = InformationQuery;
 
                         //reads sql server output from command execution
@@ -211,33 +213,23 @@ namespace Login_System
 
                             while (reader.Read())
                             {
-
-                                Profile UserProfile = new Profile();
-                                UserProfile.Email = reader["Email"].ToString();
-                                UserProfile.FirstName = reader["FirstName"].ToString();
-                                UserProfile.LastName = reader["LastName"].ToString();
-                                UserProfile.CreatedOn = (reader.IsDBNull(3)) ? DateTime.Now : DateTime.Parse(reader["CreatedOn"].ToString());
-                                UserProfile.LastLogin = (reader.IsDBNull(4)) ? DateTime.Now : DateTime.Parse(reader["LastLogin"].ToString());
+                                LoggingInUser.Email = reader["Email"].ToString();
+                                LoggingInUser.FirstName = reader["FirstName"].ToString();
+                                LoggingInUser.LastName = reader["LastName"].ToString();
+                                LoggingInUser.CreatedOn = (reader.IsDBNull(3)) ? DateTime.Now : DateTime.Parse(reader["CreatedOn"].ToString());
+                                LoggingInUser.LastLogin = (reader.IsDBNull(4)) ? DateTime.Now : DateTime.Parse(reader["LastLogin"].ToString());
+                                LoggingInUser.ProfilePicture = reader["ProfilePicture"].ToString();
                             }
                         }
 
                         connection.Close();
                     }
 
-                    // Update SQL Values For Login
-                    using (SqlCommand command = connection.CreateCommand())
-                    {
+                    //reads sql server output from command execution
+                    Update("UPDATE [Account Information] SET LoggedIn = 1, LastLogin = '" + DateTime.Now.ToString() + "'  WHERE AccountNumber = " + LoggingInUser.AccountNumber);
 
-                        string InformationQuery = "SELECT Email, FirstName, LastName, CreatedOn, LastLogin  FROM [Account Information] WHERE AccountNumber = " + LoggingInUser.AccountNumber;
-                        command.CommandText = InformationQuery;
-
-                        //reads sql server output from command execution
-                        Update("UPDATE [Account Information] SET LoggedIn = 1, LastLogin = '" + DateTime.Now.ToString() + "'  WHERE AccountNumber = " + LoggingInUser.AccountNumber);
-
-
-                        connection.Close();
-                    }
                 }
+
                 
                 // Close Out Connection
                 connection.Close();
@@ -275,4 +267,5 @@ namespace Login_System
         }
         #endregion
     }
+
 }

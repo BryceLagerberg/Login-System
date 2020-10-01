@@ -23,7 +23,7 @@ namespace Login_System
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SC.CreateAccount(textBox1.Text, textBox2.Text);
+            SC.CreateAccount(textBox1.Text, Functions.Encrypt(textBox2.Text));
             this.Hide();
         }
 

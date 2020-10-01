@@ -18,8 +18,8 @@ namespace Login_System
         // Global Variables-------------------------------------------------------------
 
         private ProfileWindow PW; 
-        SQLControl SC;
         private CreateAccount AI = null;
+
         
 
         // Required...
@@ -34,6 +34,7 @@ namespace Login_System
         private void LoginWindow1_Load(object sender, EventArgs e)
         {
 
+
             // Initlize Size
             this.Size = new Size(301, 190);
 
@@ -41,7 +42,8 @@ namespace Login_System
             PW = new ProfileWindow(this);
 
             // Initilize SQL Control
-            SC = new SQLControl(textBox4.Text, textBox3.Text);
+            SQLControl SC = new SQLControl(textBox4.Text, textBox3.Text);
+            Globals.SC = SC;
 
             // Initilize Verification Thread and run it
             new Thread(VerifyConnection).Start();
@@ -53,7 +55,7 @@ namespace Login_System
         {
             if(AI == null )
             {
-                AI = new CreateAccount(SC);
+                AI = new CreateAccount(Globals.SC);
             }
             
             AI.Show();
@@ -68,7 +70,7 @@ namespace Login_System
         // changes the database address
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            SC.DataBase = textBox3.Text;
+            Globals.SC.DataBase = textBox3.Text;
             label5.ForeColor = Color.Gold;
             label5.Text = "Connecting...";
          
@@ -78,11 +80,33 @@ namespace Login_System
         //changes the SQL server address
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            SC.SQLServer = textBox4.Text;
+            Globals.SC.SQLServer = textBox4.Text;
             label5.ForeColor = Color.Gold;
             label5.Text = "Connecting...";
 
             new Thread(VerifyConnection).Start();
+
+        }
+        //adding flare!
+        private void textBox1_MouseHover(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                textBox1.PasswordChar = '\0';
+                textBox1.Text = "Bet you cant guess me";
+
+            }
+
+        }
+        //adding flare!
+        private void textBox1_MouseLeave(object sender, EventArgs e)
+        {
+
+            if(textBox1.Text == "Bet you cant guess me")
+            {
+                textBox1.Text = "";
+                textBox1.PasswordChar = 'X';
+            }
 
         }
 
@@ -96,39 +120,34 @@ namespace Login_System
         private void Login(String username, String password)
         {
             // Attempt  Login
-            Profile User = SC.Login(username, password);
-
+            Profile User = Globals.SC.Login(username, Functions.Encrypt(password));
+            //User.Password = Functions.Decrypt(User.Password);
 
             // If Success
             if (User != null)
             {
+                Globals.LoggedInUser = User;
+
                 this.Visible = false;
                 PW.Visible = true;
-                PW.LoadProfile(User,SC);
+                textBox1.Text = "";
+                textBox2.Text = "";
+                PW.LoadProfile();
             }
             else
             {
                 this.Text = "Bad Login";
                 MessageBox.Show("Error Loggin In, \n\n Invalid Username / Password");
-
+                textBox1.Text = "";
+                textBox2.Text = "";
             }
 
         }
-        public void Logout()
-        {
-            //log out the user on the sql table using the sql control update function
-            SC.Update("UPDATE [Account Information] SET LoggedIn = 0 WHERE AccountNumber = " + LoggedInUser.AccountNumber);
-            
-            this.Visible = true;
-            PW.Visible = false;
-
-        }
-
 
         // Verifies the Connection state with the SQL server / DB (LAG)
         private void VerifyConnection()
         {
-            VerifyConnectionDelegate(SC.TestConnection());
+            VerifyConnectionDelegate(Globals.SC.TestConnection());
         }
         private void VerifyConnectionDelegate(bool Success)
         {
@@ -147,7 +166,7 @@ namespace Login_System
                     SlideThread.Start();
 
                     // Check SQL DB for required tables
-                    SC.TableCheck();
+                    Globals.SC.TableCheck();
                     //i have 20 min or so before i gotta get reaady
                     //say again?
                     //so much its very loud over here youd hate it through these garbage headphoens
@@ -190,6 +209,7 @@ namespace Login_System
                 this.Invoke(new Action<Size>(SlideDownDelegate), newSize);
             }
         }
+
         // could we add one last grow call in the main so it never ends up too short?
         // i think that the designer doesnt include the header and footer as a size
         //hmm maybe a scale issue?
