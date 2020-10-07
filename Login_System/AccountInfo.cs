@@ -20,7 +20,7 @@ namespace Login_System
             InitializeComponent();
             SC = SControl;
         }
-
+        //create account button
         private void button1_Click(object sender, EventArgs e)
         {
             SC.CreateAccount(textBox1.Text, Functions.Encrypt(textBox2.Text));
@@ -33,6 +33,22 @@ namespace Login_System
         {
             this.Hide();
             e.Cancel = true;
+        }
+        //Username Availability check
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            bool test = Globals.SC.UsernameCheck(textBox1.Text);
+            if (test)
+            {
+                pictureBox1.Image = Login_System.Properties.Resources.CheckMark;
+            }
+            else
+            {
+                pictureBox1.Image = Login_System.Properties.Resources.RedX;
+            }
+
+            // Ignore the blank case where they havn't started typing yet.
+            if (textBox1.Text == "") { pictureBox1.Visible = false; } else { pictureBox1.Visible = true; }
         }
     }
 }

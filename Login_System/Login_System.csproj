@@ -120,6 +120,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="person_paper_id_card_profile_user_icon_131800.ico" />
+    <None Include="Resources\RedX.jpg" />
+    <None Include="Resources\RedX.png" />
+    <None Include="Resources\CheckMark.png" />
     <None Include="Resources\tErl4y.jpg" />
   </ItemGroup>
   <ItemGroup>

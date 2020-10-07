@@ -186,7 +186,7 @@ namespace Login_System
             }
         } // Delegate Function
 
-
+        
         // Slide Functions
         private void SlideDown()
         {

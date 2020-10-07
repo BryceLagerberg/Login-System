@@ -1,0 +1,71 @@
+THINGS THAT HAVE BEEN DONE/FIXED AND UPLOADED----------------------------------------------------------------------------
+
+[x] Write a function to verify the connection to the SQL Server
+
+[x] make a new textbox for email
+
+[x] make a new textbox for CreatedOn
+
+[x] make a new textbox for LastLogin
+
+[x] Add SQL table creation if the database does not have the required tables within it.
+
+[x] Multithread SQLControl's TestConnection function to remove lag
+
+[x] Write a Slide function as a form animation
+
+[x] fix loggedIn reporting in sql table
+
+[X] fix lastname reporting in sql table
+
+[x] fix lastlogin reporting in sql table
+
+[x] *add a change password option
+
+[x] Add Password Mask / Clear Login 
+
+[x] *add a password visible toggle
+
+[x] link the profile photos to individual profiles, probably through sql table
+
+[x] add a toolstrip drop down button menu that we populated with a logout button and pic browser
+
+[x] finish populating the text boxes on ProfileWindow
+
+[x] create a log out button on the Profile Window Form
+
+[x] Add a profile picture option that saves previously used photos for quick access.
+
+[x] Add flare to things
+
+[x] *Add password encrypt / decrypt function to SQLControl
+
+THINGS THAT NEED TO BE DONE/FIXED OR UPLOADED---------------------------------------------------------------------------
+
+[x] *build a function that verifies username availability
+
+[ ] *add a change username option?
+
+[ ] make a chat system
+
+[ ] Open Sql to wifi
+
+[ ] make an applications tab with cool tools like web browser and calculator etc
+
+[ ] *make good flair, remove bad flair
+
+[x] make closing the window log out and close out
+
+[x] add an executable icon/ all the forms
+
+[ ] *add a drag and drop to the profile pictures so you can change easier
+
+[x] *make it so only one person can log in at a time per profile
+
+[x] fix bug with create account window being thrown out not hidden
+
+[ ] add password requirements 
+
+[ ] add check box/ x for password requirements being met or not
+
+[ ] add description for password and username requirements above or below their text boxes

@@ -366,6 +366,7 @@
             this.Name = "ProfileWindow";
             this.Text = "ProfileWindow";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProfileWindow_FormClosing);
+            this.Load += new System.EventHandler(this.ProfileWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

@@ -109,6 +109,7 @@ namespace Login_System
         // Closing Out
         private void ProfileWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Logout();
             LoginWindowForm.Close();
         }
 
@@ -191,8 +192,12 @@ namespace Login_System
 
 
 
+
         #endregion
 
-        
+        private void ProfileWindow_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

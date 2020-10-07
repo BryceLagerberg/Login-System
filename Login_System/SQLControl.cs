@@ -111,37 +111,78 @@ namespace Login_System
                 connection.Close();
             }
         }
-
-        //Create Account Function
-        public void CreateAccount(String username, String password)
+        //checks if a username is unique
+        public bool UsernameCheck(String TestUsername)
         {
-
-
+            bool IsAvailable = true;
             //setup for connection to sql server and database
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
             csb.DataSource = SQLServer;
             csb.InitialCatalog = DataBase;
             csb.IntegratedSecurity = true;
-
             string connString = csb.ToString();
+            //pull all the usernames from account logins
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    string queryString = "Select Username FROM [Account Logins]";
+                    command.CommandText = queryString;
+                    //makes connection to sql server
+                    connection.Open();
 
+                    //reads sql server output from command execution
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+
+                        while (reader.Read())
+                        {
+
+                            Profile UserProfile = new Profile();
+                            UserProfile.Username = reader["Username"].ToString();
+
+                            //compare usernames from account logins to TestUsername
+                            if (UserProfile.Username == TestUsername)
+                            {
+                                IsAvailable = false;
+                            }
+                        }
+                    }
+                }
+            }
+            //return the results
+            return IsAvailable;
+        }
+
+        //Create Account Function
+        public void CreateAccount(String username, String password)
+        {
+            //setup for connection to sql server and database
+            SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
+            csb.DataSource = SQLServer;
+            csb.InitialCatalog = DataBase;
+            csb.IntegratedSecurity = true;
+            string connString = csb.ToString();
             //sql command to enter data into our sql database
             Random rnd = new Random();
             int AccountNumber = rnd.Next(1, 10000);
             string queryString = "INSERT INTO [Account Logins](Username, Password, AccountNumber) VALUES ('" + username + "', '" + password + "', '" + AccountNumber + "' );" +
-                                 "INSERT INTO[Account Information](AccountNumber, CreatedOn, LoggedIn) VALUES("+ AccountNumber +", GETDATE(), 0);";
+                                 "INSERT INTO[Account Information](AccountNumber, CreatedOn, LoggedIn) VALUES(" + AccountNumber + ", GETDATE(), 0);";
+
 
 
             using (SqlConnection connection = new SqlConnection(connString))
-            using (SqlCommand command = connection.CreateCommand())
             {
-                command.CommandText = queryString;
-                //makes connection to sql server
-                connection.Open();
-                //execute the command you made earlier!
-                command.ExecuteReader();
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = queryString;
+                    //makes connection to sql server
+                    connection.Open();
+                    //execute the command you made earlier!
+                    command.ExecuteReader();
+                }
+                MessageBox.Show("Account Created!");
             }
-            MessageBox.Show("Account Created!");
         }
 
         //Login the user function
@@ -204,7 +245,7 @@ namespace Login_System
                     using (SqlCommand command = connection.CreateCommand())
                     {
 
-                        string InformationQuery = "SELECT Email, FirstName, LastName, CreatedOn, LastLogin, ProfilePicture  FROM [Account Information] WHERE AccountNumber = " + LoggingInUser.AccountNumber;
+                        string InformationQuery = "SELECT Email, FirstName, LastName, CreatedOn, LastLogin, ProfilePicture, LoggedIn  FROM [Account Information] WHERE AccountNumber = " + LoggingInUser.AccountNumber;
                         command.CommandText = InformationQuery;
 
                         //reads sql server output from command execution
@@ -219,6 +260,7 @@ namespace Login_System
                                 LoggingInUser.CreatedOn = (reader.IsDBNull(3)) ? DateTime.Now : DateTime.Parse(reader["CreatedOn"].ToString());
                                 LoggingInUser.LastLogin = (reader.IsDBNull(4)) ? DateTime.Now : DateTime.Parse(reader["LastLogin"].ToString());
                                 LoggingInUser.ProfilePicture = reader["ProfilePicture"].ToString();
+                                if ((bool)reader["LoggedIn"] == true) { MessageBox.Show("Already Logged In","Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return null; }
                             }
                         }
 
