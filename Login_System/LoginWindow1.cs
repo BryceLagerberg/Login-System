@@ -58,8 +58,8 @@ namespace Login_System
                 AI = new CreateAccount(Globals.SC);
             }
             
+            AI.Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2)-(this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Height / 2) - (this.Size.Height / 2)); 
             AI.Show();
-            AI.Location = new Point(this.Location.X + this.Width -10, this.Location.Y);
 
         }
         // Login Button
@@ -87,7 +87,7 @@ namespace Login_System
             new Thread(VerifyConnection).Start();
 
         }
-        //adding flare!
+        /*adding flare! (the old shitty version)
         private void textBox1_MouseHover(object sender, EventArgs e)
         {
             if (textBox1.Text == "")
@@ -108,7 +108,7 @@ namespace Login_System
                 textBox1.PasswordChar = 'X';
             }
 
-        }
+        }*/
 
 
 

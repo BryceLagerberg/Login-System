@@ -27,9 +27,12 @@ namespace Login_System
             this.Hide();
         }
 
-        private void AccountInfo_Load(object sender, EventArgs e)
-        {
 
+        // Closing Out/ actually hides the page
+        private void ProfileWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
         }
     }
 }

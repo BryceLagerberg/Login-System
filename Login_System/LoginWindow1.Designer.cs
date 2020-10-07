@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginWindow1));
             this.button1 = new System.Windows.Forms.Button();
             this.LoginWindow = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -86,8 +87,6 @@
             this.textBox1.PasswordChar = 'X';
             this.textBox1.Size = new System.Drawing.Size(195, 26);
             this.textBox1.TabIndex = 2;
-            this.textBox1.MouseHover += new System.EventHandler(this.textBox1_MouseHover);
-            this.textBox1.MouseLeave += new System.EventHandler(this.textBox1_MouseLeave);
             // 
             // textBox2
             // 
@@ -217,6 +216,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "LoginWindow1";
             this.Text = " Login Window";

@@ -15,6 +15,7 @@ namespace Login_System
         // Gloabl Variables 
         private LoginWindow1 LoginWindowForm;
 
+        // Constructor
         public ProfileWindow(LoginWindow1 LoginWindow)
         {
             LoginWindowForm = LoginWindow;
@@ -34,6 +35,7 @@ namespace Login_System
                 Globals.SC.Update("UPDATE [Account Logins] SET Password='" + Globals.LoggedInUser.Password + "' WHERE AccountNumber = " + Globals.LoggedInUser.AccountNumber);
             }
         }
+
         //FirstName TB
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
@@ -75,6 +77,16 @@ namespace Login_System
         {
             ImageBrowse();
         }
+
+        private void logoutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Logout();
+        }
+        private void browseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImageBrowse();
+        }
+
         //edit picture click event that makes password editable and readable or vice versa
         private void pictureBox2_Click(object sender, EventArgs e)
         {
@@ -92,9 +104,12 @@ namespace Login_System
 
         }
 
-        private void ProfileWindow_FormClosing(object sender, System.Windows.Forms.FormClosingEventHandler e)
+        
+
+        // Closing Out
+        private void ProfileWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MessageBox.Show("Worked");
+            LoginWindowForm.Close();
         }
 
         #endregion
@@ -178,14 +193,6 @@ namespace Login_System
 
         #endregion
 
-        private void logoutToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Logout();
-        }
-
-        private void browseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ImageBrowse();
-        }
+        
     }
 }
