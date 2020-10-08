@@ -99,12 +99,13 @@ namespace Login_System
                 //
                 if (!AccountLogins)
                 {
-                    command.CommandText = "CREATE TABLE BrycesDB.dbo.[Account Logins] (Username varchar(50), Password varchar(50), AccountNumber int,);";
+                    command.CommandText = "CREATE TABLE "+DataBase+".dbo.[Account Logins] (Username varchar(50), Password varchar(50), AccountNumber int,);";
                     command.ExecuteReader();
                 }
-                else if (AccountInformation == false)
+                if (!AccountInformation)
                 {
-                    command.CommandText = "CREATE TABLE BrycesDB.dbo.[Account Information](AccountNumber int, FirstName varchar(50), LastName varchar(50), Email varchar(50), LoggedIn bit, LastLogin datetime, CreatedOn datetime,);";
+                    // Email, FirstName, LastName, CreatedOn, LastLogin, ProfilePicture, LoggedIn
+                    command.CommandText = "CREATE TABLE "+ DataBase + ".dbo.[Account Information](AccountNumber int, FirstName varchar(50), LastName varchar(50), Email varchar(50), LoggedIn bit, LastLogin datetime, CreatedOn datetime, ProfilePicture varchar(50));";
                     command.ExecuteReader();
                 }
 

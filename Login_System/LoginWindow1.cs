@@ -176,8 +176,11 @@ namespace Login_System
                 }
                 else
                 {
-                    label5.ForeColor = Color.Red;
-                    label5.Text = "Failed!";
+                    if(label5.Text != "Connected!")
+                    {
+                        label5.ForeColor = Color.Red;
+                        label5.Text = "Failed!";
+                    }
                 }
             }
             else

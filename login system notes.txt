@@ -69,3 +69,12 @@ THINGS THAT NEED TO BE DONE/FIXED OR UPLOADED-----------------------------------
 [ ] add check box/ x for password requirements being met or not
 
 [ ] add description for password and username requirements above or below their text boxes
+
+[ ] Table creation is hard coded to BryceDB
+
+[ ] Table creation is missing columns
+
+[ ] Make an images folder for storing profile pictures on the C:\ drive
+
+[ ] Test connection is locked at connected after a successful connection
+

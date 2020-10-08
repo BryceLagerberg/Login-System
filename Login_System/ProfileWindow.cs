@@ -182,7 +182,7 @@ namespace Login_System
                 Globals.SC.Update("UPDATE [Account Information] SET ProfilePicture ='" + OFD.SafeFileName + "' WHERE AccountNumber = " + Globals.LoggedInUser.AccountNumber);
 
                 // Add a copy of the image to the images folder for quicker reload
-                if (!System.IO.File.Exists("C:\\Users\\bryce\\Desktop\\Login System Project\\Login-System\\Images\\" + OFD.SafeFileName))
+                if (!System.IO.File.Exists("C:\\Users\\bryce\\Desktop\\Login System Project\\Login-System\\Images\\" + OFD.SafeFileName)) // Make a real images destination and use it here
                 {
                     System.IO.File.Copy(OFD.FileName, "C:\\Users\\bryce\\Desktop\\Login System Project\\Login-System\\Images\\" + OFD.SafeFileName, false);
                 }

@@ -52,7 +52,7 @@
             this.button1.Location = new System.Drawing.Point(13, 122);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(321, 47);
+            this.button1.Size = new System.Drawing.Size(398, 47);
             this.button1.TabIndex = 4;
             this.button1.Text = "Login!";
             this.button1.UseVisualStyleBackColor = true;
@@ -85,7 +85,7 @@
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
             this.textBox1.PasswordChar = 'X';
-            this.textBox1.Size = new System.Drawing.Size(195, 26);
+            this.textBox1.Size = new System.Drawing.Size(274, 26);
             this.textBox1.TabIndex = 2;
             // 
             // textBox2
@@ -94,7 +94,7 @@
             this.textBox2.Location = new System.Drawing.Point(137, 22);
             this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(195, 26);
+            this.textBox2.Size = new System.Drawing.Size(274, 26);
             this.textBox2.TabIndex = 1;
             // 
             // button2
@@ -102,7 +102,7 @@
             this.button2.Location = new System.Drawing.Point(13, 223);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(320, 47);
+            this.button2.Size = new System.Drawing.Size(398, 47);
             this.button2.TabIndex = 5;
             this.button2.Text = "Create Account";
             this.button2.UseVisualStyleBackColor = true;
@@ -112,7 +112,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(117, 187);
+            this.label1.Location = new System.Drawing.Point(168, 189);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 20);
@@ -130,7 +130,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(355, 162);
+            this.groupBox1.Size = new System.Drawing.Size(417, 162);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "SQL Connection Info";
@@ -140,7 +140,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
             this.label5.ForeColor = System.Drawing.Color.Goldenrod;
-            this.label5.Location = new System.Drawing.Point(60, 101);
+            this.label5.Location = new System.Drawing.Point(99, 99);
             this.label5.Name = "label5";
             this.label5.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label5.Size = new System.Drawing.Size(217, 39);
@@ -150,12 +150,12 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(185, 46);
+            this.textBox3.Location = new System.Drawing.Point(222, 44);
             this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(149, 26);
+            this.textBox3.Size = new System.Drawing.Size(189, 26);
             this.textBox3.TabIndex = 3;
-            this.textBox3.Text = "BrycesDB";
+            this.textBox3.Text = "Database01";
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // textBox4
@@ -164,9 +164,9 @@
             this.textBox4.Location = new System.Drawing.Point(11, 44);
             this.textBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(149, 26);
+            this.textBox4.Size = new System.Drawing.Size(205, 26);
             this.textBox4.TabIndex = 5;
-            this.textBox4.Text = "MSI";
+            this.textBox4.Text = "RUN\\THEHOUSERVER";
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label3
@@ -183,7 +183,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(181, 23);
+            this.label4.Location = new System.Drawing.Point(218, 21);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 18);
             this.label4.TabIndex = 4;
@@ -203,7 +203,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox2.Size = new System.Drawing.Size(355, 278);
+            this.groupBox2.Size = new System.Drawing.Size(417, 278);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Login";
@@ -212,7 +212,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 461);
+            this.ClientSize = new System.Drawing.Size(441, 461);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
