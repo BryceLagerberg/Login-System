@@ -26,3 +26,27 @@ C:\Users\bryce\Login-System\Login_System\obj\Debug\Login_System.csproj.GenerateR
 C:\Users\bryce\Login-System\Login_System\obj\Debug\Login_System.exe
 C:\Users\bryce\Login-System\Login_System\obj\Debug\Login_System.pdb
 C:\Users\bryce\Login-System\Login_System\obj\Debug\Login_System.AccountInfo.resources
+C:\Users\Naaro\Login-System\Login_System\bin\Debug\Login_System.exe.config
+C:\Users\Naaro\Login-System\Login_System\obj\Debug\Login_System.exe
+C:\Users\Naaro\Login-System\Login_System\obj\Debug\Login_System.pdb
+C:\Users\Naaro\Login-System\Login_System\bin\Debug\Login_System.exe
+C:\Users\Naaro\Login-System\Login_System\bin\Debug\Login_System.pdb
+C:\Users\Naaro\Login-System\Login_System\obj\Debug\Login_System.LoginWindow1.resources
+C:\Users\Naaro\Login-System\Login_System\obj\Debug\Login_System.ProfileWindow.resources
+C:\Users\Naaro\Login-System\Login_System\obj\Debug\Login_System.Properties.Resources.resources
+C:\Users\Naaro\Login-System\Login_System\obj\Debug\Login_System.csproj.GenerateResource.Cache
+C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\bin\Debug\Login_System.exe.config
+C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\bin\Debug\Login_System.exe
+C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\bin\Debug\Login_System.pdb
+C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.CreateAccount.resources
+C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.LoginWindow1.resources
+C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.ProfileWindow.resources
+C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.Properties.Resources.resources
+C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.csproj.GenerateResource.cache
+C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.csproj.CoreCompileInputs.cache
+C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.exe
+C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.pdb
+C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.csprojAssemblyReference.cache
+C:\Users\Naaro\Login-System\Login_System\obj\Debug\Login_System.csprojAssemblyReference.cache
+C:\Users\Naaro\Login-System\Login_System\obj\Debug\Login_System.CreateAccount.resources
+C:\Users\Naaro\Login-System\Login_System\obj\Debug\Login_System.csproj.CoreCompileInputs.cache

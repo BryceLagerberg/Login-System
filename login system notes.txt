@@ -1,8 +1,4 @@
-# Login-System
-making a login interface that records stats. May later be expanded on
-
-
-#THINGS THAT HAVE BEEN DONE/FIXED AND UPLOADED----------------------------------------------------------------------------
+THINGS THAT HAVE BEEN DONE/FIXED AND UPLOADED----------------------------------------------------------------------------
 
 [x] Write a function to verify the connection to the SQL Server
 
@@ -54,20 +50,8 @@ making a login interface that records stats. May later be expanded on
 
 [x] add an executable icon/ all the forms
 
-[x] make the profile window tool bars clear button actually work
 
-[x] Table creation is hard coded to BryceDB
-
-[x] Table creation is missing columns
-
-[x] Make an images folder for storing profile pictures on the C:\ drive
-
-[x] Test connection is locked at connected after a successful connection
-
-[x] Make server and database textboxes start blank and remember the last locally used input
-
-
-#THINGS THAT NEED TO BE DONE/FIXED OR UPLOADED---------------------------------------------------------------------------
+THINGS THAT NEED TO BE DONE/FIXED OR UPLOADED---------------------------------------------------------------------------
 
 [ ] *add a change username option?
 
@@ -87,16 +71,11 @@ making a login interface that records stats. May later be expanded on
 
 [ ] add description for password and username requirements above or below their text boxes
 
-[ ]change profile picture through right click instead of button
+[ ] Table creation is hard coded to BryceDB
 
-[ ] make profileWindow expandable
+[ ] Table creation is missing columns
 
-[ ] add a friends list in the expanded window 
+[ ] Make an images folder for storing profile pictures on the C:\ drive
 
-[ ] make a chat box pop out window accessable from the friends list
+[ ] Test connection is locked at connected after a successful connection
 
-[ ] make the friends list live update and organize by online/offline status
-
-[ ] add a remember my username checkbox to the login
-
-[ ]make the server and database selection a pop out window accessable by a settings symbol or something
