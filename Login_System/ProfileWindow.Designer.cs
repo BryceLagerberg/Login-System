@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileWindow));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,27 +48,23 @@
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.profileImageBrowseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.browseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logoutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.profilePictureContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.browseToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.profilePictureContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label1.Location = new System.Drawing.Point(2, 270);
+            this.label1.Location = new System.Drawing.Point(2, 295);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(91, 20);
             this.label1.TabIndex = 0;
@@ -77,7 +74,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label2.Location = new System.Drawing.Point(2, 310);
+            this.label2.Location = new System.Drawing.Point(2, 335);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(88, 20);
             this.label2.TabIndex = 1;
@@ -87,7 +84,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label3.Location = new System.Drawing.Point(2, 350);
+            this.label3.Location = new System.Drawing.Point(2, 375);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 20);
             this.label3.TabIndex = 2;
@@ -97,7 +94,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label4.Location = new System.Drawing.Point(2, 390);
+            this.label4.Location = new System.Drawing.Point(2, 415);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(97, 20);
             this.label4.TabIndex = 3;
@@ -107,7 +104,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label5.Location = new System.Drawing.Point(2, 430);
+            this.label5.Location = new System.Drawing.Point(2, 455);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(96, 20);
             this.label5.TabIndex = 4;
@@ -116,18 +113,17 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox1.Location = new System.Drawing.Point(122, 267);
+            this.textBox1.Location = new System.Drawing.Point(122, 292);
             this.textBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(209, 26);
             this.textBox1.TabIndex = 6;
-            this.textBox1.Text = "asdfasdasdf";
             // 
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox2.Location = new System.Drawing.Point(122, 307);
+            this.textBox2.Location = new System.Drawing.Point(122, 332);
             this.textBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox2.Name = "textBox2";
             this.textBox2.PasswordChar = 'X';
@@ -139,7 +135,7 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox3.Location = new System.Drawing.Point(122, 347);
+            this.textBox3.Location = new System.Drawing.Point(122, 372);
             this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
@@ -149,7 +145,7 @@
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox4.Location = new System.Drawing.Point(122, 387);
+            this.textBox4.Location = new System.Drawing.Point(122, 412);
             this.textBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(209, 26);
@@ -159,7 +155,7 @@
             // textBox5
             // 
             this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox5.Location = new System.Drawing.Point(122, 427);
+            this.textBox5.Location = new System.Drawing.Point(122, 452);
             this.textBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(209, 26);
@@ -170,7 +166,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label6.Location = new System.Drawing.Point(2, 470);
+            this.label6.Location = new System.Drawing.Point(2, 495);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(56, 20);
             this.label6.TabIndex = 11;
@@ -179,7 +175,7 @@
             // textBox6
             // 
             this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox6.Location = new System.Drawing.Point(122, 467);
+            this.textBox6.Location = new System.Drawing.Point(122, 492);
             this.textBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(209, 26);
@@ -189,7 +185,7 @@
             // textBox7
             // 
             this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox7.Location = new System.Drawing.Point(122, 512);
+            this.textBox7.Location = new System.Drawing.Point(122, 537);
             this.textBox7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox7.Name = "textBox7";
             this.textBox7.ReadOnly = true;
@@ -200,7 +196,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label7.Location = new System.Drawing.Point(2, 512);
+            this.label7.Location = new System.Drawing.Point(2, 537);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(93, 20);
             this.label7.TabIndex = 14;
@@ -210,7 +206,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label8.Location = new System.Drawing.Point(2, 560);
+            this.label8.Location = new System.Drawing.Point(2, 585);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(100, 20);
             this.label8.TabIndex = 15;
@@ -219,7 +215,7 @@
             // textBox8
             // 
             this.textBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.textBox8.Location = new System.Drawing.Point(122, 556);
+            this.textBox8.Location = new System.Drawing.Point(122, 581);
             this.textBox8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox8.Name = "textBox8";
             this.textBox8.ReadOnly = true;
@@ -228,7 +224,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(25, 602);
+            this.button1.Location = new System.Drawing.Point(25, 627);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(289, 53);
@@ -239,23 +235,14 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.ContextMenuStrip = this.profilePictureContextMenuStrip;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(6, 21);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 17);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(325, 195);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.Size = new System.Drawing.Size(319, 266);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 18;
             this.pictureBox1.TabStop = false;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(256, 222);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 19;
-            this.button2.Text = "Browse";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // logoutToolStripMenuItem
             // 
@@ -263,62 +250,10 @@
             this.logoutToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.logoutToolStripMenuItem.Text = "Logout";
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripDropDownButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(366, 27);
-            this.toolStrip1.TabIndex = 21;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripDropDownButton1
-            // 
-            this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.profileImageBrowseToolStripMenuItem,
-            this.logoutToolStripMenuItem1});
-            this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
-            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(34, 24);
-            this.toolStripDropDownButton1.Text = "toolStripDropDownButton1";
-            // 
-            // profileImageBrowseToolStripMenuItem
-            // 
-            this.profileImageBrowseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.browseToolStripMenuItem,
-            this.clearToolStripMenuItem});
-            this.profileImageBrowseToolStripMenuItem.Name = "profileImageBrowseToolStripMenuItem";
-            this.profileImageBrowseToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
-            this.profileImageBrowseToolStripMenuItem.Text = "Profile Image";
-            // 
-            // browseToolStripMenuItem
-            // 
-            this.browseToolStripMenuItem.Name = "browseToolStripMenuItem";
-            this.browseToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
-            this.browseToolStripMenuItem.Text = "Browse";
-            this.browseToolStripMenuItem.Click += new System.EventHandler(this.browseToolStripMenuItem_Click);
-            // 
-            // clearToolStripMenuItem
-            // 
-            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
-            this.clearToolStripMenuItem.Text = "Clear";
-            // 
-            // logoutToolStripMenuItem1
-            // 
-            this.logoutToolStripMenuItem1.Name = "logoutToolStripMenuItem1";
-            this.logoutToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
-            this.logoutToolStripMenuItem1.Text = "Logout";
-            this.logoutToolStripMenuItem1.Click += new System.EventHandler(this.logoutToolStripMenuItem1_Click);
-            // 
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(305, 307);
+            this.pictureBox2.Location = new System.Drawing.Point(305, 332);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(26, 26);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -335,7 +270,6 @@
             this.groupBox1.Controls.Add(this.textBox5);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBox6);
-            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.textBox4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.textBox7);
@@ -348,11 +282,34 @@
             this.groupBox1.Controls.Add(this.textBox8);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 30);
+            this.groupBox1.Location = new System.Drawing.Point(12, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(343, 671);
+            this.groupBox1.Size = new System.Drawing.Size(343, 698);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
+            // 
+            // profilePictureContextMenuStrip
+            // 
+            this.profilePictureContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.profilePictureContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.browseToolStripMenuItem1,
+            this.clearToolStripMenuItem1});
+            this.profilePictureContextMenuStrip.Name = "profilePictureContextMenuStrip";
+            this.profilePictureContextMenuStrip.Size = new System.Drawing.Size(127, 52);
+            // 
+            // browseToolStripMenuItem1
+            // 
+            this.browseToolStripMenuItem1.Name = "browseToolStripMenuItem1";
+            this.browseToolStripMenuItem1.Size = new System.Drawing.Size(126, 24);
+            this.browseToolStripMenuItem1.Text = "Browse";
+            this.browseToolStripMenuItem1.Click += new System.EventHandler(this.browseToolStripMenuItem1_Click);
+            // 
+            // clearToolStripMenuItem1
+            // 
+            this.clearToolStripMenuItem1.Name = "clearToolStripMenuItem1";
+            this.clearToolStripMenuItem1.Size = new System.Drawing.Size(126, 24);
+            this.clearToolStripMenuItem1.Text = "Clear";
+            this.clearToolStripMenuItem1.Click += new System.EventHandler(this.clearToolStripMenuItem1_Click);
             // 
             // ProfileWindow
             // 
@@ -360,7 +317,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 713);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.toolStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ProfileWindow";
@@ -368,13 +324,11 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProfileWindow_FormClosing);
             this.Load += new System.EventHandler(this.ProfileWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.profilePictureContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -398,15 +352,11 @@
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
-        private System.Windows.Forms.ToolStripMenuItem profileImageBrowseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem browseToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ContextMenuStrip profilePictureContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem browseToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem1;
     }
 }

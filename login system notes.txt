@@ -40,9 +40,18 @@ THINGS THAT HAVE BEEN DONE/FIXED AND UPLOADED-----------------------------------
 
 [x] *Add password encrypt / decrypt function to SQLControl
 
-THINGS THAT NEED TO BE DONE/FIXED OR UPLOADED---------------------------------------------------------------------------
+[x] *make it so only one person can log in at a time per profile
+
+[x] fix bug with create account window being thrown out not hidden
 
 [x] *build a function that verifies username availability
+
+[x] make closing the window log out and close out
+
+[x] add an executable icon/ all the forms
+
+
+THINGS THAT NEED TO BE DONE/FIXED OR UPLOADED---------------------------------------------------------------------------
 
 [ ] *add a change username option?
 
@@ -54,15 +63,7 @@ THINGS THAT NEED TO BE DONE/FIXED OR UPLOADED-----------------------------------
 
 [ ] *make good flair, remove bad flair
 
-[x] make closing the window log out and close out
-
-[x] add an executable icon/ all the forms
-
 [ ] *add a drag and drop to the profile pictures so you can change easier
-
-[x] *make it so only one person can log in at a time per profile
-
-[x] fix bug with create account window being thrown out not hidden
 
 [ ] add password requirements 
 

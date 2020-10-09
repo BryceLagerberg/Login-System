@@ -18,6 +18,8 @@ namespace Login_System
         public string DataBase { get; set; }
         public string SQLServer { get; set; }
 
+        public bool Connected { get; set; } = false;
+
         #endregion
 
 
@@ -44,6 +46,7 @@ namespace Login_System
             {
                 connection.Open();
                 connection.Close();
+                Connected = true;
                 return true;
             }
             catch(Exception ex)

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Threading;
 using System.Runtime.CompilerServices;
+using System.IO;
 
 namespace Login_System
 {
@@ -34,9 +35,8 @@ namespace Login_System
         private void LoginWindow1_Load(object sender, EventArgs e)
         {
 
-
-            // Initlize Size
-            this.Size = new Size(301, 190);
+            // Create Folder / File structure
+            InitilizeFolderStructure();
 
             // Initilize Profile Window
             PW = new ProfileWindow(this);
@@ -45,8 +45,12 @@ namespace Login_System
             SQLControl SC = new SQLControl(textBox4.Text, textBox3.Text);
             Globals.SC = SC;
 
+            LoadSettings();
+
             // Initilize Verification Thread and run it
-            new Thread(VerifyConnection).Start();
+            if (textBox3.Text != "" && textBox4.Text != "") {
+                new Thread(VerifyConnection).Start();
+            }
 
         }
 
@@ -73,8 +77,10 @@ namespace Login_System
             Globals.SC.DataBase = textBox3.Text;
             label5.ForeColor = Color.Gold;
             label5.Text = "Connecting...";
-         
-            new Thread(VerifyConnection).Start();
+            if (textBox3.Text != "" && textBox4.Text != "")
+            {
+                new Thread(VerifyConnection).Start();
+            }
 
         }
         //changes the SQL server address
@@ -83,8 +89,10 @@ namespace Login_System
             Globals.SC.SQLServer = textBox4.Text;
             label5.ForeColor = Color.Gold;
             label5.Text = "Connecting...";
-
-            new Thread(VerifyConnection).Start();
+            if (textBox3.Text != "" && textBox4.Text != "")
+            {
+                new Thread(VerifyConnection).Start();
+            }
 
         }
         /*adding flare! (the old shitty version)
@@ -117,6 +125,55 @@ namespace Login_System
         // Helper Functions----------------------------------------------------------------------
 
         // Login Function
+
+        // Create inital folder structure
+        private void InitilizeFolderStructure()
+        {
+            // Check to see if the folder structure already exists and if it doesnt create it.
+            if(!System.IO.Directory.Exists("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System")) {
+                System.IO.Directory.CreateDirectory("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System");
+            }
+            //check to see if the folder structure contains a profile picture directory, if it does not it creates one!
+            if (!System.IO.Directory.Exists("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Profile_Pictures"))
+            {
+                System.IO.Directory.CreateDirectory("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Profile_Pictures");
+            }
+        }
+
+        // Save program Settings
+        private void SaveSettings()
+        {
+            System.IO.File.WriteAllText("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt","SQL Server: " + textBox4.Text + "\nSQL Database: " +textBox3.Text);
+        }
+        //Load program settings
+        private void LoadSettings()
+        {
+            if (System.IO.File.Exists("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt"))
+            {
+                string FullSettings = System.IO.File.ReadAllText("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt");
+
+                // split by new line '\n'
+                string[] SplitSettings = FullSettings.Split('\n');
+                
+                // for each setting...
+                foreach(string s in SplitSettings)
+                {
+                    // split by ':'
+                    string[] Setting = s.Split(':');
+                    
+                    if(Setting[0] == "SQL Server")
+                    {
+                        textBox4.Text = Setting[1].Trim();
+                    }
+                    if (Setting[0] == "SQL Database")
+                    {
+                        textBox3.Text = Setting[1].Trim();
+                    }
+                }
+            }  
+        }
+
+
         private void Login(String username, String password)
         {
             // Attempt  Login
@@ -160,6 +217,7 @@ namespace Login_System
                     textBox3.Enabled = false;
                     textBox4.Enabled = false;
                     groupBox2.Enabled = true;
+                    SaveSettings();
 
                     // Start Slide Effect
                     Thread SlideThread = new Thread(SlideDown);
@@ -176,7 +234,7 @@ namespace Login_System
                 }
                 else
                 {
-                    if(label5.Text != "Connected!")
+                    if(!Globals.SC.Connected)
                     {
                         label5.ForeColor = Color.Red;
                         label5.Text = "Failed!";

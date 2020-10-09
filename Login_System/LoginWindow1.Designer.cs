@@ -155,7 +155,6 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(189, 26);
             this.textBox3.TabIndex = 3;
-            this.textBox3.Text = "Database01";
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // textBox4
@@ -166,7 +165,6 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(205, 26);
             this.textBox4.TabIndex = 5;
-            this.textBox4.Text = "RUN\\THEHOUSERVER";
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label3

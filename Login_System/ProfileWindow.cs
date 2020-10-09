@@ -72,21 +72,6 @@ namespace Login_System
             Logout();
         }
 
-        // Image Browse
-        private void button2_Click(object sender, EventArgs e)
-        {
-            ImageBrowse();
-        }
-
-        private void logoutToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            Logout();
-        }
-        private void browseToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ImageBrowse();
-        }
-
         //edit picture click event that makes password editable and readable or vice versa
         private void pictureBox2_Click(object sender, EventArgs e)
         {
@@ -104,7 +89,17 @@ namespace Login_System
 
         }
 
-        
+        //right click menu browse button for profile pictures
+        private void browseToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ImageBrowse();
+        }
+
+        //right click menu clear button for profile pictures
+        private void clearToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Image = Login_System.Properties.Resources.Deafult_Profile_Pitcher;
+        }
 
         // Closing Out
         private void ProfileWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -112,6 +107,8 @@ namespace Login_System
             Logout();
             LoginWindowForm.Close();
         }
+
+      
 
         #endregion
 
@@ -171,7 +168,7 @@ namespace Login_System
             OpenFileDialog OFD = new OpenFileDialog();
             OFD.Title = "Profile Image Browser";
             OFD.Multiselect = false;
-            OFD.InitialDirectory = "C:\\Users\\bryce\\Desktop\\Login System Project\\Login-System\\Images";
+            OFD.InitialDirectory = "C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Profile_Pictures";
             OFD.Filter = "JPG files|*.jpg|All files|*.*|Aaron|Aaron*.*";
 
             // Open file dialog and if result is OK NOT Cancle 
@@ -182,22 +179,19 @@ namespace Login_System
                 Globals.SC.Update("UPDATE [Account Information] SET ProfilePicture ='" + OFD.SafeFileName + "' WHERE AccountNumber = " + Globals.LoggedInUser.AccountNumber);
 
                 // Add a copy of the image to the images folder for quicker reload
-                if (!System.IO.File.Exists("C:\\Users\\bryce\\Desktop\\Login System Project\\Login-System\\Images\\" + OFD.SafeFileName)) // Make a real images destination and use it here
+                if (!System.IO.File.Exists("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Profile_Pictures\\" + OFD.SafeFileName))
                 {
-                    System.IO.File.Copy(OFD.FileName, "C:\\Users\\bryce\\Desktop\\Login System Project\\Login-System\\Images\\" + OFD.SafeFileName, false);
+                    System.IO.File.Copy(OFD.FileName, "C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Profile_Pictures\\" + OFD.SafeFileName, false);
                 }
 
             }
         }
-
-
-
-
         #endregion
 
         private void ProfileWindow_Load(object sender, EventArgs e)
         {
 
         }
+
     }
 }
