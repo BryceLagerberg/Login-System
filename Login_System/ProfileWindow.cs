@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,11 +16,19 @@ namespace Login_System
         // Gloabl Variables 
         private LoginWindow1 LoginWindowForm;
 
+
+        Dictionary<int, Profile> Friends = new Dictionary<int, Profile>(); // Account Number - Profile
+
+
+        private ChatWindow CW;
+
         // Constructor
         public ProfileWindow(LoginWindow1 LoginWindow)
         {
             LoginWindowForm = LoginWindow;
             InitializeComponent();
+
+            CW = new ChatWindow();
 
         }
 
@@ -29,10 +38,11 @@ namespace Login_System
         //Password TB
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
+
             if (Globals.LoggedInUser != null)
             {
                 Globals.LoggedInUser.Password = Functions.Encrypt(textBox2.Text);
-                Globals.SC.Update("UPDATE [Account Logins] SET Password='" + Globals.LoggedInUser.Password + "' WHERE AccountNumber = " + Globals.LoggedInUser.AccountNumber);
+                Globals.SC.Update("UPDATE [Account Logins] SET Password ='" + Globals.LoggedInUser.Password + "' WHERE AccountNumber = " + Globals.LoggedInUser.AccountNumber);
             }
         }
 
@@ -108,9 +118,14 @@ namespace Login_System
             LoginWindowForm.Close();
         }
 
-      
+        //Chat window open event
+
 
         #endregion
+
+
+
+
 
 
         #region "Functions / Methods"
@@ -136,6 +151,11 @@ namespace Login_System
             textBox6.Text = Globals.LoggedInUser.Email;
             textBox7.Text = Globals.LoggedInUser.LastLogin.ToString();
             textBox8.Text = Globals.LoggedInUser.CreatedOn.ToString();
+            pictureBox1.Image = LoadImage(Globals.LoggedInUser.ProfilePicture);
+
+            // Load Friends
+            Friends = Globals.SC.PullUsers();
+            PopulateFriendsList();
 
         }
 
@@ -156,6 +176,8 @@ namespace Login_System
             textBox7.Text = "";
             textBox8.Text = "";
 
+            //clear friends list
+            flowLayoutPanel1.Controls.Clear();
 
             // Hide this form / Show login form
             this.Visible = false;
@@ -186,12 +208,94 @@ namespace Login_System
 
             }
         }
-        #endregion
 
-        private void ProfileWindow_Load(object sender, EventArgs e)
+        // Populates the friends list
+        private void PopulateFriendsList()
         {
 
+            foreach (Profile friend in Friends.Values)
+            {
+                Panel FriendPanel = new Panel();
+                Label FirstName = new Label();
+                Label LoggedIn = new Label();
+                PictureBox ProfilePicture = new PictureBox();
+
+
+
+                flowLayoutPanel1.Controls.Add(FriendPanel);
+
+                FriendPanel.BackColor = System.Drawing.Color.Gray;
+                FriendPanel.Controls.Add(LoggedIn);
+                FriendPanel.Controls.Add(FirstName);
+                FriendPanel.Controls.Add(ProfilePicture);
+                FriendPanel.Location = new System.Drawing.Point(20, 400);
+                FriendPanel.Name = "panel" + friend.AccountNumber;  //should be changed to accountnumber instead of firstname
+                FriendPanel.Size = new System.Drawing.Size(253, 81);
+                FriendPanel.TabIndex = 1;
+                FriendPanel.Visible = true;
+                FriendPanel.DoubleClick += new System.EventHandler(this.FriendDoubleClick);
+
+
+
+                ProfilePicture.Image = LoadImage(friend.ProfilePicture);
+                ProfilePicture.Location = new System.Drawing.Point(8, 8);
+                ProfilePicture.Name = "pictureBox" + friend.AccountNumber;  //should be changed to accountnumber instead of firstname
+                ProfilePicture.Size = new System.Drawing.Size(60, 65);
+                ProfilePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+                ProfilePicture.TabIndex = 0;
+                ProfilePicture.TabStop = false;
+
+                FirstName.AutoSize = true;
+                FirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+                FirstName.Location = new System.Drawing.Point(84, 8);
+                FirstName.Name = "label" + friend.AccountNumber;  //should be changed to accountnumber instead of firstname
+                FirstName.Size = new System.Drawing.Size(51, 20);
+                FirstName.TabIndex = 1;
+                FirstName.Text = friend.FirstName + " (" + friend.AccountNumber + ")";
+
+                LoggedIn.AutoSize = true;
+                LoggedIn.Location = new System.Drawing.Point(86, 49);
+                LoggedIn.Name = "label" + friend.AccountNumber; //should be changed to accountnumber instead of firstname
+                LoggedIn.Size = new System.Drawing.Size(52, 13);
+                LoggedIn.TabIndex = 2;
+                LoggedIn.Text = friend.LoggedIn ? "online" : "offline";
+
+                
+
+            }
         }
 
+        // Loads Profile Image
+        private Image LoadImage(string imageName)
+        {
+            Image ProfileImage;
+
+            if(System.IO.File.Exists("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Profile_Pictures\\" + imageName))
+            {
+               ProfileImage = Image.FromFile("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Profile_Pictures\\" + imageName);
+            }
+            else
+            {
+                ProfileImage = Login_System.Properties.Resources.Deafult_Profile_Pitcher;
+            }
+            return ProfileImage;
+        }
+
+
+        #endregion
+
+        private void FriendDoubleClick(object sender, EventArgs e)
+        {
+            CW.Show();
+
+            // Load friend profile
+            Control control = (Control)sender;
+            int AccountNumber = Int32.Parse(control.Name.Replace("panel", "").Replace("label", "").Replace("pictureBox", ""));
+            Profile friend = Friends[AccountNumber];
+            CW.LoadChat(friend);
+
+
+            CW.Visible = true;
+        }
     }
 }

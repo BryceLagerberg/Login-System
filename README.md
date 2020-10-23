@@ -87,7 +87,7 @@ making a login interface that records stats. May later be expanded on
 
 [ ] add description for password and username requirements above or below their text boxes
 
-[ ]change profile picture through right click instead of button
+[ ] change profile picture through right click instead of button
 
 [ ] make profileWindow expandable
 
@@ -99,4 +99,22 @@ making a login interface that records stats. May later be expanded on
 
 [ ] add a remember my username checkbox to the login
 
-[ ]make the server and database selection a pop out window accessable by a settings symbol or something
+[ ] make the server and database selection a pop out window accessable by a settings symbol or something
+
+[ ] create sql stored procedures
+
+[x/2] fix broken accounts so u can test stuff
+
+[ ] on friends list make the loggedIn update in real time
+
+[ ] make friends list elements use correct info per user?
+
+[ ] make logged in users appear green logged out users appear gray
+yes
+idk why it doesnt see the mic on my headphones
+but u talk ill just listen
+sounds good to me
+yea that looks good
+we could even do the image pretty well
+lets redo this call so i can talk
+

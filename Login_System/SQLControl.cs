@@ -311,6 +311,85 @@ namespace Login_System
                 connection.Close();
             }
         }
+        //pulls the friends of the current user
+        public List<Profile> PullFriends()
+        {
+            return new List<Profile>();
+        }
+
+        //Pulls all users from the Account Information Table
+        public Dictionary<int, Profile> PullUsers()
+        {
+            //setup for connection to sql server and database
+            SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
+            csb.DataSource = SQLServer;
+            csb.InitialCatalog = DataBase;
+            csb.IntegratedSecurity = true;
+
+            string connString = csb.ToString();
+
+
+            Dictionary<int, Profile> FriendsList = new Dictionary<int, Profile>();
+
+
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                command.CommandText = "SELECT AccountNumber, FirstName, ProfilePicture, LoggedIn FROM [Account Information]";
+                //makes connection to sql server
+                connection.Open();
+                //execute the command u made above!
+
+                using(SqlDataReader reader = command.ExecuteReader()){
+
+                    while (reader.Read())
+                    {
+                        Profile Friend = new Profile();
+                        Friend.AccountNumber = (int)reader["AccountNumber"];
+                        Friend.FirstName = reader["FirstName"] is null ? "" : reader["FirstName"].ToString();
+                        Friend.ProfilePicture = reader["ProfilePicture"] is null ? "" :  reader["ProfilePicture"].ToString();
+                        Friend.LoggedIn = (bool)reader["LoggedIn"];
+                        FriendsList.Add(Friend.AccountNumber, Friend);
+                    }
+                }
+
+
+
+                connection.Close();
+            }
+
+
+            return FriendsList;
+        }
+
+        //sends a chat message
+        public void SendChat(int accountNumber, int friendsAccountNumber, DateTime time, string message)
+        {
+            string queryString = "INSERT INTO[Chat Logs](AccountNumberSender, AccountNumberReceiver, SentTime, Message) VALUES("+accountNumber+", "+friendsAccountNumber+ ", GETDATE(), '" + message+"');";
+            //setup for connection to sql server and database
+            SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
+            csb.DataSource = SQLServer;
+            csb.InitialCatalog = DataBase;
+            csb.IntegratedSecurity = true;
+
+            string connString = csb.ToString();
+
+
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                command.CommandText = queryString;
+                //makes connection to sql server
+                connection.Open();
+                //execute the command u made above!
+                command.ExecuteReader();
+
+                connection.Close();
+            }
+        }
+
         #endregion
     }
 

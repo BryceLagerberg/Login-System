@@ -76,6 +76,7 @@ namespace Login_System
         public DateTime CreatedOn { get; set; }
         public DateTime LastLogin { get; set; }
         public string ProfilePicture { get; set; }
+        public bool LoggedIn { get; set; }
     }
 
 

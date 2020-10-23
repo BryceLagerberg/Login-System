@@ -190,6 +190,7 @@ namespace Login_System
                 textBox1.Text = "";
                 textBox2.Text = "";
                 PW.LoadProfile();
+
             }
             else
             {
