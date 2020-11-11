@@ -42,10 +42,12 @@ namespace Login_System
             PW = new ProfileWindow(this);
 
             // Initilize SQL Control
-            SQLControl SC = new SQLControl(textBox4.Text, textBox3.Text);
+            SQLControl SC = new SQLControl(textBox4.Text, textBox3.Text, "192.168.86.88");// update after we add a textbox for serverip input
             Globals.SC = SC;
 
+            // Load Last SQL Settings
             LoadSettings();
+
 
             // Initilize Verification Thread and run it
             if (textBox3.Text != "" && textBox4.Text != "") {
@@ -66,11 +68,13 @@ namespace Login_System
             AI.Show();
 
         }
+        
         // Login Button
         private void button1_Click(object sender, EventArgs e)
         {
             Login(textBox2.Text, textBox1.Text);
         }
+        
         // changes the database address
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
@@ -83,6 +87,7 @@ namespace Login_System
             }
 
         }
+        
         //changes the SQL server address
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
@@ -95,6 +100,16 @@ namespace Login_System
             }
 
         }
+
+        //turns enter key into login button shortcut
+        private void textBox1_KeyPressEvent(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == (char)Keys.Enter)
+            {
+                Login(textBox2.Text, textBox1.Text);
+            }
+        }
+
         /*adding flare! (the old shitty version)
         private void textBox1_MouseHover(object sender, EventArgs e)
         {

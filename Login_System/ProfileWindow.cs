@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace Login_System
 {
@@ -15,12 +16,13 @@ namespace Login_System
     {
         // Gloabl Variables 
         private LoginWindow1 LoginWindowForm;
-
+        private ChatWindow CW;
+        private Thread FriendsRefresh;
 
         Dictionary<int, Profile> Friends = new Dictionary<int, Profile>(); // Account Number - Profile
 
 
-        private ChatWindow CW;
+        #region "Events"
 
         // Constructor
         public ProfileWindow(LoginWindow1 LoginWindow)
@@ -28,12 +30,12 @@ namespace Login_System
             LoginWindowForm = LoginWindow;
             InitializeComponent();
 
-            CW = new ChatWindow();
-
         }
 
-
-        #region "Events"
+        private void ProfileWindow_Load(object sender, EventArgs e)
+        {
+            
+        }
 
         //Password TB
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -119,26 +121,86 @@ namespace Login_System
         }
 
         //Chat window open event
+        private void FriendDoubleClick(object sender, EventArgs e)
+        {
 
+            CW.Show();
+
+            // Load friend profile
+            Control control = (Control)sender;
+            int AccountNumber = Int32.Parse(control.Name.Replace("panel", "").Replace("label", "").Replace("pictureBox", ""));
+            Profile friend = Friends[AccountNumber];
+            CW.LoadChat(friend);
+
+
+            CW.Visible = true;
+        }
+
+        //drag and drop picture event
+        private void pictureBox1_DragDropEvent(object sender, DragEventArgs e)
+        {
+            String[] DroppedFiles = (String[])e.Data.GetData(DataFormats.FileDrop);
+            string FilePath = DroppedFiles[0];
+            string FileName = FilePath.Split('\\')[FilePath.Split('\\').Length - 1];
+
+            // C:Users\bryce\Pictures\water1.jpg
+
+            // Set the new image
+            pictureBox1.ImageLocation = FilePath;
+            
+            Globals.SC.Update("UPDATE [Account Information] SET ProfilePicture ='" + FileName + "' WHERE AccountNumber = " + Globals.LoggedInUser.AccountNumber);
+
+            // Add a copy of the image to the images folder for quicker reload
+            if (!System.IO.File.Exists("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Profile_Pictures\\" + FileName))
+            {
+                System.IO.File.Copy(FilePath, "C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Profile_Pictures\\" + FileName, false);
+            }
+        }
+        
+        //drag enter event
+        private void PictureBox1_DragEnterEvent(object sender, DragEventArgs e)
+        {
+
+            // See if this is a copy and the data includes an image.
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) &&
+                (e.AllowedEffect & DragDropEffects.Copy) != 0)
+            {
+                // Allow this.
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                // Don't allow any other drop.
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        //chat window expand button
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            Size originalSize = new Size(623, 618);
+            //do the expand thing
+            if (this.Size == originalSize)
+            {
+                this.Size = new Size(923, 618);
+                //this.pictureBox3.Image = 
+            }else
+            {
+                this.Size = originalSize;
+            }
+            
+            
+            //then make it slide
+            //then make it more cool
+        }
 
         #endregion
 
 
 
-
-
-
         #region "Functions / Methods"
 
-        // having version 1 and 2 for LoadProfile is called overloading
-        // Version 1 - Not Used
-        public void LoadProfile(string UsernameValue, string Password)
-        {
-            textBox1.Text = UsernameValue;
-            textBox2.Text = Password;
-        }
-
-        // Version 2
+        // load profile 
         public void LoadProfile()
         {
 
@@ -157,6 +219,58 @@ namespace Login_System
             Friends = Globals.SC.PullUsers();
             PopulateFriendsList();
 
+            // Create a new chat window instance
+            CW = new ChatWindow();
+
+            // Create instance of friends list refresh thread
+            FriendsRefresh = new Thread(FriendsStatus);
+            FriendsRefresh.IsBackground = true;
+            FriendsRefresh.Start();
+
+        }
+
+        // gets the current status of your friends
+        public void FriendsStatus()
+        {
+            
+            while (true)
+            {
+                // make a call to check the LoggedIn status of the current users friends
+                Friends = Globals.SC.PullUsers();
+                Thread.Sleep(2500);
+
+                // Update their status 
+                FriendsStatusDelegate();
+            }
+        }
+
+        // the thread version of friendsstatus or whatever... blah bhalllllllllllllllll 
+        private void FriendsStatusDelegate()
+        {
+            try
+            {
+                if (this.InvokeRequired == false)
+                {
+                    // Update LoggedIn Labels
+                    foreach (Profile friend in Friends.Values)
+                    {
+
+                        if (flowLayoutPanel1.Controls.Count > 0)
+                        {
+                            Label L = (Label)flowLayoutPanel1.Controls["panel" + friend.AccountNumber].Controls["LoggedIn" + friend.AccountNumber];
+                            L.Text = friend.LoggedIn ? "online" : "offline";
+                            L.ForeColor = friend.LoggedIn ? Color.LimeGreen : Color.Red;
+                        }             
+                    }
+                }
+                else
+                {
+                    this.Invoke(new Action(FriendsStatusDelegate));
+                }
+            }catch(Exception ex)
+            {
+
+            }
         }
 
         // Logs the user out 
@@ -182,6 +296,8 @@ namespace Login_System
             // Hide this form / Show login form
             this.Visible = false;
             LoginWindowForm.Visible = true;
+            CW.Dispose();
+            CW = null;
             
         }
         // browse for profile picture
@@ -248,19 +364,19 @@ namespace Login_System
                 FirstName.AutoSize = true;
                 FirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
                 FirstName.Location = new System.Drawing.Point(84, 8);
-                FirstName.Name = "label" + friend.AccountNumber;  //should be changed to accountnumber instead of firstname
+                FirstName.Name = "FirstName" + friend.AccountNumber;  //should be changed to accountnumber instead of firstname
                 FirstName.Size = new System.Drawing.Size(51, 20);
                 FirstName.TabIndex = 1;
                 FirstName.Text = friend.FirstName + " (" + friend.AccountNumber + ")";
 
                 LoggedIn.AutoSize = true;
                 LoggedIn.Location = new System.Drawing.Point(86, 49);
-                LoggedIn.Name = "label" + friend.AccountNumber; //should be changed to accountnumber instead of firstname
+                LoggedIn.Name = "LoggedIn" + friend.AccountNumber; //should be changed to accountnumber instead of firstname
                 LoggedIn.Size = new System.Drawing.Size(52, 13);
                 LoggedIn.TabIndex = 2;
                 LoggedIn.Text = friend.LoggedIn ? "online" : "offline";
+                LoggedIn.ForeColor = friend.LoggedIn ? Color.LimeGreen : Color.Red;
 
-                
 
             }
         }
@@ -282,20 +398,7 @@ namespace Login_System
         }
 
 
+
         #endregion
-
-        private void FriendDoubleClick(object sender, EventArgs e)
-        {
-            CW.Show();
-
-            // Load friend profile
-            Control control = (Control)sender;
-            int AccountNumber = Int32.Parse(control.Name.Replace("panel", "").Replace("label", "").Replace("pictureBox", ""));
-            Profile friend = Friends[AccountNumber];
-            CW.LoadChat(friend);
-
-
-            CW.Visible = true;
-        }
     }
 }

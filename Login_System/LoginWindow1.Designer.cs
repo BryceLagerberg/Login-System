@@ -87,6 +87,7 @@
             this.textBox1.PasswordChar = 'X';
             this.textBox1.Size = new System.Drawing.Size(274, 26);
             this.textBox1.TabIndex = 2;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(textBox1_KeyPressEvent); 
             // 
             // textBox2
             // 

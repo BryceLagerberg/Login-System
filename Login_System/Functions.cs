@@ -64,6 +64,13 @@ namespace Login_System
     }
 
     
+    public class Message
+    {
+        public string Text { get; set; }
+        public DateTime SentTime { get; set; }
+        public int AccountNumberSender { get; set; }
+        public int AccountNumberReceiver { get; set; }
+    }
 
     public class Profile
     {
@@ -77,6 +84,7 @@ namespace Login_System
         public DateTime LastLogin { get; set; }
         public string ProfilePicture { get; set; }
         public bool LoggedIn { get; set; }
+        public List<Message> Messages { get; set; }
     }
 
 
