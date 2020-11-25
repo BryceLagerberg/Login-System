@@ -135,3 +135,9 @@ making a login interface that records stats. May later be expanded on
 [ ] add slide effect to CW expand button
 
 [ ] add slide on hover effect to CW expand button
+
+[ ] make expand arrow change directions after completing the grow or shrink animation
+
+[ ] replace login window slidedown function with new slide funtion
+
+[ ]

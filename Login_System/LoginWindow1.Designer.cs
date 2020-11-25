@@ -87,7 +87,7 @@
             this.textBox1.PasswordChar = 'X';
             this.textBox1.Size = new System.Drawing.Size(274, 26);
             this.textBox1.TabIndex = 2;
-            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(textBox1_KeyPressEvent); 
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPressEvent);
             // 
             // textBox2
             // 
@@ -211,7 +211,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 461);
+            this.ClientSize = new System.Drawing.Size(440, 182);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;

@@ -178,15 +178,24 @@ namespace Login_System
         //chat window expand button
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            Size originalSize = new Size(623, 618);
-            //do the expand thing
-            if (this.Size == originalSize)
+            Size OriginalSize = new Size(624, 616);
+            Size TargetSize = new Size(923, 616);
+            //Size Test = this.Size; // for testing
+
+
+            // Do the expand thing
+            if (this.Size == OriginalSize)
             {
-                this.Size = new Size(923, 618);
-                //this.pictureBox3.Image = 
-            }else
+                this.pictureBox3.Image = Login_System.Properties.Resources.Arrow_Right;
+                Thread SlideThread = new Thread(() => Functions.Slide(this, TargetSize, 10));
+                SlideThread.Start();
+                
+            }
+            else
             {
-                this.Size = originalSize;
+                this.pictureBox3.Image = Login_System.Properties.Resources.Arrow_Left;
+                Thread SlideThread = new Thread(() => Functions.Slide(this, OriginalSize, 10));
+                SlideThread.Start();
             }
             
             

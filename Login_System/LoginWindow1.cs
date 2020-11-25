@@ -236,7 +236,8 @@ namespace Login_System
                     SaveSettings();
 
                     // Start Slide Effect
-                    Thread SlideThread = new Thread(SlideDown);
+                    // Thread SlideThread = new Thread(Slide);
+                    Thread SlideThread = new Thread(() => Functions.Slide(this, new Size(this.Size.Width, 425),5,2));
                     SlideThread.Start();
 
                     // Check SQL DB for required tables

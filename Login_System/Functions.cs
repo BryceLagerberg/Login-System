@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
@@ -60,6 +61,62 @@ namespace Login_System
             // Then convert each character to it's integer representation, subtract by the key value, and reconvert back into a character. 
             // Then recast as a string.
             return new string(Text.ToCharArray().Select(x => (char)((int)x + (Encrypt ? -1 : 1) * Key)).ToArray<char>());
+        }
+
+        // Slide Functions
+        public static void Slide(Form form, Size newSize, int delay = 5, int maxChange = 5) //form could be set to a control for more broad usage
+        {
+
+            // Variable Setup
+            int xDirection = 1;
+            int yDirection = 1;
+            int xChange, yChange;
+
+            // Current Size = 140, 100
+            // Tar5get Size = 145, 100
+
+            while (form.Size != newSize)
+            {
+                // Pause 
+                System.Threading.Thread.Sleep(delay);
+
+                // Direction Determination
+                if ((form.Size.Width - newSize.Width) > 0) { xDirection = -1; }
+                if ((form.Size.Height - newSize.Height) > 0) { yDirection = -1; }
+
+                //Figure out change amount
+                if (Math.Abs(form.Size.Width - newSize.Width) > maxChange) { xChange = maxChange; } else { xChange = 1; }
+                if (Math.Abs(form.Size.Height - newSize.Height) > maxChange) { yChange = maxChange; } else { yChange = 1; }
+
+                // Make the Change
+                if (form.Size.Height != newSize.Height && form.Size.Width != newSize.Width)
+                {
+                    SlideDelegate(form, new Size(form.Size.Width + xChange * xDirection, form.Size.Height + yChange * yDirection));
+                } 
+                else if (form.Size.Height != newSize.Height)
+                {
+                    SlideDelegate(form, new Size(form.Size.Width, form.Size.Height + yChange * yDirection));
+                }
+                else if(form.Size.Width != newSize.Width)
+                {
+                    SlideDelegate(form, new Size(form.Size.Width + xChange * xDirection, form.Size.Height));
+                }
+
+            }
+            // change arrow here
+            // new delegate call
+
+        } //(LAG)
+        private static void SlideDelegate(Control form, Size newSize)
+        {
+            if (form.InvokeRequired == false)
+            {
+                form.Size = newSize;
+            }
+            else
+            {
+                form.Invoke(new Action<Form,Size>(SlideDelegate), form, newSize);
+            }
         }
     }
 
