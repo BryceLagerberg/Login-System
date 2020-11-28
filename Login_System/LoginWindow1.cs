@@ -46,7 +46,22 @@ namespace Login_System
             Globals.SC = SC;
 
             // Load Last SQL Settings
-            LoadSettings();
+            Functions.LoadSettings();
+            textBox3.Text = Globals.Settings["SQL Database"];
+            textBox4.Text = Globals.Settings["SQL Server"];
+            try
+            {
+                if (Globals.Settings["Remember Username"] == "true")
+                {
+                    checkBox1.Checked = true; 
+                    textBox2.Text = Globals.Settings["SQL Username"];
+                    
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
 
 
             // Initilize Verification Thread and run it
@@ -155,38 +170,7 @@ namespace Login_System
             }
         }
 
-        // Save program Settings
-        private void SaveSettings()
-        {
-            System.IO.File.WriteAllText("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt","SQL Server: " + textBox4.Text + "\nSQL Database: " +textBox3.Text);
-        }
-        //Load program settings
-        private void LoadSettings()
-        {
-            if (System.IO.File.Exists("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt"))
-            {
-                string FullSettings = System.IO.File.ReadAllText("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt");
 
-                // split by new line '\n'
-                string[] SplitSettings = FullSettings.Split('\n');
-                
-                // for each setting...
-                foreach(string s in SplitSettings)
-                {
-                    // split by ':'
-                    string[] Setting = s.Split(':');
-                    
-                    if(Setting[0] == "SQL Server")
-                    {
-                        textBox4.Text = Setting[1].Trim();
-                    }
-                    if (Setting[0] == "SQL Database")
-                    {
-                        textBox3.Text = Setting[1].Trim();
-                    }
-                }
-            }  
-        }
 
         //the function names says it all
         private void Login(String username, String password)
@@ -198,13 +182,15 @@ namespace Login_System
             // If Success
             if (User != null)
             {
+                Functions.SaveSettings("SQL Username", textBox2.Text);
                 Globals.LoggedInUser = User;
 
                 this.Visible = false;
                 PW.Visible = true;
                 textBox1.Text = "";
-                textBox2.Text = "";
+                if(Globals.Settings["Remember Username"] == "false") { textBox2.Text = ""; }
                 PW.LoadProfile();
+
 
             }
             else
@@ -212,7 +198,6 @@ namespace Login_System
                 this.Text = "Bad Login";
                 MessageBox.Show("Error Loggin In, \n\n Invalid Username / Password");
                 textBox1.Text = "";
-                textBox2.Text = "";
             }
 
         }
@@ -233,10 +218,11 @@ namespace Login_System
                     textBox3.Enabled = false;
                     textBox4.Enabled = false;
                     groupBox2.Enabled = true;
-                    SaveSettings();
+                    Functions.SaveSettings("SQL Server", textBox4.Text);
+                    Functions.SaveSettings("SQL Database", textBox3.Text);
 
                     // Start Slide Effect
-                    Thread SlideThread = new Thread(() => Functions.Grow(this, new Size(this.Size.Width, 425),5,2));
+                    Thread SlideThread = new Thread(() => Functions.Grow(this, new Size(this.Size.Width, 465),5,2));
                     SlideThread.Start();
 
                     // Check SQL DB for required tables
@@ -254,6 +240,21 @@ namespace Login_System
             else
             {
                 this.Invoke(new Action<bool>(VerifyConnectionDelegate), Success);
+            }
+        }
+
+        //save or clear username for login
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                //save the username to settings file 
+                Functions.SaveSettings("Remember Username", "true");
+            }
+            else
+            {
+                //clear saved username from settings file
+                Functions.SaveSettings("Remember Username", "false");
             }
         }
     }

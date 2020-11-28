@@ -67,6 +67,7 @@ namespace Login_System
         {
 
             // Limit message length
+            
             string message = (textBox1.Text.Length > 100) ? textBox1.Text.Substring(0, 100) : textBox1.Text;
             textBox1.Text = message;
 

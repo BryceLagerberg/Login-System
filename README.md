@@ -112,7 +112,16 @@ making a login interface that records stats. May later be expanded on
 
 [x] add mouse move box to replace mouseEnter and mouseLeave events to fix expand button edge case 
 
-#THINGS THAT NEED TO BE DONE/FIXED---------------------------------------------------------------------------
+[x] make expand window button for profile window, make slide effects for both button and the form
+
+[x] make profileWindow expandable
+
+[x] fix sizing on loginWindow slide function
+
+[x] make remember me check box stay checked
+
+
+#THINGS THAT NEED TO BE DONE-------------------------------------------------------------------------------------------------------------
 
 [ ] *add a change username option?
 
@@ -124,15 +133,13 @@ making a login interface that records stats. May later be expanded on
 
 [ ] add password requirements 
 
-[ ] add check box/ x for password requirements being met or not
+[ ] add check box for password requirements being met or not
 
 [ ] add description for password and username requirements above or below their text boxes
 
-[ ] make profileWindow expandable
-
 [ ] make the friends list live update and organize by online/offline status
 
-[ ] add a remember my username checkbox to the login
+[x] add a remember my username checkbox to the login
 
 [ ] make the server and database selection a pop out window accessable by a settings symbol or something
 
@@ -144,14 +151,15 @@ making a login interface that records stats. May later be expanded on
 
 [ ] add on double click events for all friends list controls
 
-[x/2] make expand window button for profile window, make slide effects for both button and the form
-
 [ ] make expand arrow change directions after completing the grow or shrink animation
-
-[ ] fix already logged in error
 
 [ ] fix transperency issue with expand button
 
+[ ] change message cap to a hard limit instead of replacing old text in chat window
+
+[ ] fix tab order on login window
+BUGS TO FIX------------------------------------------------------------------------------------------------------------------------------
+
 [ ] fix expand button jumping to the top (bug)
 
-[ ] change message cap to a hard limit instead of replacing old text in chat window
+[ ] fix bug that says wrong username/password when logging in to an already logged in account

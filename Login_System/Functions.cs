@@ -34,7 +34,7 @@ namespace Login_System
             //return the new string!
             return EncryptedOutput;
         }
-
+        
         public static string Decrypt(string DecryptInput)
         {
             string DecryptedOutput = string.Empty;
@@ -54,7 +54,8 @@ namespace Login_System
             //return the new string!
             return DecryptedOutput;
         }
-
+        
+        //encrypt and decrypt all in one function!
         public static string Cypher(string Text, int Key, bool Encrypt = true)
         {
             // First convert input string to a character array. 
@@ -62,7 +63,6 @@ namespace Login_System
             // Then recast as a string.
             return new string(Text.ToCharArray().Select(x => (char)((int)x + (Encrypt ? -1 : 1) * Key)).ToArray<char>());
         }
-
 
         public static void Grow(Control ctrl, Size newSize, int delay = 5, int maxChange = 5)
         {
@@ -119,7 +119,6 @@ namespace Login_System
                 form.Invoke(new Action<Form,Size>(GrowDelegate), form, newSize);
             }
         }
-
 
         //slide to the left.. slide to the right. but no hops
         public static void Slide(Control _ctrl, Point _newLocation, int delay = 5, int maxChange = 5)
@@ -186,6 +185,56 @@ namespace Login_System
             }
         }
 
+
+        public static void SaveSettings(string _Key, string _NewSetting)
+        {
+            // save the new setting to the settings dictionary
+            if (Globals.Settings.ContainsKey(_Key))
+            {
+                Globals.Settings[_Key] = _NewSetting;
+            }
+            else
+            {
+                Globals.Settings.Add(_Key, _NewSetting);
+            }
+
+            // use the dictionary to compile a string of all the settings
+            string _AllSettings = "";
+            foreach (string Key in Globals.Settings.Keys)
+            {
+                _AllSettings += Key + ":" + Globals.Settings[Key] + "\n";
+            }
+            // save all the settings into the settings file on local system
+            System.IO.File.WriteAllText("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt", _AllSettings);
+        }
+
+        //Load program settings
+        public static void LoadSettings()
+        {
+            if (System.IO.File.Exists("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt"))
+            {
+                string FullSettings = System.IO.File.ReadAllText("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt");
+
+                // split by new line '\n'
+                string[] SplitSettings = FullSettings.Split('\n');
+
+                // for each setting...
+                foreach (string s in SplitSettings)
+                {
+                    if (s != "")
+                    {
+
+
+                        // split by ':'
+                        string[] Setting = s.Split(':');
+
+                        Globals.Settings.Add(Setting[0], Setting[1]);
+                    }
+                }
+            }
+        }
+
+
     }
 
     
@@ -217,6 +266,7 @@ namespace Login_System
     {
         public static SQLControl SC;
         public static Profile LoggedInUser;
+        public static Dictionary<string, string> Settings = new Dictionary<string, string>();
     }
 
 
