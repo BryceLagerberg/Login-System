@@ -63,8 +63,8 @@ namespace Login_System
             return new string(Text.ToCharArray().Select(x => (char)((int)x + (Encrypt ? -1 : 1) * Key)).ToArray<char>());
         }
 
-        // Slide Functions
-        public static void Slide(Form form, Size newSize, int delay = 5, int maxChange = 5) //form could be set to a control for more broad usage
+
+        public static void Grow(Control ctrl, Size newSize, int delay = 5, int maxChange = 5)
         {
 
             // Variable Setup
@@ -75,39 +75,40 @@ namespace Login_System
             // Current Size = 140, 100
             // Tar5get Size = 145, 100
 
-            while (form.Size != newSize)
+            while (ctrl.Size != newSize)
             {
                 // Pause 
                 System.Threading.Thread.Sleep(delay);
 
                 // Direction Determination
-                if ((form.Size.Width - newSize.Width) > 0) { xDirection = -1; }
-                if ((form.Size.Height - newSize.Height) > 0) { yDirection = -1; }
+                if ((ctrl.Size.Width - newSize.Width) > 0) { xDirection = -1; }
+                if ((ctrl.Size.Height - newSize.Height) > 0) { yDirection = -1; }
 
                 //Figure out change amount
-                if (Math.Abs(form.Size.Width - newSize.Width) > maxChange) { xChange = maxChange; } else { xChange = 1; }
-                if (Math.Abs(form.Size.Height - newSize.Height) > maxChange) { yChange = maxChange; } else { yChange = 1; }
+                if (Math.Abs(ctrl.Size.Width - newSize.Width) > maxChange) { xChange = maxChange; } else { xChange = 1; }
+                if (Math.Abs(ctrl.Size.Height - newSize.Height) > maxChange) { yChange = maxChange; } else { yChange = 1; }
+
 
                 // Make the Change
-                if (form.Size.Height != newSize.Height && form.Size.Width != newSize.Width)
+                if (ctrl.Size.Height != newSize.Height && ctrl.Size.Width != newSize.Width)
                 {
-                    SlideDelegate(form, new Size(form.Size.Width + xChange * xDirection, form.Size.Height + yChange * yDirection));
+                    GrowDelegate(ctrl, new Size(ctrl.Size.Width + xChange * xDirection, ctrl.Size.Height + yChange * yDirection));
                 } 
-                else if (form.Size.Height != newSize.Height)
+                else if (ctrl.Size.Height != newSize.Height)
                 {
-                    SlideDelegate(form, new Size(form.Size.Width, form.Size.Height + yChange * yDirection));
+                    GrowDelegate(ctrl, new Size(ctrl.Size.Width, ctrl.Size.Height + yChange * yDirection));
                 }
-                else if(form.Size.Width != newSize.Width)
+                else if(ctrl.Size.Width != newSize.Width)
                 {
-                    SlideDelegate(form, new Size(form.Size.Width + xChange * xDirection, form.Size.Height));
+                    GrowDelegate(ctrl, new Size(ctrl.Size.Width + xChange * xDirection, ctrl.Size.Height));
                 }
 
             }
             // change arrow here
             // new delegate call
 
-        } //(LAG)
-        private static void SlideDelegate(Control form, Size newSize)
+        }
+        private static void GrowDelegate(Control form, Size newSize)
         {
             if (form.InvokeRequired == false)
             {
@@ -115,9 +116,76 @@ namespace Login_System
             }
             else
             {
-                form.Invoke(new Action<Form,Size>(SlideDelegate), form, newSize);
+                form.Invoke(new Action<Form,Size>(GrowDelegate), form, newSize);
             }
         }
+
+
+        //slide to the left.. slide to the right. but no hops
+        public static void Slide(Control _ctrl, Point _newLocation, int delay = 5, int maxChange = 5)
+        {
+            // Variable Setup
+            int xDirection = 1;
+            int yDirection = 1;
+            int xChange, yChange;
+
+            // Current Size = 140, 100
+            // Tar5get Size = 145, 100
+            try
+            {
+
+                while (_ctrl.Location != _newLocation)
+                {
+                    // Pause 
+                    System.Threading.Thread.Sleep(delay);
+
+                    // Direction Determination
+                    if ((_ctrl.Location.X - _newLocation.X) > 0) { xDirection = -1; }
+                    if ((_ctrl.Location.Y - _newLocation.Y) > 0) { yDirection = -1; }
+
+                    //Figure out change amount
+                    if (Math.Abs(_ctrl.Location.X - _newLocation.X) > maxChange) { xChange = maxChange; } else { xChange = 1; }
+                    if (Math.Abs(_ctrl.Location.Y - _newLocation.Y) > maxChange) { yChange = maxChange; } else { yChange = 1; }
+
+
+                    // Make the Change
+                    if (_ctrl.Location.Y != _newLocation.Y && _ctrl.Location.X != _newLocation.X)
+                    {
+                        SlideDelegate(_ctrl, new Point(_ctrl.Location.X + xChange * xDirection, _ctrl.Location.Y + yChange * yDirection));
+                    }
+                    else if (_ctrl.Location.Y != _newLocation.Y)
+                    {
+                        SlideDelegate(_ctrl, new Point(_ctrl.Location.Y, _ctrl.Location.Y + yChange * yDirection));
+                    }
+                    else if (_ctrl.Location.X != _newLocation.X)
+                    {
+                        SlideDelegate(_ctrl, new Point(_ctrl.Location.X + xChange * xDirection, _ctrl.Location.Y));
+                    }
+                }
+
+            }catch(Exception Ex)
+            {
+                //MessageBox.Show(Ex.Message);
+            }
+        }
+        public static void SlideDelegate(Control _ctrl, Point _newLocation)
+        {
+            try
+            {
+                if (_ctrl.InvokeRequired == false)
+                {
+                    _ctrl.Location = _newLocation;
+                }
+                else
+                {
+                    _ctrl.Invoke(new Action<Control, Point>(SlideDelegate), _ctrl, _newLocation);
+                }
+            }catch(Exception Ex)
+            {
+
+            }
+        }
+
     }
 
     

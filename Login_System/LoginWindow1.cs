@@ -188,7 +188,7 @@ namespace Login_System
             }  
         }
 
-
+        //the function names says it all
         private void Login(String username, String password)
         {
             // Attempt  Login
@@ -236,18 +236,11 @@ namespace Login_System
                     SaveSettings();
 
                     // Start Slide Effect
-                    // Thread SlideThread = new Thread(Slide);
-                    Thread SlideThread = new Thread(() => Functions.Slide(this, new Size(this.Size.Width, 425),5,2));
+                    Thread SlideThread = new Thread(() => Functions.Grow(this, new Size(this.Size.Width, 425),5,2));
                     SlideThread.Start();
 
                     // Check SQL DB for required tables
                     Globals.SC.TableCheck();
-                    //i have 20 min or so before i gotta get reaady
-                    //say again?
-                    //so much its very loud over here youd hate it through these garbage headphoens
-                    //its both nice and not nice she did bring me a beer though so worth the music
-                    //also all my questions are in notes now haha so i can look back
-                    // 
                 }
                 else
                 {
@@ -262,44 +255,6 @@ namespace Login_System
             {
                 this.Invoke(new Action<bool>(VerifyConnectionDelegate), Success);
             }
-        } // Delegate Function
-
-        
-        // Slide Functions
-        private void SlideDown()
-        {
-            while (this.Size.Height < 425)
-            {
-                System.Threading.Thread.Sleep(5);
-
-                SlideDownDelegate(new Size(this.Size.Width, this.Size.Height + 2));
-                
-            }
-        } //(LAG)
-        private void SlideDownDelegate(Size newSize)
-        {
-            if (this.InvokeRequired == false)
-            {
-                this.Size = newSize;
-            }
-            else
-            {
-                this.Invoke(new Action<Size>(SlideDownDelegate), newSize);
-            }
         }
-
-        // could we add one last grow call in the main so it never ends up too short?
-        // i think that the designer doesnt include the header and footer as a size
-        //hmm maybe a scale issue?
-        // ive had it tell me to change my % zoom or something before 
-        // i just do=nt know what that was for so i ignored
-        //say that again i missed that
-        //seems weird it would stop short
-        // when i drag it around it stops growing. it also isnt the right size now
-        //yea that makes sense i dont get how you make it change the parameters of the main threads window
-        //so the side thread pauses between sending the +1?
-        // so the main thread is still waiting the delay but isnt exactly paused it just hasnt gotten the new +1 becuase the side thread is delayed
     }
-
-
 }

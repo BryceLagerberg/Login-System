@@ -18,6 +18,8 @@ namespace Login_System
         private LoginWindow1 LoginWindowForm;
         private ChatWindow CW;
         private Thread FriendsRefresh;
+        private Thread SlideThread;
+        private Thread ExpandThread;
 
         Dictionary<int, Profile> Friends = new Dictionary<int, Profile>(); // Account Number - Profile
 
@@ -29,7 +31,8 @@ namespace Login_System
         {
             LoginWindowForm = LoginWindow;
             InitializeComponent();
-
+            SlideThread = new Thread(() => Functions.Slide(pictureBox3, new Point(pictureBox3.Location.X - pictureBox3.Size.Width, pictureBox3.Location.Y), 5, 2)); // Dummy placeholder for the purpose of initilizing the thread
+            ExpandThread = new Thread(() => Functions.Grow(this, new Size(0,0), 10));
         }
 
         private void ProfileWindow_Load(object sender, EventArgs e)
@@ -175,32 +178,68 @@ namespace Login_System
             }
         }
 
-        //chat window expand button
+        //profile window expand button
+
         private void pictureBox3_Click(object sender, EventArgs e)
         {
-            Size OriginalSize = new Size(624, 616);
+            Size OriginalSize = new Size(584, 616);
             Size TargetSize = new Size(923, 616);
             //Size Test = this.Size; // for testing
-
 
             // Do the expand thing
             if (this.Size == OriginalSize)
             {
                 this.pictureBox3.Image = Login_System.Properties.Resources.Arrow_Right;
-                Thread SlideThread = new Thread(() => Functions.Slide(this, TargetSize, 10));
-                SlideThread.Start();
+                ExpandThread = new Thread(() => Functions.Grow(this, TargetSize, 10));
+                ExpandThread.Start();
                 
             }
             else
             {
                 this.pictureBox3.Image = Login_System.Properties.Resources.Arrow_Left;
-                Thread SlideThread = new Thread(() => Functions.Slide(this, OriginalSize, 10));
-                SlideThread.Start();
+                ExpandThread = new Thread(() => Functions.Grow(this, OriginalSize, 10));
+                ExpandThread.Start();
+
             }
-            
-            
-            //then make it slide
-            //then make it more cool
+        }
+
+        //makes the expand button hide and show depending on mouse location
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            // calculate the location of the forms right side
+            int mx = MousePosition.X;
+            int my = MousePosition.Y;
+
+            Point bottomRight = new Point((this.Location.X + this.Size.Width - 8), (this.Location.Y + this.Size.Height - 8));//the minus 8 is for border discrepancy
+
+            //if mouse is located within 50 pixels of right side of the form then trigger event
+            if (bottomRight.X - mx <= 50 && bottomRight.X - mx >= 0 && bottomRight.Y - my <= this.Size.Height && bottomRight.Y - my >= 0)
+            {
+                //mouse enter event
+
+                //if statement so only 1 thread goes at a time
+                if (SlideThread.IsAlive == false && ExpandThread.IsAlive == false)
+                {
+                    SlideThread = new Thread(() => Functions.Slide(pictureBox3, new Point(this.Size.Width - pictureBox3.Size.Width - 16, pictureBox3.Location.Y), 25, 3));
+                    SlideThread.Start();
+                }
+            }
+            else
+            {
+                //mouse leave event
+
+                //if statement so only 1 thread goes at a time
+                if (SlideThread.IsAlive)
+                {
+                    SlideThread.Abort();
+                }
+                if (ExpandThread.IsAlive == false)
+                {
+                    SlideThread = new Thread(() => Functions.Slide(pictureBox3, new Point(this.Size.Width, pictureBox3.Location.Y), 25, 3));
+                    SlideThread.Start();
+                }
+            }
+
         }
 
         #endregion
@@ -355,7 +394,7 @@ namespace Login_System
                 FriendPanel.Controls.Add(ProfilePicture);
                 FriendPanel.Location = new System.Drawing.Point(20, 400);
                 FriendPanel.Name = "panel" + friend.AccountNumber;  //should be changed to accountnumber instead of firstname
-                FriendPanel.Size = new System.Drawing.Size(253, 81);
+                FriendPanel.Size = new System.Drawing.Size(272, 81);
                 FriendPanel.TabIndex = 1;
                 FriendPanel.Visible = true;
                 FriendPanel.DoubleClick += new System.EventHandler(this.FriendDoubleClick);
@@ -409,5 +448,7 @@ namespace Login_System
 
 
         #endregion
+
+      
     }
 }

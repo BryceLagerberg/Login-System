@@ -76,35 +76,9 @@ making a login interface that records stats. May later be expanded on
 
 [X] make a chat system
 
-#THINGS THAT NEED TO BE DONE/FIXED OR UPLOADED---------------------------------------------------------------------------
-
-[ ] *add a change username option?
-
 [X] Open Sql to wifi
 
-[ ] make an applications tab with cool tools like web browser and calculator etc
-
-[ ] *make good flair, remove bad flair
-
-[ ] *add a drag and drop to the profile pictures so you can change easier
-
-[ ] add password requirements 
-
-[ ] add check box/ x for password requirements being met or not
-
-[ ] add description for password and username requirements above or below their text boxes
-
 [X] change profile picture through right click instead of button
-
-[ ] make profileWindow expandable
-
-[ ] make the friends list live update and organize by online/offline status
-
-[ ] add a remember my username checkbox to the login
-
-[ ] make the server and database selection a pop out window accessable by a settings symbol or something
-
-[ ] create sql stored procedures
 
 [x] on friends list make the loggedIn update in real time
 
@@ -122,22 +96,62 @@ making a login interface that records stats. May later be expanded on
 
 [x] make each chat instance have its own tab
 
+[x] make a CW expand button
+
+[x] add slide effect to CW expand button
+
+[x] replace login window slidedown function with new slide funtion
+
+[x] add slide on hover effect to CW expand button
+
+[x] fix friends list panel sizing
+
+[x] fix anchoring of expand button
+
+[x] make expand button autoshrink if not being hovered
+
+[x] add mouse move box to replace mouseEnter and mouseLeave events to fix expand button edge case 
+
+#THINGS THAT NEED TO BE DONE/FIXED---------------------------------------------------------------------------
+
+[ ] *add a change username option?
+
+[ ] make an applications tab with cool tools like web browser and calculator etc
+
+[ ] *make good flair, remove bad flair
+
+[ ] *add a drag and drop to the profile pictures so you can change easier
+
+[ ] add password requirements 
+
+[ ] add check box/ x for password requirements being met or not
+
+[ ] add description for password and username requirements above or below their text boxes
+
+[ ] make profileWindow expandable
+
+[ ] make the friends list live update and organize by online/offline status
+
+[ ] add a remember my username checkbox to the login
+
+[ ] make the server and database selection a pop out window accessable by a settings symbol or something
+
+[ ] create sql stored procedures
+
 [ ] Make chat window appear to the right of the profile window
 
 [ ] remove the logged in user from their own friends list
 
 [ ] add on double click events for all friends list controls
 
-[ ] make expand window button for profile window, make slide effects for both button and the form
-
-[x] make a CW expand button
-
-[ ] add slide effect to CW expand button
-
-[ ] add slide on hover effect to CW expand button
+[x/2] make expand window button for profile window, make slide effects for both button and the form
 
 [ ] make expand arrow change directions after completing the grow or shrink animation
 
-[ ] replace login window slidedown function with new slide funtion
+[ ] fix already logged in error
 
-[ ]
+[ ] fix transperency issue with expand button
+
+[ ] fix expand button jumping to the top (bug)
+
+[ ] change message cap to a hard limit instead of replacing old text in chat window
