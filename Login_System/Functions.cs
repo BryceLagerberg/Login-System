@@ -7,6 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace Login_System
 {
@@ -63,7 +64,8 @@ namespace Login_System
             // Then recast as a string.
             return new string(Text.ToCharArray().Select(x => (char)((int)x + (Encrypt ? -1 : 1) * Key)).ToArray<char>());
         }
-
+        
+        // grow or shrink a control
         public static void Grow(Control ctrl, Size newSize, int delay = 5, int maxChange = 5)
         {
 
@@ -185,7 +187,7 @@ namespace Login_System
             }
         }
 
-
+        //read the name!
         public static void SaveSettings(string _Key, string _NewSetting)
         {
             // save the new setting to the settings dictionary
@@ -234,7 +236,50 @@ namespace Login_System
             }
         }
 
+        //checks if a password meets requirements
+        public static bool PasswordCheck(String TestPassword, String Username)
+        {
+            //declare password requirements
 
+            //initialize variables
+            Regex _containsNumber = new Regex("[0-9]");
+            Regex _containsLetter = new Regex("[a-z]");
+            Regex _containsUppercase = new Regex("[A-Z]");
+
+            //must be 8 characters long
+            if (TestPassword.Length < 8)
+            {
+                return false;
+            }
+
+            //must have atleast 1 number
+            if (_containsNumber.IsMatch(TestPassword) == false)
+            {
+                return false;
+            }
+
+            //must have atleast 1 letter
+            if (_containsLetter.IsMatch(TestPassword) == false)
+            {
+                return false;
+            }
+
+            // must have atleast 1 uppercase letter
+            if (_containsUppercase.IsMatch(TestPassword) == false)
+            {
+                return false;
+            }
+
+            //cant match username
+            if (TestPassword.Equals(Username))
+            {
+                return false;
+            }
+
+            //if tests are passed return true
+
+            return true;
+        }
     }
 
     

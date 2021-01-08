@@ -126,6 +126,7 @@ namespace Login_System
                 Connection.Close();
             }
         }
+        
         //checks if a username is unique
         public bool UsernameCheck(String TestUsername)
         {

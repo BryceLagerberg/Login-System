@@ -1,124 +1,137 @@
 # Login-System
+
 making a login interface that records stats. May later be expanded on
 
 
 #THINGS THAT HAVE BEEN DONE/FIXED AND UPLOADED----------------------------------------------------------------------------
 
-[x] Write a function to verify the connection to the SQL Server
+1[x] Write a function to verify the connection to the SQL Server
 
-[x] make a new textbox for email
+2[x] make a new textbox for email
 
-[x] make a new textbox for CreatedOn
+3[x] make a new textbox for CreatedOn
 
-[x] make a new textbox for LastLogin
+4[x] make a new textbox for LastLogin
 
-[x] Add SQL table creation if the database does not have the required tables within it.
+5[x] Add SQL table creation if the database does not have the required tables within it.
 
-[x] Multithread SQLControl's TestConnection function to remove lag
+6[x] Multithread SQLControl's TestConnection function to remove lag
 
-[x] Write a Slide function as a form animation
+7[x] Write a Slide function as a form animation
 
-[x] fix loggedIn reporting in sql table
+8[x] fix loggedIn reporting in sql table
 
-[X] fix lastname reporting in sql table
+9[X] fix lastname reporting in sql table
 
-[x] fix lastlogin reporting in sql table
+10[x] fix lastlogin reporting in sql table
 
-[x] *add a change password option
+11[x] *add a change password option
 
-[x] Add Password Mask / Clear Login 
+12[x] Add Password Mask / Clear Login 
 
-[x] *add a password visible toggle
+13[x] *add a password visible toggle
 
-[x] link the profile photos to individual profiles, probably through sql table
+14[x] link the profile photos to individual profiles, probably through sql table
 
-[x] add a toolstrip drop down button menu that we populated with a logout button and pic browser
+15[x] add a toolstrip drop down button menu that we populated with a logout button and pic browser
 
-[x] finish populating the text boxes on ProfileWindow
+16[x] finish populating the text boxes on ProfileWindow
 
-[x] create a log out button on the Profile Window Form
+17[x] create a log out button on the Profile Window Form
 
-[x] Add a profile picture option that saves previously used photos for quick access.
+18[x] Add a profile picture option that saves previously used photos for quick access.
 
-[x] Add flare to things
+19[x] Add flare to things
 
-[x] *Add password encrypt / decrypt function to SQLControl
+20[x] *Add password encrypt / decrypt function to SQLControl
 
-[x] *make it so only one person can log in at a time per profile
+21[x] *make it so only one person can log in at a time per profile
 
-[x] fix bug with create account window being thrown out not hidden
+22[x] fix bug with create account window being thrown out not hidden
 
-[x] *build a function that verifies username availability
+23[x] *build a function that verifies username availability
 
-[x] make closing the window log out and close out
+24[x] make closing the window log out and close out
 
-[x] add an executable icon/ all the forms
+25[x] add an executable icon/ all the forms
 
-[x] make the profile window tool bars clear button actually work
+26[x] make the profile window tool bars clear button actually work
 
-[x] Table creation is hard coded to BryceDB
+27[x] Table creation is hard coded to BryceDB
 
-[x] Table creation is missing columns
+28[x] Table creation is missing columns
 
-[x] Make an images folder for storing profile pictures on the C:\ drive
+29[x] Make an images folder for storing profile pictures on the C:\ drive
 
-[x] Test connection is locked at connected after a successful connection
+30[x] Test connection is locked at connected after a successful connection
 
-[x] Make server and database textboxes start blank and remember the last locally used input
+31[x] Make server and database textboxes start blank and remember the last locally used input
 
-[x/2] fix broken accounts so u can test stuff
+32[x] fix broken accounts so u can test stuff
 
-[x] add a friends list in the expanded window 
+33[x] add a friends list in the expanded window 
 
-[x] make a chat box pop out window accessable from the friends list
+34[x] make a chat box pop out window accessable from the friends list
 
-[x] make friends list elements use correct info per user?
+35[x] make friends list elements use correct info per user?
 
-[X] make a chat system
+36[X] make a chat system
 
-[X] Open Sql to wifi
+37[X] Open Sql to wifi
 
-[X] change profile picture through right click instead of button
+38[X] change profile picture through right click instead of button
 
-[x] on friends list make the loggedIn update in real time
+39[x] on friends list make the loggedIn update in real time
 
-[x] make logged in users appear green logged out users appear gray
+40[x] make logged in users appear green logged out users appear gray
 
-[x] fix chat window text counter location
+41[x] fix chat window text counter location
 
-[x] Make chat window close when you log out
+42[x] Make chat window close when you log out
 
-[x] make it so you can login by hitting enter on the password textbox
+43[x] make it so you can login by hitting enter on the password textbox
 
-[x] make the correct name show on each message in chat window
+44[x] make the correct name show on each message in chat window
 
-[x] come up with more efficent way to display your messages
+45[x] come up with more efficent way to display your messages
 
-[x] make each chat instance have its own tab
+46[x] make each chat instance have its own tab
 
-[x] make a CW expand button
+47[x] make a CW expand button
 
-[x] add slide effect to CW expand button
+48[x] add slide effect to CW expand button
 
-[x] replace login window slidedown function with new slide funtion
+49[x] replace login window slidedown function with new slide funtion
 
-[x] add slide on hover effect to CW expand button
+50[x] add slide on hover effect to CW expand button
 
-[x] fix friends list panel sizing
+51[x] fix friends list panel sizing
 
-[x] fix anchoring of expand button
+52[x] fix anchoring of expand button
 
-[x] make expand button autoshrink if not being hovered
+53[x] make expand button autoshrink if not being hovered
 
-[x] add mouse move box to replace mouseEnter and mouseLeave events to fix expand button edge case 
+54[x] add mouse move box to replace mouseEnter and mouseLeave events to fix expand button edge case 
 
-[x] make expand window button for profile window, make slide effects for both button and the form
+55[x] make expand window button for profile window, make slide effects for both button and the form
 
-[x] make profileWindow expandable
+56[x] make profileWindow expandable
 
-[x] fix sizing on loginWindow slide function
+57[x] fix sizing on loginWindow slide function
 
-[x] make remember me check box stay checked
+58[x] make remember me check box stay checked
+
+59[x] add password requirements 
+
+60[x] add check box for password requirements being met or not
+
+61[x] add description for password and username requirements above or below their text boxes
+
+62[x] add a remember my username checkbox to the login
+
+63[x] make create account password textbox text hidden
+
+64[x] make create account button only work if username and password requirements are met
 
 
 #THINGS THAT NEED TO BE DONE-------------------------------------------------------------------------------------------------------------
@@ -128,18 +141,11 @@ making a login interface that records stats. May later be expanded on
 [ ] make an applications tab with cool tools like web browser and calculator etc
 
 [ ] *make good flair, remove bad flair
+	[ ] make a safe password checkbox that if checked gives a message saying thats a bad idea and then doesnt remember the password
 
 [ ] *add a drag and drop to the profile pictures so you can change easier
 
-[ ] add password requirements 
-
-[ ] add check box for password requirements being met or not
-
-[ ] add description for password and username requirements above or below their text boxes
-
 [ ] make the friends list live update and organize by online/offline status
-
-[x] add a remember my username checkbox to the login
 
 [ ] make the server and database selection a pop out window accessable by a settings symbol or something
 
@@ -158,8 +164,15 @@ making a login interface that records stats. May later be expanded on
 [ ] change message cap to a hard limit instead of replacing old text in chat window
 
 [ ] fix tab order on login window
+
 BUGS TO FIX------------------------------------------------------------------------------------------------------------------------------
 
-[ ] fix expand button jumping to the top (bug)
+[ ] fix expand button jumping to the top (havent been able to recreate this bug yet)
 
 [ ] fix bug that says wrong username/password when logging in to an already logged in account
+
+[ ] profile window should reset to original size on user log out or when the user closes
+
+[ ] all chat messages are outputing the same message regardless of input when logged in as bobby and sending to bryce, but works fine for other users bobby sends a message to.
+
+[ ] after a failed login the login window name always stays as 'Bad Login' it should change back to login window after a successful login, or when error message is closed.
