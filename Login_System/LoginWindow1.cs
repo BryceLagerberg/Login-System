@@ -42,10 +42,27 @@ namespace Login_System
             PW = new ProfileWindow(this);
 
             // Initilize SQL Control
-            SQLControl SC = new SQLControl(textBox4.Text, textBox3.Text);
+            SQLControl SC = new SQLControl(textBox4.Text, textBox3.Text, "192.168.86.88");// update after we add a textbox for serverip input
             Globals.SC = SC;
 
-            LoadSettings();
+            // Load Last SQL Settings
+            Functions.LoadSettings();
+            textBox3.Text = Globals.Settings["SQL Database"];
+            textBox4.Text = Globals.Settings["SQL Server"];
+            try
+            {
+                if (Globals.Settings["Remember Username"] == "true")
+                {
+                    checkBox1.Checked = true; 
+                    textBox2.Text = Globals.Settings["SQL Username"];
+                    
+                }
+            }
+            catch(Exception ex)
+            {
+
+            }
+
 
             // Initilize Verification Thread and run it
             if (textBox3.Text != "" && textBox4.Text != "") {
@@ -66,11 +83,13 @@ namespace Login_System
             AI.Show();
 
         }
+        
         // Login Button
         private void button1_Click(object sender, EventArgs e)
         {
             Login(textBox2.Text, textBox1.Text);
         }
+        
         // changes the database address
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
@@ -83,6 +102,7 @@ namespace Login_System
             }
 
         }
+        
         //changes the SQL server address
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
@@ -95,6 +115,16 @@ namespace Login_System
             }
 
         }
+
+        //turns enter key into login button shortcut
+        private void textBox1_KeyPressEvent(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar == (char)Keys.Enter)
+            {
+                Login(textBox2.Text, textBox1.Text);
+            }
+        }
+
         /*adding flare! (the old shitty version)
         private void textBox1_MouseHover(object sender, EventArgs e)
         {
@@ -140,40 +170,9 @@ namespace Login_System
             }
         }
 
-        // Save program Settings
-        private void SaveSettings()
-        {
-            System.IO.File.WriteAllText("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt","SQL Server: " + textBox4.Text + "\nSQL Database: " +textBox3.Text);
-        }
-        //Load program settings
-        private void LoadSettings()
-        {
-            if (System.IO.File.Exists("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt"))
-            {
-                string FullSettings = System.IO.File.ReadAllText("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt");
-
-                // split by new line '\n'
-                string[] SplitSettings = FullSettings.Split('\n');
-                
-                // for each setting...
-                foreach(string s in SplitSettings)
-                {
-                    // split by ':'
-                    string[] Setting = s.Split(':');
-                    
-                    if(Setting[0] == "SQL Server")
-                    {
-                        textBox4.Text = Setting[1].Trim();
-                    }
-                    if (Setting[0] == "SQL Database")
-                    {
-                        textBox3.Text = Setting[1].Trim();
-                    }
-                }
-            }  
-        }
 
 
+        //the function names says it all
         private void Login(String username, String password)
         {
             // Attempt  Login
@@ -183,13 +182,15 @@ namespace Login_System
             // If Success
             if (User != null)
             {
+                Functions.SaveSettings("SQL Username", textBox2.Text);
                 Globals.LoggedInUser = User;
 
                 this.Visible = false;
                 PW.Visible = true;
                 textBox1.Text = "";
-                textBox2.Text = "";
+                if(Globals.Settings["Remember Username"] == "false") { textBox2.Text = ""; }
                 PW.LoadProfile();
+
 
             }
             else
@@ -197,7 +198,6 @@ namespace Login_System
                 this.Text = "Bad Login";
                 MessageBox.Show("Error Loggin In, \n\n Invalid Username / Password");
                 textBox1.Text = "";
-                textBox2.Text = "";
             }
 
         }
@@ -218,20 +218,15 @@ namespace Login_System
                     textBox3.Enabled = false;
                     textBox4.Enabled = false;
                     groupBox2.Enabled = true;
-                    SaveSettings();
+                    Functions.SaveSettings("SQL Server", textBox4.Text);
+                    Functions.SaveSettings("SQL Database", textBox3.Text);
 
                     // Start Slide Effect
-                    Thread SlideThread = new Thread(SlideDown);
+                    Thread SlideThread = new Thread(() => Functions.Grow(this, new Size(this.Size.Width, 465),5,2));
                     SlideThread.Start();
 
                     // Check SQL DB for required tables
                     Globals.SC.TableCheck();
-                    //i have 20 min or so before i gotta get reaady
-                    //say again?
-                    //so much its very loud over here youd hate it through these garbage headphoens
-                    //its both nice and not nice she did bring me a beer though so worth the music
-                    //also all my questions are in notes now haha so i can look back
-                    // 
                 }
                 else
                 {
@@ -246,44 +241,21 @@ namespace Login_System
             {
                 this.Invoke(new Action<bool>(VerifyConnectionDelegate), Success);
             }
-        } // Delegate Function
+        }
 
-        
-        // Slide Functions
-        private void SlideDown()
+        //save or clear username for login
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            while (this.Size.Height < 425)
+            if (checkBox1.Checked)
             {
-                System.Threading.Thread.Sleep(5);
-
-                SlideDownDelegate(new Size(this.Size.Width, this.Size.Height + 2));
-                
-            }
-        } //(LAG)
-        private void SlideDownDelegate(Size newSize)
-        {
-            if (this.InvokeRequired == false)
-            {
-                this.Size = newSize;
+                //save the username to settings file 
+                Functions.SaveSettings("Remember Username", "true");
             }
             else
             {
-                this.Invoke(new Action<Size>(SlideDownDelegate), newSize);
+                //clear saved username from settings file
+                Functions.SaveSettings("Remember Username", "false");
             }
         }
-
-        // could we add one last grow call in the main so it never ends up too short?
-        // i think that the designer doesnt include the header and footer as a size
-        //hmm maybe a scale issue?
-        // ive had it tell me to change my % zoom or something before 
-        // i just do=nt know what that was for so i ignored
-        //say that again i missed that
-        //seems weird it would stop short
-        // when i drag it around it stops growing. it also isnt the right size now
-        //yea that makes sense i dont get how you make it change the parameters of the main threads window
-        //so the side thread pauses between sending the +1?
-        // so the main thread is still waiting the delay but isnt exactly paused it just hasnt gotten the new +1 becuase the side thread is delayed
     }
-
-
 }

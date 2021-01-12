@@ -46,8 +46,8 @@ C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\
 C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.csproj.CoreCompileInputs.cache
 C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.exe
 C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.pdb
-C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.csprojAssemblyReference.cache
 C:\Users\Naaro\Login-System\Login_System\obj\Debug\Login_System.csprojAssemblyReference.cache
 C:\Users\Naaro\Login-System\Login_System\obj\Debug\Login_System.CreateAccount.resources
 C:\Users\Naaro\Login-System\Login_System\obj\Debug\Login_System.csproj.CoreCompileInputs.cache
 C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.ChatWindow.resources
+C:\Users\bryce\Desktop\Login System Project\Login-System\Login_System\obj\Debug\Login_System.csprojAssemblyReference.cache

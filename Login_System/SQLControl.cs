@@ -19,33 +19,51 @@ namespace Login_System
         public string SQLServer { get; set; }
 
         public bool Connected { get; set; } = false;
+        public string ConnectionString = string.Empty;
+        public string ServerIP;
 
         #endregion
+        
 
-
-        public SQLControl(string _SQLServer, string _DataBase)
+        // Constructor for the Class
+        public SQLControl(string _SQLServer, string _DataBase, string _ServerIP)
         {
+
+            ServerIP = _ServerIP;
             DataBase = _DataBase;
             SQLServer = _SQLServer;
+
+            // Setup SQL Connection
+            SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
+            csb.InitialCatalog = DataBase;
+            csb.DataSource = SQLServer;
+            csb.IntegratedSecurity = true;
+            csb.UserID = "guest";
+            csb.Password = "guest";
+
+            ConnectionString = csb.ToString();
+
         }
 
         #region Functions
         public Boolean TestConnection()
         {
-            //setup for connection to sql server and database
+
+            // Setup SQL Connection
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
-            csb.DataSource = SQLServer;
             csb.InitialCatalog = DataBase;
+            csb.DataSource = SQLServer;
             csb.IntegratedSecurity = true;
+            csb.UserID = "guest";
+            csb.Password = "guest";
 
-            string connString = csb.ToString();
-
-            SqlConnection connection = new SqlConnection(connString);
+            ConnectionString = csb.ToString();
+            SqlConnection Connection = new SqlConnection(ConnectionString);
 
             try
             {
-                connection.Open();
-                connection.Close();
+                Connection.Open();
+                Connection.Close();
                 Connected = true;
                 return true;
             }
@@ -58,21 +76,14 @@ namespace Login_System
         // Check For Tables
         public void TableCheck()
         {
-            //setup for connection to sql server and database
-            SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
-            csb.DataSource = SQLServer;
-            csb.InitialCatalog = DataBase;
-            csb.IntegratedSecurity = true;
-
-            string connString = csb.ToString();
 
 
-            using (SqlConnection connection = new SqlConnection(connString))
-            using (SqlCommand command = connection.CreateCommand())
+            using (SqlConnection Connection = new SqlConnection(ConnectionString))
+            using (SqlCommand command = Connection.CreateCommand())
             {
                 command.CommandText = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Account Logins' or TABLE_NAME = 'Account Information'";
                 //makes connection to sql server
-                connection.Open();
+                Connection.Open();
 
                 //Check to see what tables exist
                 bool AccountLogins = false;
@@ -81,20 +92,20 @@ namespace Login_System
                 {
 
                     while (reader.Read())
-                    {               
+                    {
                         string Table = reader["TABLE_NAME"].ToString();
-                        if(Table == "Account Information")
+                        if (Table == "Account Information")
                         {
                             //what needs to be in each table? check for that
                             AccountInformation = true;
                         }
-                        else if(Table == "Account Logins")
+                        else if (Table == "Account Logins")
                         {
                             AccountLogins = true;
                         }
-                        
-  
-                         
+
+
+
                     }
                 }
 
@@ -102,19 +113,20 @@ namespace Login_System
                 //
                 if (!AccountLogins)
                 {
-                    command.CommandText = "CREATE TABLE "+DataBase+".dbo.[Account Logins] (Username varchar(50), Password varchar(50), AccountNumber int,);";
+                    command.CommandText = "CREATE TABLE " + DataBase + ".dbo.[Account Logins] (Username varchar(50), Password varchar(50), AccountNumber int,);";
                     command.ExecuteReader();
                 }
                 if (!AccountInformation)
                 {
                     // Email, FirstName, LastName, CreatedOn, LastLogin, ProfilePicture, LoggedIn
-                    command.CommandText = "CREATE TABLE "+ DataBase + ".dbo.[Account Information](AccountNumber int, FirstName varchar(50), LastName varchar(50), Email varchar(50), LoggedIn bit, LastLogin datetime, CreatedOn datetime, ProfilePicture varchar(50));";
+                    command.CommandText = "CREATE TABLE " + DataBase + ".dbo.[Account Information](AccountNumber int, FirstName varchar(50), LastName varchar(50), Email varchar(50), LoggedIn bit, LastLogin datetime, CreatedOn datetime, ProfilePicture varchar(50));";
                     command.ExecuteReader();
                 }
 
-                connection.Close();
+                Connection.Close();
             }
         }
+        
         //checks if a username is unique
         public bool UsernameCheck(String TestUsername)
         {
@@ -213,7 +225,7 @@ namespace Login_System
                 using (SqlCommand command = connection.CreateCommand())
                 {
                     //sql command to pull username and password from our sql table
-                    string LoginQuery = "SELECT Username, Password, AccountNumber  FROM [Account Logins]";
+                    string LoginQuery = "SELECT Username, Password, AccountNumber FROM [Account Logins]";
                     command.CommandText = LoginQuery;
                     //makes connection to sql server
                     connection.Open();
@@ -236,7 +248,7 @@ namespace Login_System
                             if (UserProfile.Username == Username && UserProfile.Password == Password)
                             {
                                 LoggingInUser = UserProfile;
-                            } 
+                            }
                         }
                     }
 
@@ -264,7 +276,7 @@ namespace Login_System
                                 LoggingInUser.CreatedOn = (reader.IsDBNull(3)) ? DateTime.Now : DateTime.Parse(reader["CreatedOn"].ToString());
                                 LoggingInUser.LastLogin = (reader.IsDBNull(4)) ? DateTime.Now : DateTime.Parse(reader["LastLogin"].ToString());
                                 LoggingInUser.ProfilePicture = reader["ProfilePicture"].ToString();
-                                if ((bool)reader["LoggedIn"] == true) { MessageBox.Show("Already Logged In","Error", MessageBoxButtons.OK, MessageBoxIcon.Error); return null; }
+                                if ((bool)reader["LoggedIn"] == true) { return null; }
                             }
                         }
 
@@ -388,6 +400,51 @@ namespace Login_System
 
                 connection.Close();
             }
+        }
+
+        //gets messages
+        public List<Message> GetMessages(int ANS, int ANR)
+        {
+            List<Message> messages = new List<Message>();
+
+            //setup for connection to sql server and database
+            SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
+            csb.DataSource = SQLServer;
+            csb.InitialCatalog = DataBase;
+            csb.IntegratedSecurity = true;
+
+            string connString = csb.ToString();
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                command.CommandText = "SELECT * FROM [Chat Logs] where  (AccountNumberSender = '"+ANS+"' or AccountNumberSender = '"+ANR+"') and (AccountNumberReceiver = '"+ANS+"' or AccountNumberReceiver = '"+ANR+"');";
+                //makes connection to sql server
+                connection.Open();
+                //execute the command u made above!
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+
+                    while (reader.Read())
+                    {
+                        Message m = new Message();
+                        m.AccountNumberSender =  Int32.Parse(reader["AccountNumberSender"].ToString());
+                        m.AccountNumberReceiver = Int32.Parse(reader["AccountNumberReceiver"].ToString());
+                        m.SentTime = (DateTime)reader["SentTime"];
+                        m.Text = reader["Message"].ToString();
+
+                        messages.Add(m);
+                    }
+                }
+
+
+
+                connection.Close();
+            }
+
+
+            return messages;
         }
 
         #endregion
