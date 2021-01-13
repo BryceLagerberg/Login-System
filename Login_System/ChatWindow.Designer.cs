@@ -49,6 +49,7 @@ namespace Login_System
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(549, 433);
@@ -105,7 +106,7 @@ namespace Login_System
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.button1.Location = new System.Drawing.Point(451, 444);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 26);
+            this.button1.Size = new System.Drawing.Size(117, 32);
             this.button1.TabIndex = 1;
             this.button1.Text = "Send";
             this.button1.UseVisualStyleBackColor = true;
@@ -118,7 +119,7 @@ namespace Login_System
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.textBox1.Location = new System.Drawing.Point(4, 445);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(438, 26);
+            this.textBox1.Size = new System.Drawing.Size(583, 30);
             this.textBox1.TabIndex = 2;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_EnterKeyPressed);
@@ -136,7 +137,7 @@ namespace Login_System
             // 
             // ChatWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(548, 478);
             this.Controls.Add(this.label1);
@@ -144,6 +145,7 @@ namespace Login_System
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ChatWindow";
             this.Text = "ChatWindow";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ChatWindow_FormClosing);
