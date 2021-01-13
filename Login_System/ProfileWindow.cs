@@ -44,40 +44,40 @@ namespace Login_System
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
-            if (Globals.LoggedInUser != null)
+            if (Globals._LoggedInUser != null)
             {
-                Globals.LoggedInUser.Password = Functions.Encrypt(textBox2.Text);
-                Globals.SC.Update("UPDATE [Account Logins] SET Password ='" + Globals.LoggedInUser.Password + "' WHERE AccountNumber = " + Globals.LoggedInUser.AccountNumber);
+                Globals._LoggedInUser.Password = Functions.Encrypt(textBox2.Text);
+                Globals._SC.Update("UPDATE [Account Logins] SET Password ='" + Globals._LoggedInUser.Password + "' WHERE AccountNumber = " + Globals._LoggedInUser.AccountNumber);
             }
         }
 
         //FirstName TB
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            if (Globals.LoggedInUser != null)
+            if (Globals._LoggedInUser != null)
             {
-                Globals.LoggedInUser.FirstName = textBox4.Text;
-                Globals.SC.Update("UPDATE [Account Information] SET FirstName='" + textBox4.Text + "' WHERE AccountNumber = " + Globals.LoggedInUser.AccountNumber);
+                Globals._LoggedInUser.FirstName = textBox4.Text;
+                Globals._SC.Update("UPDATE [Account Information] SET FirstName='" + textBox4.Text + "' WHERE AccountNumber = " + Globals._LoggedInUser.AccountNumber);
             }
         }
 
         //LastName TB
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
-            if (Globals.LoggedInUser != null)
+            if (Globals._LoggedInUser != null)
             {
-                Globals.LoggedInUser.LastName = textBox5.Text;
-                Globals.SC.Update("UPDATE [Account Information] SET LastName='" + textBox5.Text + "' WHERE AccountNumber = " + Globals.LoggedInUser.AccountNumber);
+                Globals._LoggedInUser.LastName = textBox5.Text;
+                Globals._SC.Update("UPDATE [Account Information] SET LastName='" + textBox5.Text + "' WHERE AccountNumber = " + Globals._LoggedInUser.AccountNumber);
             }
         }
         
         //Email TB
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
-            if (Globals.LoggedInUser != null)
+            if (Globals._LoggedInUser != null)
             {
-                Globals.LoggedInUser.Email = textBox6.Text;
-                Globals.SC.Update("UPDATE [Account Information] SET Email='" + textBox6.Text + "' WHERE AccountNumber = " + Globals.LoggedInUser.AccountNumber);
+                Globals._LoggedInUser.Email = textBox6.Text;
+                Globals._SC.Update("UPDATE [Account Information] SET Email='" + textBox6.Text + "' WHERE AccountNumber = " + Globals._LoggedInUser.AccountNumber);
             }
         }
         
@@ -151,7 +151,7 @@ namespace Login_System
             // Set the new image
             pictureBox1.ImageLocation = FilePath;
             
-            Globals.SC.Update("UPDATE [Account Information] SET ProfilePicture ='" + FileName + "' WHERE AccountNumber = " + Globals.LoggedInUser.AccountNumber);
+            Globals._SC.Update("UPDATE [Account Information] SET ProfilePicture ='" + FileName + "' WHERE AccountNumber = " + Globals._LoggedInUser.AccountNumber);
 
             // Add a copy of the image to the images folder for quicker reload
             if (!System.IO.File.Exists("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Profile_Pictures\\" + FileName))
@@ -253,18 +253,18 @@ namespace Login_System
         {
 
             // Populate the fields
-            textBox1.Text = Globals.LoggedInUser.Username;
-            textBox2.Text = Functions.Decrypt(Globals.LoggedInUser.Password);
-            textBox3.Text = Globals.LoggedInUser.AccountNumber.ToString();
-            textBox4.Text = Globals.LoggedInUser.FirstName;
-            textBox5.Text = Globals.LoggedInUser.LastName;
-            textBox6.Text = Globals.LoggedInUser.Email;
-            textBox7.Text = Globals.LoggedInUser.LastLogin.ToString();
-            textBox8.Text = Globals.LoggedInUser.CreatedOn.ToString();
-            pictureBox1.Image = LoadImage(Globals.LoggedInUser.ProfilePicture);
+            textBox1.Text = Globals._LoggedInUser.Username;
+            textBox2.Text = Functions.Decrypt(Globals._LoggedInUser.Password);
+            textBox3.Text = Globals._LoggedInUser.AccountNumber.ToString();
+            textBox4.Text = Globals._LoggedInUser.FirstName;
+            textBox5.Text = Globals._LoggedInUser.LastName;
+            textBox6.Text = Globals._LoggedInUser.Email;
+            textBox7.Text = Globals._LoggedInUser.LastLogin.ToString();
+            textBox8.Text = Globals._LoggedInUser.CreatedOn.ToString();
+            pictureBox1.Image = LoadImage(Globals._LoggedInUser.ProfilePicture);
 
             // Load Friends
-            Friends = Globals.SC.PullUsers();
+            Friends = Globals._SC.PullUsers();
             PopulateFriendsList();
 
             // Create a new chat window instance
@@ -284,7 +284,7 @@ namespace Login_System
             while (true)
             {
                 // make a call to check the LoggedIn status of the current users friends
-                Friends = Globals.SC.PullUsers();
+                Friends = Globals._SC.PullUsers();
                 Thread.Sleep(2500);
 
                 // Update their status 
@@ -325,8 +325,8 @@ namespace Login_System
         public void Logout()
         {
             // Log out the user (SQL)
-            Globals.SC.Update("UPDATE [Account Information] SET LoggedIn = 0 WHERE AccountNumber = " + Globals.LoggedInUser.AccountNumber);
-            Globals.LoggedInUser = null;
+            Globals._SC.Update("UPDATE [Account Information] SET LoggedIn = 0 WHERE AccountNumber = " + Globals._LoggedInUser.AccountNumber);
+            Globals._LoggedInUser = null;
 
             // Clear all field values
             textBox1.Text = "";
@@ -337,6 +337,9 @@ namespace Login_System
             textBox6.Text = "";
             textBox7.Text = "";
             textBox8.Text = "";
+
+            // reset the profile window dimensions to starting size
+            this.Size = new Size(584, 616);
 
             //clear friends list
             flowLayoutPanel1.Controls.Clear();
@@ -362,7 +365,7 @@ namespace Login_System
             {
                 // Set the new image
                 pictureBox1.ImageLocation = OFD.FileName;
-                Globals.SC.Update("UPDATE [Account Information] SET ProfilePicture ='" + OFD.SafeFileName + "' WHERE AccountNumber = " + Globals.LoggedInUser.AccountNumber);
+                Globals._SC.Update("UPDATE [Account Information] SET ProfilePicture ='" + OFD.SafeFileName + "' WHERE AccountNumber = " + Globals._LoggedInUser.AccountNumber);
 
                 // Add a copy of the image to the images folder for quicker reload
                 if (!System.IO.File.Exists("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Profile_Pictures\\" + OFD.SafeFileName))

@@ -32,6 +32,7 @@ namespace Login_System
             ServerIP = _ServerIP;
             DataBase = _DataBase;
             SQLServer = _SQLServer;
+            
 
             // Setup SQL Connection
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
@@ -298,7 +299,7 @@ namespace Login_System
             return LoggingInUser;
 
         }
-
+        
         public void Update(string queryString)
         {
             //setup for connection to sql server and database
@@ -332,6 +333,8 @@ namespace Login_System
         //Pulls all users from the Account Information Table
         public Dictionary<int, Profile> PullUsers()
         {
+            // TODO
+            // ADD A TRY CATCH BLOCK HERE!
             //setup for connection to sql server and database
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
             csb.DataSource = SQLServer;

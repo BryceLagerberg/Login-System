@@ -15,6 +15,7 @@ namespace Login_System
     public static class Functions
     {
 
+
         // Ceasar Cypher  A->B, B->C, C->D...
         public static string Encrypt(string EncryptInput)
         {
@@ -191,20 +192,20 @@ namespace Login_System
         public static void SaveSettings(string _Key, string _NewSetting)
         {
             // save the new setting to the settings dictionary
-            if (Globals.Settings.ContainsKey(_Key))
+            if (Globals._Settings.ContainsKey(_Key))
             {
-                Globals.Settings[_Key] = _NewSetting;
+                Globals._Settings[_Key] = _NewSetting;
             }
             else
             {
-                Globals.Settings.Add(_Key, _NewSetting);
+                Globals._Settings.Add(_Key, _NewSetting);
             }
 
             // use the dictionary to compile a string of all the settings
             string _AllSettings = "";
-            foreach (string Key in Globals.Settings.Keys)
+            foreach (string Key in Globals._Settings.Keys)
             {
-                _AllSettings += Key + ":" + Globals.Settings[Key] + "\n";
+                _AllSettings += Key + ":" + Globals._Settings[Key] + "\n";
             }
             // save all the settings into the settings file on local system
             System.IO.File.WriteAllText("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt", _AllSettings);
@@ -213,9 +214,9 @@ namespace Login_System
         //Load program settings
         public static void LoadSettings()
         {
-            if (System.IO.File.Exists("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt"))
+            if (System.IO.File.Exists(Globals._SettingsPath))
             {
-                string FullSettings = System.IO.File.ReadAllText("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt");
+                string FullSettings = System.IO.File.ReadAllText(Globals._SettingsPath);
 
                 // split by new line '\n'
                 string[] SplitSettings = FullSettings.Split('\n');
@@ -230,9 +231,16 @@ namespace Login_System
                         // split by ':'
                         string[] Setting = s.Split(':');
 
-                        Globals.Settings.Add(Setting[0], Setting[1]);
+                        Globals._Settings.Add(Setting[0], Setting[1]);
                     }
                 }
+            }
+            else
+            {
+                //  TODO
+                // Write the base settings to the computer
+                System.IO.File.WriteAllText(Globals._SettingsPath, Login_System.Properties.Resources.Settings);
+
             }
         }
 
@@ -309,9 +317,10 @@ namespace Login_System
 
     static class Globals
     {
-        public static SQLControl SC;
-        public static Profile LoggedInUser;
-        public static Dictionary<string, string> Settings = new Dictionary<string, string>();
+        public static SQLControl _SC;
+        public static Profile _LoggedInUser;
+        public static Dictionary<string, string> _Settings = new Dictionary<string, string>();
+        public static string _SettingsPath = @"C:\Users\" + System.Environment.UserName + @"\Documents\Login_System\Settings.txt";
     }
 
 

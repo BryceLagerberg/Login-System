@@ -57,7 +57,7 @@ namespace Login_System
         //message send button
         private void button1_Click(object sender, EventArgs e)
         {
-            Globals.SC.SendChat(Globals.LoggedInUser.AccountNumber,CurrentFriend.AccountNumber,DateTime.Now,textBox1.Text);
+            Globals._SC.SendChat(Globals._LoggedInUser.AccountNumber,CurrentFriend.AccountNumber,DateTime.Now,textBox1.Text);
 
             textBox1.Text = "";
         }
@@ -104,7 +104,7 @@ namespace Login_System
                 int friendID = Int32.Parse(tabControl1.SelectedTab.Name);
 
                 // load the messages with that friend
-                Tabs[friendID].Messages = Globals.SC.GetMessages(Globals.LoggedInUser.AccountNumber, CurrentFriend.AccountNumber);
+                Tabs[friendID].Messages = Globals._SC.GetMessages(Globals._LoggedInUser.AccountNumber, CurrentFriend.AccountNumber);
 
                 // set that friend as the target friend
                 CurrentFriend = Tabs[friendID];
@@ -123,7 +123,7 @@ namespace Login_System
             CurrentFriend = friend;
 
             // load the messages with that friend
-            CurrentFriend.Messages = Globals.SC.GetMessages(Globals.LoggedInUser.AccountNumber, CurrentFriend.AccountNumber);
+            CurrentFriend.Messages = Globals._SC.GetMessages(Globals._LoggedInUser.AccountNumber, CurrentFriend.AccountNumber);
 
 
             // Tabs
@@ -176,14 +176,15 @@ namespace Login_System
             {
                 while (true)
                 {
-                    if (CurrentFriend != null && Globals.LoggedInUser != null)
+                    if (CurrentFriend != null && Globals._LoggedInUser != null)
                     {
                         // Load Messages Between You and Current friend
-                        CurrentFriend.Messages = Globals.SC.GetMessages(Globals.LoggedInUser.AccountNumber, CurrentFriend.AccountNumber);
-                        Thread.Sleep(1000);
-
+                        CurrentFriend.Messages = Globals._SC.GetMessages(Globals._LoggedInUser.AccountNumber, CurrentFriend.AccountNumber);
+                       
                         // Refresh Messages
                         RefreshMessagesDelegate();
+
+                        Thread.Sleep(1000);
                     }
 
                 }
@@ -207,9 +208,9 @@ namespace Login_System
                         //  new message check
                         if (m.SentTime > LastRefresh) 
                         { 
-                            string senderName = (m.AccountNumberSender == CurrentFriend.AccountNumber) ? CurrentFriend.FirstName : Globals.LoggedInUser.FirstName;
+                            string senderName = (m.AccountNumberSender == CurrentFriend.AccountNumber) ? CurrentFriend.FirstName : Globals._LoggedInUser.FirstName;
 
-                            LB.Text = senderName + " - " + m.SentTime.ToString() + Environment.NewLine + m.Text + Environment.NewLine + Environment.NewLine;//change textbox2 to the correct textbox
+                            LB.Text = senderName + " - " + m.SentTime.ToString() + Environment.NewLine + " - " + m.Text + Environment.NewLine + Environment.NewLine;//change textbox2 to the correct textbox
                             LB.Items.Add(LB.Text);
                             LastRefresh = m.SentTime;
                         }

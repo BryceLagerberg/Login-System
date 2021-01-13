@@ -42,19 +42,19 @@ namespace Login_System
             PW = new ProfileWindow(this);
 
             // Initilize SQL Control
-            SQLControl SC = new SQLControl(textBox4.Text, textBox3.Text, "192.168.86.88");// update after we add a textbox for serverip input
-            Globals.SC = SC;
+            SQLControl SC = new SQLControl(textBox4.Text, textBox3.Text, "192.168.86.38");// update after we add a textbox for serverip input
+            Globals._SC = SC;
 
             // Load Last SQL Settings
             Functions.LoadSettings();
-            textBox3.Text = Globals.Settings["SQL Database"];
-            textBox4.Text = Globals.Settings["SQL Server"];
+            textBox3.Text = Globals._Settings["SQL Database"];
+            textBox4.Text = Globals._Settings["SQL Server"];
             try
             {
-                if (Globals.Settings["Remember Username"] == "true")
+                if (Globals._Settings["Remember Username"] == "true")
                 {
                     checkBox1.Checked = true; 
-                    textBox2.Text = Globals.Settings["SQL Username"];
+                    textBox2.Text = Globals._Settings["SQL Username"];
                     
                 }
             }
@@ -76,7 +76,7 @@ namespace Login_System
         {
             if(AI == null )
             {
-                AI = new CreateAccount(Globals.SC);
+                AI = new CreateAccount(Globals._SC);
             }
             
             AI.Location = new Point((Screen.PrimaryScreen.Bounds.Width / 2)-(this.Size.Width / 2), (Screen.PrimaryScreen.Bounds.Height / 2) - (this.Size.Height / 2)); 
@@ -93,7 +93,7 @@ namespace Login_System
         // changes the database address
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            Globals.SC.DataBase = textBox3.Text;
+            Globals._SC.DataBase = textBox3.Text;
             label5.ForeColor = Color.Gold;
             label5.Text = "Connecting...";
             if (textBox3.Text != "" && textBox4.Text != "")
@@ -106,7 +106,7 @@ namespace Login_System
         //changes the SQL server address
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            Globals.SC.SQLServer = textBox4.Text;
+            Globals._SC.SQLServer = textBox4.Text;
             label5.ForeColor = Color.Gold;
             label5.Text = "Connecting...";
             if (textBox3.Text != "" && textBox4.Text != "")
@@ -176,19 +176,19 @@ namespace Login_System
         private void Login(String username, String password)
         {
             // Attempt  Login
-            Profile User = Globals.SC.Login(username, Functions.Encrypt(password));
+            Profile User = Globals._SC.Login(username, Functions.Encrypt(password));
             //User.Password = Functions.Decrypt(User.Password);
 
             // If Success
             if (User != null)
             {
                 Functions.SaveSettings("SQL Username", textBox2.Text);
-                Globals.LoggedInUser = User;
+                Globals._LoggedInUser = User;
 
                 this.Visible = false;
                 PW.Visible = true;
                 textBox1.Text = "";
-                if(Globals.Settings["Remember Username"] == "false") { textBox2.Text = ""; }
+                if(Globals._Settings["Remember Username"] == "false") { textBox2.Text = ""; }
                 PW.LoadProfile();
 
 
@@ -205,7 +205,7 @@ namespace Login_System
         // Verifies the Connection state with the SQL server / DB (LAG)
         private void VerifyConnection()
         {
-            VerifyConnectionDelegate(Globals.SC.TestConnection());
+            VerifyConnectionDelegate(Globals._SC.TestConnection());
         }
         private void VerifyConnectionDelegate(bool Success)
         {
@@ -226,11 +226,11 @@ namespace Login_System
                     SlideThread.Start();
 
                     // Check SQL DB for required tables
-                    Globals.SC.TableCheck();
+                    Globals._SC.TableCheck();
                 }
                 else
                 {
-                    if(!Globals.SC.Connected)
+                    if(!Globals._SC.Connected)
                     {
                         label5.ForeColor = Color.Red;
                         label5.Text = "Failed!";

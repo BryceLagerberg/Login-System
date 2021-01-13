@@ -23,7 +23,7 @@ namespace Login_System
         //create account button
         private void button1_Click(object sender, EventArgs e)
         {
-            if (Globals.SC.UsernameCheck(textBox1.Text) && Functions.PasswordCheck(textBox2.Text, textBox1.Text))
+            if (Globals._SC.UsernameCheck(textBox1.Text) && Functions.PasswordCheck(textBox2.Text, textBox1.Text))
             {
                 SC.CreateAccount(textBox1.Text, Functions.Encrypt(textBox2.Text));
                 this.Hide();
@@ -44,7 +44,7 @@ namespace Login_System
         //Username Availability check
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            bool test = Globals.SC.UsernameCheck(textBox1.Text);
+            bool test = Globals._SC.UsernameCheck(textBox1.Text);
             if (test)
             {
                 pictureBox1.Image = Login_System.Properties.Resources.CheckMark;
