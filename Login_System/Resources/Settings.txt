@@ -1,0 +1,4 @@
+SQL Server:msi
+SQL Database:BrycesDB
+Remember Username:false
+SQL Username:

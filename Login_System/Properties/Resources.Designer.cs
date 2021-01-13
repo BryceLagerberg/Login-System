@@ -109,5 +109,18 @@ namespace Login_System.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SQL Server:msi
+        ///SQL Database:BrycesDB
+        ///Remember Username:false
+        ///SQL Username:
+        ///.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
     }
 }

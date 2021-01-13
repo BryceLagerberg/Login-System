@@ -129,6 +129,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="person_paper_id_card_profile_user_icon_131800.ico" />
+    <None Include="Resources\Settings.txt" />
     <None Include="Resources\Arrow-Right.png" />
     <None Include="Resources\Arrow-Left.png" />
     <None Include="Resources\Deafult-Profile-Pitcher.png" />
