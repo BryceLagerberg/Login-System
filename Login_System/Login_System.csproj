@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -53,6 +53,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.2\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -64,44 +67,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountInfo.cs">
+    <Compile Include="Forms\AccountInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AccountInfo.Designer.cs">
+    <Compile Include="Forms\AccountInfo.Designer.cs">
       <DependentUpon>AccountInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChatWindow.cs">
+    <Compile Include="Forms\ChatWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChatWindow.Designer.cs">
+    <Compile Include="Forms\ChatWindow.Designer.cs">
       <DependentUpon>ChatWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Functions.cs" />
-    <Compile Include="SQLControl.cs" />
-    <Compile Include="LoginWindow1.cs">
+    <Compile Include="Extras\Functions.cs" />
+    <Compile Include="Extras\SQLControl.cs" />
+    <Compile Include="Forms\LoginWindow1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginWindow1.Designer.cs">
+    <Compile Include="Forms\LoginWindow1.Designer.cs">
       <DependentUpon>LoginWindow1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProfileWindow.cs">
+    <Compile Include="Forms\ProfileWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProfileWindow.Designer.cs">
+    <Compile Include="Forms\ProfileWindow.Designer.cs">
       <DependentUpon>ProfileWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AccountInfo.resx">
+    <EmbeddedResource Include="Forms\AccountInfo.resx">
       <DependentUpon>AccountInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChatWindow.resx">
+    <EmbeddedResource Include="Forms\ChatWindow.resx">
       <DependentUpon>ChatWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginWindow1.resx">
+    <EmbeddedResource Include="Forms\LoginWindow1.resx">
       <DependentUpon>LoginWindow1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProfileWindow.resx">
+    <EmbeddedResource Include="Forms\ProfileWindow.resx">
       <DependentUpon>ProfileWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -114,6 +117,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -149,6 +153,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Budget_Tracker\Budget_Tracker.csproj">
+      <Project>{848f30c4-2abf-4153-9345-8d7e591e7a92}</Project>
+      <Name>Budget_Tracker</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{c1d3e691-c15d-4821-a8fa-a31193898010}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
