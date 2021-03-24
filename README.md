@@ -160,6 +160,17 @@ making a login interface that records stats. May later be expanded on
 77[x] add a third tab to the budget tracker to hold all account transactions(in the same location as the current transactions are displayed)
 
 78[x] move login system functions and sql control over to the utilities project
+
+79[x] make it if you dont pick a catagory while adding a gain or loss it wont let you post the transaction and gives u a message to select a catagory first
+
+80[x] clear the fields after posting transaction
+
+81[x] add transaction date to the transactions list items
+
+82[x] only transactional gains are being displayed on the all transactions tab when it should also show expense transactions
+
+83[x] daily and weekly expenses are not being calculated for some reason in the earnings statement
+
 #THINGS THAT NEED TO BE DONE-------------------------------------------------------------------------------------------------------------
 
 a[ ] *add a change username option?
@@ -191,15 +202,15 @@ n[ ] make it so that the budget tracker application is hidden on close not delet
 
 o[ ] get rid of the utilities folders on both projects and turn the utilities project into the now deleted utilites folder.
 
-p[ ] make it if you dont pick a catagory while adding a gain or loss it wont let you post the transaction and gives u a message to select a catagory first
+p[ ] in budget tracker replace the numericupdown with something that goes above 100 so its possible to post transactions above 100 dollars
 
 q[ ] populate the budget tracker pie graph with data from the sql database
 
 r[ ] Inside of utilities.Functions.LoadSettings there is a reference to Login System.resources that is out of bounds, currently its commented out but needs to be fixed for real at some point
 
-s
+s[ ] change the all transactions tab to show transactions in order by date (currently they are displayed in an unreliable way that can change randomly)
 
-t
+t[ ] *add a post number to the budget tracker sql table to make tracking transactions easier (not sure i actually need this anymore)
 
 u
 
@@ -210,6 +221,8 @@ w
 x
 
 y
+
+z
 
 * still undecided if i actaully want to do this or not
 #BUGS TO FIX------------------------------------------------------------------------------------------------------------------------------
@@ -224,6 +237,9 @@ y
 
 [ ] if you login with the enter key the computer makes a ping sound. doesnt happen if the login button is pressed though
 
+[ ] in all transactions tab the amount part of the expense transactions show a positive value instead of negative as an expense should
+
+[ ] the earnings statement is miscalculating the daily earnings somehow
 #IDEAS ON HOW TO COMPLETE ITEMS ON THE TO DO LIST--------------------------------------------------------------------------------------------
 
 currently making the loadtransactions function in form1, it will be very similar to the loadchat function in chatwindow
