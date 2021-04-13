@@ -79,8 +79,6 @@
     <Compile Include="Forms\ChatWindow.Designer.cs">
       <DependentUpon>ChatWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Extras\Functions.cs" />
-    <Compile Include="Extras\SQLControl.cs" />
     <Compile Include="Forms\LoginWindow1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +161,9 @@
       <Project>{c1d3e691-c15d-4821-a8fa-a31193898010}</Project>
       <Name>Utilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extras\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

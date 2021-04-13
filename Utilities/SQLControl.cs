@@ -409,9 +409,9 @@ namespace Utilities
         }
 
         // post a transaction to the Sql table
-        public void PostTransaction(int AccountNumber, DateTime Date, int Value, string Catagory, string Notes)
+        public void PostTransaction(int AccountNumber, string Date, double Value, string Catagory, string Notes)
         {
-            string queryString = $"INSERT INTO[BudgetTransactions]([AccountNumber], [TransactionDate], [TransactionValue], [TransactionType], [TransactionNotes]) VALUES({AccountNumber}, '{Date.Date}', {Value}, '{Catagory}', '{Notes}');";
+            string queryString = $"INSERT INTO[BudgetTransactions]([AccountNumber], [TransactionDate], [TransactionValue], [TransactionType], [TransactionNotes]) VALUES({AccountNumber}, '{Date}', {Value}, '{Catagory}', '{Notes}');";
             //setup for connection to sql server and database
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
             csb.DataSource = SQLServer;
@@ -436,9 +436,9 @@ namespace Utilities
         }
 
         //gets messages
-        public List<Message> GetMessages(int ANS, int ANR)  // ANS = Account number sender, ANR = Account number receiver
+        public List<ChatMessage> GetMessages(int ANS, int ANR)  // ANS = Account number sender, ANR = Account number receiver
         {
-            List<Message> messages = new List<Message>();
+            List<ChatMessage> messages = new List<ChatMessage>();
 
             //setup for connection to sql server and database
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
@@ -451,7 +451,7 @@ namespace Utilities
             using (SqlConnection connection = new SqlConnection(connString))
             using (SqlCommand command = connection.CreateCommand())
             {
-                command.CommandText = "SELECT * FROM [Chat Logs] where  (AccountNumberSender = '" + ANS + "' or AccountNumberSender = '" + ANR + "') and (AccountNumberReceiver = '" + ANS + "' or AccountNumberReceiver = '" + ANR + "');";
+                command.CommandText = "SELECT * FROM [Chat Logs] where  (AccountNumberSender = '" + ANS + "' or AccountNumberSender = '" + ANR + "') and (AccountNumberReceiver = '" + ANS + "' or AccountNumberReceiver = '" + ANR + "') order by [SentTime];";
                 //makes connection to sql server
                 connection.Open();
                 //execute the command u made above!
@@ -461,7 +461,7 @@ namespace Utilities
 
                     while (reader.Read())
                     {
-                        Message m = new Message();
+                        ChatMessage m = new ChatMessage();
                         m.AccountNumberSender = Int32.Parse(reader["AccountNumberSender"].ToString());
                         m.AccountNumberReceiver = Int32.Parse(reader["AccountNumberReceiver"].ToString());
                         m.SentTime = (DateTime)reader["SentTime"];
@@ -484,7 +484,6 @@ namespace Utilities
         public List<Transaction> GetTransactions(int AccountNumber)
         {
             List<Transaction> transactions = new List<Transaction>();
-            int TransactionNum = 0;
 
             //setup for connection to sql server and database
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
@@ -497,7 +496,7 @@ namespace Utilities
             using (SqlConnection connection = new SqlConnection(connString))
             using (SqlCommand command = connection.CreateCommand())
             {
-                command.CommandText = $"Select * From [BudgetTransactions] Where (AccountNumber = {AccountNumber});";
+                command.CommandText = $"Select * From [BudgetTransactions] Where (AccountNumber = {AccountNumber}) order by [transactionDate];";
                 //makes connection to sql server
                 connection.Open();
                 //execute the command u made above!
@@ -507,15 +506,13 @@ namespace Utilities
 
                     while (reader.Read())
                     {
-                        TransactionNum += 1;
                         Transaction T = new Transaction();
                         T.AccountNumber = Int32.Parse(reader["AccountNumber"].ToString());
                         T.TransactionDate = (DateTime)reader["TransactionDate"];
-                        T.TransactionValue = Int32.Parse(reader["TransactionValue"].ToString());
+                        T.TransactionValue = Double.Parse(reader["TransactionValue"].ToString());
                         T.TransactionType = reader["TransactionType"].ToString();
                         T.Note = reader["TransactionNotes"].ToString();
-                        T.TransactionNumber = TransactionNum;
-
+                        
                         transactions.Add(T);
                     }
                 }

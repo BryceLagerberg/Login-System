@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
-using Login_System.Extras;
 using Utilities;
 
 namespace Login_System
@@ -178,6 +177,7 @@ namespace Login_System
                     {
                         // Load Messages Between You and Current friend
                         CurrentFriend.Messages = Globals._SC.GetMessages(Globals._LoggedInUser.AccountNumber, CurrentFriend.AccountNumber);
+                        CurrentFriend.Messages = Globals._SC.GetMessages(Globals._LoggedInUser.AccountNumber, CurrentFriend.AccountNumber);
                        
                         // Refresh Messages
                         RefreshMessagesDelegate();
@@ -201,7 +201,7 @@ namespace Login_System
 
 
                     // Display Messages 
-                    foreach (Utilities.Message m in CurrentFriend.Messages)
+                    foreach (Utilities.ChatMessage m in CurrentFriend.Messages)
                     {
                         //  new message check
                         if (m.SentTime > LastRefresh) 

@@ -291,15 +291,13 @@ namespace Utilities
         public string Note { get; set; }
         public DateTime TransactionDate { get; set; }
         public int AccountNumber { get; set; }
-        public int TransactionValue { get; set; }
+        public double TransactionValue { get; set; }
         public string TransactionType { get; set; }
-        public int TransactionNumber { get; set; }
-
     }
 
 
 
-    public class Message
+    public class ChatMessage
     {
         public string Text { get; set; }
         public DateTime SentTime { get; set; }
@@ -319,7 +317,7 @@ namespace Utilities
         public DateTime LastLogin { get; set; }
         public string ProfilePicture { get; set; }
         public bool LoggedIn { get; set; }
-        public List<Message> Messages { get; set; }
+        public List<ChatMessage> Messages { get; set; }
         public List<Transaction> Transactions { get; set; }
     }
 

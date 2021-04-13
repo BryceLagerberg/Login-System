@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Threading;
-using Login_System.Extras;
 using Utilities;
 
 namespace Login_System
@@ -34,8 +33,8 @@ namespace Login_System
         {
             LoginWindowForm = LoginWindow;
             InitializeComponent();
-            SlideThread = new Thread(() => Functions2.Slide(pictureBox3, new Point(pictureBox3.Location.X - pictureBox3.Size.Width, pictureBox3.Location.Y), 5, 2)); // Dummy placeholder for the purpose of initilizing the thread
-            ExpandThread = new Thread(() => Functions2.Grow(this, new Size(0,0), 10));
+            SlideThread = new Thread(() => Functions.Slide(pictureBox3, new Point(pictureBox3.Location.X - pictureBox3.Size.Width, pictureBox3.Location.Y), 5, 2)); // Dummy placeholder for the purpose of initilizing the thread
+            ExpandThread = new Thread(() => Functions.Grow(this, new Size(0,0), 10));
         }
 
         //Password TB
@@ -187,14 +186,14 @@ namespace Login_System
             if (this.Size == OriginalSize)
             {
                 this.pictureBox3.Image = Login_System.Properties.Resources.Arrow_Right;
-                ExpandThread = new Thread(() => Functions2.Grow(this, TargetSize, 10));
+                ExpandThread = new Thread(() => Functions.Grow(this, TargetSize, 10));
                 ExpandThread.Start();
                 
             }
             else
             {
                 this.pictureBox3.Image = Login_System.Properties.Resources.Arrow_Left;
-                ExpandThread = new Thread(() => Functions2.Grow(this, OriginalSize, 10));
+                ExpandThread = new Thread(() => Functions.Grow(this, OriginalSize, 10));
                 ExpandThread.Start();
 
             }
@@ -217,7 +216,7 @@ namespace Login_System
                 //if statement so only 1 thread goes at a time
                 if (SlideThread.IsAlive == false && ExpandThread.IsAlive == false)
                 {
-                    SlideThread = new Thread(() => Functions2.Slide(pictureBox3, new Point(this.Size.Width - pictureBox3.Size.Width - 16, pictureBox3.Location.Y), 25, 3));
+                    SlideThread = new Thread(() => Functions.Slide(pictureBox3, new Point(this.Size.Width - pictureBox3.Size.Width - 16, pictureBox3.Location.Y), 25, 3));
                     SlideThread.Start();
                 }
             }
@@ -232,7 +231,7 @@ namespace Login_System
                 }
                 if (ExpandThread.IsAlive == false)
                 {
-                    SlideThread = new Thread(() => Functions2.Slide(pictureBox3, new Point(this.Size.Width, pictureBox3.Location.Y), 25, 3));
+                    SlideThread = new Thread(() => Functions.Slide(pictureBox3, new Point(this.Size.Width, pictureBox3.Location.Y), 25, 3));
                     SlideThread.Start();
                 }
             }

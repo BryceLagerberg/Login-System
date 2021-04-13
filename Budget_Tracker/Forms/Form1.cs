@@ -16,7 +16,7 @@ namespace Budget_Tracker.Forms
     public partial class Form1 : Form
     {
         Thread TransactionRefresh;
-        int TransactionsLoaded;
+        DateTime LastRefresh;
 
         public Form1()
         {
@@ -40,14 +40,19 @@ namespace Budget_Tracker.Forms
         // gains button press event
         private void button1_Click(object sender, EventArgs e)
         {
+
             // check that a transaction catagory was selected
             if (comboBox1.SelectedItem != null)
             {
 
             AddGain(comboBox1.Text, (double)numericUpDown1.Value, textBox1.Text);
-
+            
+            // setup the datetime for the sql table transaction 
+            string transactionDate = monthCalendar1.SelectionRange.Start.ToShortDateString() + " ";
+            transactionDate += DateTime.Now.ToLongTimeString();
+            
             // add transaction to the sql table
-            Globals._SC.PostTransaction(Globals._LoggedInUser.AccountNumber, monthCalendar1.SelectionRange.Start, (int)numericUpDown1.Value, comboBox1.Text, textBox1.Text);
+            Globals._SC.PostTransaction(Globals._LoggedInUser.AccountNumber, transactionDate, (double)numericUpDown1.Value, comboBox1.Text, textBox1.Text);
 
             // clear the gain fields so its ready for a new transaction
             textBox1.Text = "";
@@ -62,13 +67,18 @@ namespace Budget_Tracker.Forms
         // Expenses button press event
         private void button2_Click(object sender, EventArgs e)
         {
+            
             // check that a transaction catagory was selected
             if (comboBox2.SelectedItem != null)
             {
                 AddLoss(comboBox2.Text, (double)numericUpDown2.Value, textBox2.Text);
 
+                // setup the datetime for the sql table transaction 
+                string transactionDate = monthCalendar1.SelectionRange.Start.ToShortDateString() + " ";
+                transactionDate += DateTime.Now.ToLongTimeString();
+
                 // add transaction to the sql table
-                Globals._SC.PostTransaction(Globals._LoggedInUser.AccountNumber, monthCalendar1.SelectionRange.Start, (int)numericUpDown2.Value, comboBox2.Text, textBox2.Text);
+                Globals._SC.PostTransaction(Globals._LoggedInUser.AccountNumber, transactionDate, (double)numericUpDown2.Value, comboBox2.Text, textBox2.Text);
 
                 // clear the gain fields so its ready for a new transaction
                 textBox2.Text = "";
@@ -154,11 +164,11 @@ namespace Budget_Tracker.Forms
                     foreach(Utilities.Transaction t in Globals._LoggedInUser.Transactions)
                     {
                         // new message check
-                        if(t.TransactionNumber > TransactionsLoaded)
+                        if(t.TransactionDate > LastRefresh)
                         {
                             listBox2.Items.Add($"{t.TransactionType} ${t.TransactionValue}  Date: {t.TransactionDate.Date.ToShortDateString()}");
                             listBox2.Items.Add($"    Note: {t.Note}");
-                            TransactionsLoaded = t.TransactionNumber;
+                            LastRefresh = t.TransactionDate;
                         }
                     }
                 }
@@ -176,11 +186,12 @@ namespace Budget_Tracker.Forms
         // calculate earnings statement
         private void EarningsStatement()
         {
-            int Balance = 0;
-            int WeekGains = 0;
-            int WeekLosses = 0;
-            int DayGains = 0;
-            int DayLosses = 0;
+            // initialize variables 
+            double Balance = 0;
+            double WeekGains = 0;
+            double WeekLosses = 0;
+            double DayGains = 0;
+            double DayLosses = 0;
 
             foreach(Transaction t in Globals._LoggedInUser.Transactions)
             {
@@ -220,11 +231,11 @@ namespace Budget_Tracker.Forms
             }
 
             // post the updated Earnings Statement
-            label14.Text = "$" + Balance + ".00";
-            label11.Text = "$" + WeekGains + ".00";
-            label9.Text = "$" + DayGains + ".00";
-            label12.Text = "$" + WeekLosses + ".00";
-            label10.Text = "$" + DayLosses + ".00";
+            label14.Text = "$" + string.Format("{0:0.00}", Balance);
+            label11.Text = "$" + string.Format("{0:0.00}", WeekGains);
+            label9.Text = "$" + string.Format("{0:0.00}", DayGains);
+            label12.Text = "$" + string.Format("{0:0.00}", WeekLosses);
+            label10.Text = "$" + string.Format("{0:0.00}", DayLosses);
 
 
         }
