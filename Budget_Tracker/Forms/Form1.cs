@@ -26,6 +26,7 @@ namespace Budget_Tracker.Forms
         List<double> _Totals = new List<double>();
         
         
+
         #region Events
         
         // On Load
@@ -35,10 +36,18 @@ namespace Budget_Tracker.Forms
             TransactionRefresh = new Thread(LoadTransactions);
             TransactionRefresh.IsBackground = true;
             TransactionRefresh.Start();
+            DrawExpenseChart();
+            DrawGainChart();
+            
+        }
+        private void Form1_Closing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Visible = false;
         }
 
         // gains button press event
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
 
             // check that a transaction catagory was selected
@@ -65,7 +74,7 @@ namespace Budget_Tracker.Forms
         }
 
         // Expenses button press event
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             
             // check that a transaction catagory was selected
@@ -90,7 +99,7 @@ namespace Budget_Tracker.Forms
             }
         }
 
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        private void MonthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             // Load Gains / Losses based on the selected day (This will require that data is saved somewhere)
         }
@@ -156,6 +165,7 @@ namespace Budget_Tracker.Forms
         // load budget tracker transactions delegate function
         private void LoadTransactionsDelegate()
         {
+            int testcount = 0;
             try
             {
                 if(this.InvokeRequired == false)
@@ -163,11 +173,57 @@ namespace Budget_Tracker.Forms
                     // display transactions
                     foreach(Utilities.Transaction t in Globals._LoggedInUser.Transactions)
                     {
-                        // new message check
+                        // new transaction check
                         if(t.TransactionDate > LastRefresh)
                         {
+                            // add transaction to the listbox to display it to user
                             listBox2.Items.Add($"{t.TransactionType} ${t.TransactionValue}  Date: {t.TransactionDate.Date.ToShortDateString()}");
                             listBox2.Items.Add($"    Note: {t.Note}");
+
+                            // add the transaction to the piechartstats
+                            if (t.TransactionType.ToString() == "Pay Check")
+                            {
+                                Utilities.PieChartStats.PayCheck += t.TransactionValue;
+                                DrawGainChart();
+                            }
+                            else if (t.TransactionType.ToString() == "Refund")
+                            {
+                                Utilities.PieChartStats.Refund += t.TransactionValue;
+                                DrawGainChart();
+                            }
+                            else if (t.TransactionType.ToString() == "Other Gain")
+                            {
+                                Utilities.PieChartStats.OtherGain += t.TransactionValue;
+                                DrawGainChart();
+                            }
+                            else if (t.TransactionType.ToString() == "Rent")
+                            {
+                                Utilities.PieChartStats.Rent += t.TransactionValue;
+                                DrawExpenseChart();
+                            }
+                            else if (t.TransactionType.ToString() == "Transportation")
+                            {
+                                Utilities.PieChartStats.Transportation += t.TransactionValue;
+                                DrawExpenseChart();
+                            }
+                            else if (t.TransactionType.ToString() == "Entertainment")
+                            {
+                                Utilities.PieChartStats.Entertainment += t.TransactionValue;
+                                DrawExpenseChart();
+                            }
+                            else if (t.TransactionType.ToString() == "Other Expense")
+                            {
+                                Utilities.PieChartStats.OtherExpense += t.TransactionValue;
+                                DrawExpenseChart();
+                            }
+                            else if (t.TransactionType.ToString() == "Groceries")
+                            {
+                                Utilities.PieChartStats.Groceries += t.TransactionValue;
+                                DrawExpenseChart();
+                            }
+
+
+                            // set the new transaction as the last processed transaction
                             LastRefresh = t.TransactionDate;
                         }
                     }
@@ -238,6 +294,30 @@ namespace Budget_Tracker.Forms
             label10.Text = "$" + string.Format("{0:0.00}", DayLosses);
 
 
+        }
+
+        // draw the expenses pie chart
+        private void DrawExpenseChart()
+        {
+            chart1.Legends[0].Title = "Catagories";
+            chart1.Series["Series1"].Points.Clear();
+            chart1.Series["Series1"].Points.AddXY("Rent", Utilities.PieChartStats.Rent);
+            chart1.Series["Series1"].Points.AddXY("Groceries", Utilities.PieChartStats.Groceries);
+            chart1.Series["Series1"].Points.AddXY("Entertainment", Utilities.PieChartStats.Entertainment);
+            chart1.Series["Series1"].Points.AddXY("Transportation", Utilities.PieChartStats.Transportation);
+            chart1.Series["Series1"].Points.AddXY("Other", Utilities.PieChartStats.OtherExpense);
+            chart1.Series["Series1"].IsValueShownAsLabel = true;
+        }
+
+        // draw the gains pie chart
+        private void DrawGainChart()
+        {
+            chart2.Legends[0].Title = "Catagories";
+            chart2.Series["Series1"].Points.Clear();
+            chart2.Series["Series1"].Points.AddXY("PayCheck", Utilities.PieChartStats.PayCheck);
+            chart2.Series["Series1"].Points.AddXY("Refund", Utilities.PieChartStats.Refund);
+            chart2.Series["Series1"].Points.AddXY("Other", Utilities.PieChartStats.OtherGain);
+            chart2.Series["Series1"].IsValueShownAsLabel = true;
         }
 
 

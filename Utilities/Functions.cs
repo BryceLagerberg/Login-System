@@ -286,6 +286,19 @@ namespace Utilities
         }
     }
 
+    public class PieChartStats
+    {
+        public static double PayCheck = 0;
+        public static double Refund = 0;
+        public static double OtherGain = 0;
+        public static double Rent = 0;
+        public static double Transportation = 0;
+        public static double Entertainment = 0;
+        public static double OtherExpense = 0;
+        public  static double Groceries = 0;
+    }
+
+
     public class Transaction 
     {
         public string Note { get; set; }

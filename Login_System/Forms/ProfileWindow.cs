@@ -341,12 +341,27 @@ namespace Login_System
             //clear friends list
             flowLayoutPanel1.Controls.Clear();
 
-            // Hide this form / Show login form
+            // Hide this form / Show login form/ close any other forms
             this.Visible = false;
             LoginWindowForm.Visible = true;
             CW.Dispose();
             CW = null;
-            
+            if (BTForm1 != null) 
+            {
+                BTForm1.Dispose();
+                BTForm1 = null;
+            }
+
+            // reset piechartstats to zero
+            Utilities.PieChartStats.PayCheck = 0;
+            Utilities.PieChartStats.Refund = 0;
+            Utilities.PieChartStats.OtherGain = 0;
+            Utilities.PieChartStats.Rent = 0;
+            Utilities.PieChartStats.Transportation = 0;
+            Utilities.PieChartStats.Entertainment = 0;
+            Utilities.PieChartStats.OtherExpense = 0;
+            Utilities.PieChartStats.Groceries = 0;
+
         }
         // browse for profile picture
         public void ImageBrowse()
@@ -462,10 +477,17 @@ namespace Login_System
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
-            BTForm1 = new Budget_Tracker.Forms.Form1();
-            BTForm1.Show();
-            BTForm1.Visible = true;
+            if (BTForm1 == null)
+            {
+                BTForm1 = new Budget_Tracker.Forms.Form1();
+                BTForm1.Show();
+                BTForm1.Visible = true;
+            }
+            else
+            {
+                BTForm1.Show();
+                BTForm1.Visible = true;
+            }
         }
     }
 }

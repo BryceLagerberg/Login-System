@@ -32,6 +32,11 @@ namespace Budget_Tracker.Forms
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -67,6 +72,7 @@ namespace Budget_Tracker.Forms
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.groupBox1.SuspendLayout();
@@ -79,6 +85,7 @@ namespace Budget_Tracker.Forms
             this.tabPage3.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,6 +93,7 @@ namespace Budget_Tracker.Forms
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.BackColor = System.Drawing.Color.Teal;
             this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label12);
@@ -96,11 +104,12 @@ namespace Budget_Tracker.Forms
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(9, 5);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.groupBox1.Location = new System.Drawing.Point(9, 9);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(237, 126);
+            this.groupBox1.Size = new System.Drawing.Size(236, 126);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Earnings Statement";
@@ -108,138 +117,152 @@ namespace Budget_Tracker.Forms
             // label14
             // 
             this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Lime;
-            this.label14.Location = new System.Drawing.Point(98, 90);
+            this.label14.Location = new System.Drawing.Point(112, 98);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(28, 13);
+            this.label14.Size = new System.Drawing.Size(44, 20);
             this.label14.TabIndex = 9;
             this.label14.Text = "$0.0";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(14, 90);
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label13.Location = new System.Drawing.Point(14, 98);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(79, 13);
+            this.label13.Size = new System.Drawing.Size(103, 17);
             this.label13.TabIndex = 8;
             this.label13.Text = "Total Balance :";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Red;
-            this.label12.Location = new System.Drawing.Point(116, 74);
+            this.label12.Location = new System.Drawing.Point(136, 80);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(28, 13);
+            this.label12.Size = new System.Drawing.Size(44, 20);
             this.label12.TabIndex = 7;
             this.label12.Text = "$0.0";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Lime;
-            this.label11.Location = new System.Drawing.Point(90, 58);
+            this.label11.Location = new System.Drawing.Point(105, 61);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(28, 13);
+            this.label11.Size = new System.Drawing.Size(44, 20);
             this.label11.TabIndex = 6;
             this.label11.Text = "$0.0";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Red;
-            this.label10.Location = new System.Drawing.Point(103, 42);
+            this.label10.Location = new System.Drawing.Point(121, 42);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(28, 13);
+            this.label10.Size = new System.Drawing.Size(44, 20);
             this.label10.TabIndex = 5;
             this.label10.Text = "$0.0";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
             this.label9.ForeColor = System.Drawing.Color.Lime;
-            this.label9.Location = new System.Drawing.Point(84, 26);
+            this.label9.Location = new System.Drawing.Point(97, 23);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(28, 13);
+            this.label9.Size = new System.Drawing.Size(44, 20);
             this.label9.TabIndex = 4;
             this.label9.Text = "$0.0";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 74);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label4.Location = new System.Drawing.Point(14, 80);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 13);
+            this.label4.Size = new System.Drawing.Size(127, 17);
             this.label4.TabIndex = 3;
             this.label4.Text = "Weekly Expenses :";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 58);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label3.Location = new System.Drawing.Point(14, 61);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 13);
+            this.label3.Size = new System.Drawing.Size(96, 17);
             this.label3.TabIndex = 2;
             this.label3.Text = "Weekly Gain :";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label2.Location = new System.Drawing.Point(14, 42);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 13);
+            this.label2.Size = new System.Drawing.Size(112, 17);
             this.label2.TabIndex = 1;
             this.label2.Text = "Daily Expenses :";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 26);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label1.Location = new System.Drawing.Point(14, 23);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 13);
+            this.label1.Size = new System.Drawing.Size(88, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Daily Gains :";
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.Gainsboro;
             this.button1.Location = new System.Drawing.Point(67, 191);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(81, 32);
             this.button1.TabIndex = 2;
             this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // monthCalendar1
             // 
             this.monthCalendar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.monthCalendar1.Location = new System.Drawing.Point(257, 5);
+            this.monthCalendar1.BackColor = System.Drawing.Color.Teal;
+            this.monthCalendar1.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.monthCalendar1.Location = new System.Drawing.Point(259, 9);
             this.monthCalendar1.Margin = new System.Windows.Forms.Padding(7);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 3;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MonthCalendar1_DateChanged);
             // 
             // listBox1
             // 
             this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox1.BackColor = System.Drawing.Color.Teal;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.IntegralHeight = false;
             this.listBox1.Location = new System.Drawing.Point(0, 0);
             this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(230, 302);
+            this.listBox1.Size = new System.Drawing.Size(230, 300);
             this.listBox1.TabIndex = 4;
             // 
             // tabControl1
@@ -248,15 +271,16 @@ namespace Budget_Tracker.Forms
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(257, 176);
+            this.tabControl1.Location = new System.Drawing.Point(259, 177);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(227, 284);
+            this.tabControl1.Size = new System.Drawing.Size(227, 288);
             this.tabControl1.TabIndex = 5;
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.Color.Teal;
             this.tabPage1.Controls.Add(this.label16);
             this.tabPage1.Controls.Add(this.comboBox1);
             this.tabPage1.Controls.Add(this.label6);
@@ -268,10 +292,9 @@ namespace Budget_Tracker.Forms
             this.tabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage1.Size = new System.Drawing.Size(219, 258);
+            this.tabPage1.Size = new System.Drawing.Size(219, 262);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Add Gain";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // label16
             // 
@@ -344,6 +367,7 @@ namespace Budget_Tracker.Forms
             // 
             // tabPage2
             // 
+            this.tabPage2.BackColor = System.Drawing.Color.Teal;
             this.tabPage2.Controls.Add(this.label15);
             this.tabPage2.Controls.Add(this.comboBox2);
             this.tabPage2.Controls.Add(this.label7);
@@ -358,7 +382,6 @@ namespace Budget_Tracker.Forms
             this.tabPage2.Size = new System.Drawing.Size(219, 258);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Add Loss";
-            this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // label15
             // 
@@ -440,19 +463,17 @@ namespace Budget_Tracker.Forms
             this.button2.TabIndex = 7;
             this.button2.Text = "Add";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // tabControl2
             // 
-            this.tabControl2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl2.Controls.Add(this.tabPage3);
             this.tabControl2.Controls.Add(this.tabPage5);
             this.tabControl2.Controls.Add(this.tabPage4);
-            this.tabControl2.Location = new System.Drawing.Point(9, 133);
+            this.tabControl2.Location = new System.Drawing.Point(7, 140);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(238, 327);
+            this.tabControl2.Size = new System.Drawing.Size(238, 325);
             this.tabControl2.TabIndex = 6;
             // 
             // tabPage3
@@ -461,7 +482,7 @@ namespace Budget_Tracker.Forms
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(230, 301);
+            this.tabPage3.Size = new System.Drawing.Size(230, 299);
             this.tabPage3.TabIndex = 0;
             this.tabPage3.Text = "New Transactions";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -471,52 +492,87 @@ namespace Budget_Tracker.Forms
             this.tabPage5.Controls.Add(this.listBox2);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(230, 301);
+            this.tabPage5.Size = new System.Drawing.Size(230, 299);
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "All transactions";
             // 
             // listBox2
             // 
+            this.listBox2.BackColor = System.Drawing.Color.Teal;
             this.listBox2.FormattingEnabled = true;
             this.listBox2.Location = new System.Drawing.Point(-1, 0);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(231, 303);
+            this.listBox2.Size = new System.Drawing.Size(236, 303);
             this.listBox2.TabIndex = 5;
             // 
             // tabPage4
             // 
+            this.tabPage4.BackColor = System.Drawing.Color.Teal;
+            this.tabPage4.Controls.Add(this.chart2);
             this.tabPage4.Controls.Add(this.chart1);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(230, 301);
+            this.tabPage4.Size = new System.Drawing.Size(230, 299);
             this.tabPage4.TabIndex = 1;
             this.tabPage4.Text = "Graph";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
-            // chart1
+            // chart2
             // 
+            this.chart2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            this.chart2.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(6, 21);
-            this.chart1.Name = "chart1";
+            this.chart2.Legends.Add(legend1);
+            this.chart2.Location = new System.Drawing.Point(5, 151);
+            this.chart2.Name = "chart2";
+            this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(218, 165);
+            this.chart2.Series.Add(series1);
+            this.chart2.Size = new System.Drawing.Size(219, 144);
+            this.chart2.TabIndex = 1;
+            this.chart2.Text = "chart2";
+            title1.Name = "Title1";
+            title1.Text = "Gains";
+            this.chart2.Titles.Add(title1);
+            // 
+            // chart1
+            // 
+            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
+            this.chart1.Location = new System.Drawing.Point(5, 4);
+            this.chart1.Name = "chart1";
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
+            this.chart1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
+            this.chart1.Size = new System.Drawing.Size(219, 144);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
+            title2.Name = "Title1";
+            title2.Text = "Expenses";
+            this.chart1.Titles.Add(title2);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Turquoise;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(487, 470);
+            this.ClientSize = new System.Drawing.Size(496, 474);
             this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.monthCalendar1);
@@ -528,6 +584,7 @@ namespace Budget_Tracker.Forms
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Budget Tracker";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_Closing);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
@@ -541,6 +598,7 @@ namespace Budget_Tracker.Forms
             this.tabPage3.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
@@ -585,6 +643,7 @@ namespace Budget_Tracker.Forms
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
     }
 }
 
