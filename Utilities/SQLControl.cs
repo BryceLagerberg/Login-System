@@ -34,6 +34,7 @@ namespace Utilities
             ServerIP = _ServerIP;
             DataBase = _DataBase;
             SQLServer = _SQLServer;
+            
 
 
             // Setup SQL Connection
@@ -300,7 +301,7 @@ namespace Utilities
             return LoggingInUser;
 
         }
-
+        
         public void Update(string queryString)
         {
             //setup for connection to sql server and database
