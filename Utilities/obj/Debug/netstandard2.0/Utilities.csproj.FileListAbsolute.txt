@@ -20,3 +20,25 @@ C:\Users\bryce\Desktop\Login System Project\Login-System\Utilities\bin\Debug\net
 C:\Users\bryce\Desktop\Login System Project\Login-System\Utilities\bin\Debug\netstandard2.0\System.Runtime.Serialization.Formatters.Soap.xml
 C:\Users\bryce\Desktop\Login System Project\Login-System\Utilities\obj\Debug\netstandard2.0\Utilities.csproj.CopyComplete
 C:\Users\bryce\Desktop\Login System Project\Login-System\Utilities\obj\Debug\netstandard2.0\Utilities.csprojAssemblyReference.cache
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\Utilities.deps.json
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\Utilities.dll
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\Utilities.pdb
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\System.Windows.Forms.dll
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\System.Security.dll
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\System.Configuration.dll
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\Accessibility.dll
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\System.Deployment.dll
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\System.Runtime.Serialization.Formatters.Soap.dll
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\System.Windows.Forms.xml
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\System.Security.xml
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\System.Configuration.xml
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\Accessibility.xml
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\System.Deployment.xml
+C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\System.Runtime.Serialization.Formatters.Soap.xml
+C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.csprojAssemblyReference.cache
+C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.AssemblyInfoInputs.cache
+C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.AssemblyInfo.cs
+C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.csproj.CoreCompileInputs.cache
+C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.csproj.CopyComplete
+C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.dll
+C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.pdb
