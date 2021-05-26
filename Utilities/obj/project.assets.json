@@ -879,11 +879,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bryce\\Desktop\\Login System Project\\Login-System\\Utilities\\Utilities.csproj",
+      "projectUniqueName": "C:\\Users\\bryce\\Desktop\\LoginSystem\\Utilities\\Utilities.csproj",
       "projectName": "Utilities",
-      "projectPath": "C:\\Users\\bryce\\Desktop\\Login System Project\\Login-System\\Utilities\\Utilities.csproj",
+      "projectPath": "C:\\Users\\bryce\\Desktop\\LoginSystem\\Utilities\\Utilities.csproj",
       "packagesPath": "C:\\Users\\bryce\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bryce\\Desktop\\Login System Project\\Login-System\\Utilities\\obj\\",
+      "outputPath": "C:\\Users\\bryce\\Desktop\\LoginSystem\\Utilities\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bryce\\AppData\\Roaming\\NuGet\\NuGet.Config",

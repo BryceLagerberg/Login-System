@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xawgdmaPtj6MYbBOmTTkgDRsmggLK52C8bs5XmKftegRl0H+My4B5gYKXBbpm2iM2XQAlsL0QiPUCj1ugVBIrg==",
+  "dgSpecHash": "RlOz9/W0A0kMtAMnGS2IKJJng29rtc2I/bUxPsi2MxxaXvLegbHnSOnEf3dTKpQjeNRcvzYijRvwy97oHnrahg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\bryce\\Desktop\\Login System Project\\Login-System\\Utilities\\Utilities.csproj",
+  "projectFilePath": "C:\\Users\\bryce\\Desktop\\LoginSystem\\Utilities\\Utilities.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bryce\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.1\\microsoft.netcore.platforms.5.0.1.nupkg.sha512",
     "C:\\Users\\bryce\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
