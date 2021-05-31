@@ -436,6 +436,86 @@ namespace Utilities
             }
         }
 
+        // Delete a Transaction from the sql table
+        public void DeleteTransaction()
+        {
+            string queryString = $"";
+
+            //setup for connection to sql server and database
+            SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
+            csb.DataSource = SQLServer;
+            csb.InitialCatalog = DataBase;
+            csb.IntegratedSecurity = true;
+
+            string connString = csb.ToString();
+
+
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                command.CommandText = queryString;
+                //makes connection to sql server
+                connection.Open();
+                //execute the command u made above!
+                command.ExecuteReader();
+
+                connection.Close();
+            }
+        }
+
+        // Edit a Transactions info in tne sql table
+        public void EditTransaction(Boolean Catagory, Boolean Note, Boolean Value, int TransactionID)
+        {
+            string setString = "UPDATE [BudgetTransactions] SET ";
+            string whereString = $" WHERE [TransactionDate] = '{Globals._LoggedInUser.Transactions[TransactionID].TransactionDate}';";
+            
+            if (Catagory == true)
+            {
+                setString += $" [TransactionType] = '{Globals._LoggedInUser.Transactions[TransactionID].TransactionType}'";
+            }
+            if (Catagory == true && Note == true || Catagory == true && Value == true)
+            {
+                setString += ", ";
+            }
+            if (Note == true)
+            {
+                setString += $"[TransactionNotes] = '{Globals._LoggedInUser.Transactions[TransactionID].Note}'";
+            }
+            if (Note == true && Value == true)
+            {
+                setString += ", ";
+            }
+            if (Value == true)
+            {
+                setString += $"[TransactionValue] = '{Globals._LoggedInUser.Transactions[TransactionID].TransactionValue}'";
+            }
+
+            string queryString = setString + whereString;
+
+            //setup for connection to sql server and database
+            SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
+            csb.DataSource = SQLServer;
+            csb.InitialCatalog = DataBase;
+            csb.IntegratedSecurity = true;
+
+            string connString = csb.ToString();
+
+
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                command.CommandText = queryString;
+                //makes connection to sql server
+                connection.Open();
+                //execute the command u made above!
+                command.ExecuteReader();
+
+                connection.Close();
+            }
+        }
+
         //gets messages
         public List<ChatMessage> GetMessages(int ANS, int ANR)  // ANS = Account number sender, ANR = Account number receiver
         {
@@ -504,15 +584,17 @@ namespace Utilities
 
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
-
+                    int transactionID = 0;
                     while (reader.Read())
                     {
+                        transactionID++;
                         Transaction T = new Transaction();
                         T.AccountNumber = Int32.Parse(reader["AccountNumber"].ToString());
                         T.TransactionDate = (DateTime)reader["TransactionDate"];
                         T.TransactionValue = Double.Parse(reader["TransactionValue"].ToString());
                         T.TransactionType = reader["TransactionType"].ToString();
                         T.Note = reader["TransactionNotes"].ToString();
+                        T.TransactionID = transactionID;
                         
                         transactions.Add(T);
                     }

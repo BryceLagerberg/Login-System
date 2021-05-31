@@ -16,7 +16,8 @@ namespace Budget_Tracker.Forms
     public partial class Form1 : Form
     {
         Thread TransactionRefresh;
-        DateTime LastRefresh;
+        Thread TransactionRefresh2;
+        DateTime? LastRefresh;
 
         public Form1()
         {
@@ -103,6 +104,72 @@ namespace Budget_Tracker.Forms
         {
             // Load Gains / Losses based on the selected day (This will require that data is saved somewhere)
         }
+
+        // Update Transaction button press
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+            // check to see if the transaction is being changed
+            if (checkBox1.Checked || checkBox2.Checked || checkBox3.Checked)
+            {
+                // add transaction edit to the recent activity (listbox1)
+                listBox1.Items.Add($"Transaction ID# {textBox3.Text} Updated");
+
+                // update transaction info in the loggedinuser transactions data
+                if (checkBox1.Checked)
+                {
+                    Globals._LoggedInUser.Transactions[(Int32.Parse(textBox3.Text) - 1)].TransactionType = comboBox3.Text;
+                }
+                if (checkBox2.Checked)
+                {
+                    Globals._LoggedInUser.Transactions[(Int32.Parse(textBox3.Text) - 1)].Note = textBox5.Text;
+                }
+                if (checkBox3.Checked)
+                {
+                    Globals._LoggedInUser.Transactions[(Int32.Parse(textBox3.Text) - 1)].TransactionValue = (double)numericUpDown3.Value;
+                }
+
+                //add empty line for better visual
+                listBox1.Items.Add("");
+
+                // update the transaction info in the sql database
+                Globals._SC.EditTransaction(checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, (Int32.Parse(textBox3.Text) - 1));
+
+                // refresh the all transactions listbox
+                listBox2.Items.Clear();
+                LastRefresh = null;
+
+                // reset the pie chart stats
+                Utilities.PieChartStats.PayCheck = 0;
+                Utilities.PieChartStats.Refund = 0;
+                Utilities.PieChartStats.OtherGain = 0;
+                Utilities.PieChartStats.Rent = 0;
+                Utilities.PieChartStats.Transportation = 0;
+                Utilities.PieChartStats.Entertainment = 0;
+                Utilities.PieChartStats.OtherExpense = 0;
+                Utilities.PieChartStats.Groceries = 0;
+
+                // clear the edit transaction fields
+                textBox3.Text = null;
+                comboBox3.Text = null;
+                textBox5.Text = null;
+                numericUpDown3.ResetText();
+                checkBox1.Checked = false;
+                checkBox2.Checked = false;
+                checkBox3.Checked = false;
+
+            }
+
+
+
+
+        }
+
+        // Delete Transaction button press
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Globals._SC.DeleteTransaction();
+        }
         #endregion
 
 
@@ -115,17 +182,8 @@ namespace Budget_Tracker.Forms
         {
             listBox1.Items.Add($"{Catagory} +${Amount}  Date: {monthCalendar1.SelectionRange.Start.Date.ToShortDateString()}");
             listBox1.Items.Add($"     Note: {Note}");
+            listBox1.Items.Add("");
 
-            // Add to Totals
-            
-
-            // Add Revenue listbox
-
-            // Adjust Daily gains
-            
-            //label9.Text = 
-
-            // Adjust Weekly Gains
         }
         
         // add a loss to the budget tracker
@@ -133,12 +191,8 @@ namespace Budget_Tracker.Forms
         {
             listBox1.Items.Add($"{Catagory} -${Amount}  Date: {monthCalendar1.SelectionRange.Start.Date.ToShortDateString()}");
             listBox1.Items.Add($"    Note: {Note}");
+            listBox1.Items.Add("");
 
-            // add to totals
-
-            // Adjust Daily expenses
-
-            // Adjust Weekly expenses
         }
 
         // load the budget tracker transactions
@@ -165,7 +219,6 @@ namespace Budget_Tracker.Forms
         // load budget tracker transactions delegate function
         private void LoadTransactionsDelegate()
         {
-            int testcount = 0;
             try
             {
                 if(this.InvokeRequired == false)
@@ -174,11 +227,13 @@ namespace Budget_Tracker.Forms
                     foreach(Utilities.Transaction t in Globals._LoggedInUser.Transactions)
                     {
                         // new transaction check
-                        if(t.TransactionDate > LastRefresh)
+                        if(t.TransactionDate > LastRefresh || LastRefresh == null)
                         {
                             // add transaction to the listbox to display it to user
+                            listBox2.Items.Add($"ID#: {t.TransactionID}");
                             listBox2.Items.Add($"{t.TransactionType} ${t.TransactionValue}  Date: {t.TransactionDate.Date.ToShortDateString()}");
                             listBox2.Items.Add($"    Note: {t.Note}");
+                            listBox2.Items.Add("");
 
                             // add the transaction to the piechartstats
                             if (t.TransactionType.ToString() == "Pay Check")
@@ -221,7 +276,6 @@ namespace Budget_Tracker.Forms
                                 Utilities.PieChartStats.Groceries += t.TransactionValue;
                                 DrawExpenseChart();
                             }
-
 
                             // set the new transaction as the last processed transaction
                             LastRefresh = t.TransactionDate;

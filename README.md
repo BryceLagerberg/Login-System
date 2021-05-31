@@ -1,6 +1,10 @@
 # Login-System
 
-making a login interface that records stats. May later be expanded on
+making a login interface that records stats. Have since expanded the project to record profiles data for the logins to actually access something.
+Have also added a friends panel that is currently populated with all the created accounts.
+There is also a chat feature accessable by clicking on a friend panel.
+Have added an app panel that is accessable through an expand button that reveals itself when the cursor nears the right side of the profile form.
+Have added a budget tracker app to the app panel that is currently partly usable and my main focus at this time.
 
 
 #THINGS THAT HAVE BEEN DONE/FIXED AND UPLOADED----------------------------------------------------------------------------
@@ -171,12 +175,35 @@ making a login interface that records stats. May later be expanded on
 
 83[x] daily and weekly expenses are not being calculated for some reason in the earnings statement
 
+84[x] change the all transactions tab to show transactions in order by date (currently they are displayed in an unreliable way that can change randomly)
+
+85[x] the earnings statement is miscalculating the daily earnings somehow
+
+86[x] in all transactions tab the amount part of the expense transactions show a positive value instead of negative as an expense should
+
+87[x] populate the budget tracker pie graph with data from the sql database
+
+88[x] in budget tracker replace the numericupdown with something that goes above 100 so its possible to post transactions above 100 dollars (still a numericupdown but goes above 100)
+
+89[x] get rid of the utilities folders on both projects and turn the utilities project into the now deleted utilites folder.
+
+90[x] make it so that the budget tracker application is hidden on close not deleted and recreated when reopened(should still be deleted on user log out)
+
+91[x] populate the earnings statement inside the budget tracker
+
+92[x] add a transaction number to the transaction class so i can use it to edit specific transactions
+
+93[x] display the transaction number in the all transactions list
+
+94[x] make it so that you can edit more than one part of a transaction at a time (currently you can edit 1 of 3 parts at a time, if 2 or more is attempted it fails)
+
 #THINGS THAT NEED TO BE DONE-------------------------------------------------------------------------------------------------------------
 
 a[ ] *add a change username option?
 
 c[ ] make good flair, remove bad flair
 	[ ] *make a save password checkbox that if checked gives a message saying thats a bad idea and then doesnt remember the password
+	[ ] make the transaction values display in green or red depending on if its a gain or loss
 
 d[ ] *add a drag and drop to the profile pictures so you can change easier
 
@@ -196,21 +223,21 @@ k[ ] *change message cap to a hard limit instead of replacing old text in chat w
 
 l[ ] make the displayed gains and expenses change depending on the date selected from on the calender
 
-m[ ] populate the earnings statement inside the budget tracker
+m[ ] Inside of utilities.Functions.LoadSettings there is a reference to Login System.resources that is out of bounds, currently its commented out but needs to be fixed for real at some point
 
-n[ ] make it so that the budget tracker application is hidden on close not deleted and recreated when reopened(should still be deleted on user log out)
+n
 
-o[ ] get rid of the utilities folders on both projects and turn the utilities project into the now deleted utilites folder.
+o
 
-p[ ] in budget tracker replace the numericupdown with something that goes above 100 so its possible to post transactions above 100 dollars
+p
 
-q[ ] populate the budget tracker pie graph with data from the sql database
+q
 
-r[ ] Inside of utilities.Functions.LoadSettings there is a reference to Login System.resources that is out of bounds, currently its commented out but needs to be fixed for real at some point
+r
 
-s[ ] change the all transactions tab to show transactions in order by date (currently they are displayed in an unreliable way that can change randomly)
+s
 
-t[ ] *add a post number to the budget tracker sql table to make tracking transactions easier (not sure i actually need this anymore)
+t
 
 u
 
@@ -237,9 +264,9 @@ z
 
 [ ] if you login with the enter key the computer makes a ping sound. doesnt happen if the login button is pressed though
 
-[ ] in all transactions tab the amount part of the expense transactions show a positive value instead of negative as an expense should
 
-[ ] the earnings statement is miscalculating the daily earnings somehow
+
+
 #IDEAS ON HOW TO COMPLETE ITEMS ON THE TO DO LIST--------------------------------------------------------------------------------------------
 
 currently making the loadtransactions function in form1, it will be very similar to the loadchat function in chatwindow

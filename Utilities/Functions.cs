@@ -306,6 +306,7 @@ namespace Utilities
         public int AccountNumber { get; set; }
         public double TransactionValue { get; set; }
         public string TransactionType { get; set; }
+        public int TransactionID { get; set; }
     }
 
 
