@@ -185,6 +185,7 @@ namespace Login_System
             // If Success
             if (User != null)
             {
+                User.LoggedIn = true;
                 Functions.SaveSettings("SQL Username", textBox2.Text);
                 Globals._LoggedInUser = User;
 

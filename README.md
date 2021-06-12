@@ -6,6 +6,8 @@ There is also a chat feature accessable by clicking on a friend panel.
 Have added an app panel that is accessable through an expand button that reveals itself when the cursor nears the right side of the profile form.
 Have added a budget tracker app to the app panel that is currently partly usable and my main focus at this time.
 
+6/8/21 UPDATE: Budget Tracker is now almost completely functional, only need to finish the delete transaction button in the edit transactions tab.
+
 
 #THINGS THAT HAVE BEEN DONE/FIXED AND UPLOADED----------------------------------------------------------------------------
 
@@ -225,13 +227,13 @@ l[ ] make the displayed gains and expenses change depending on the date selected
 
 m[ ] Inside of utilities.Functions.LoadSettings there is a reference to Login System.resources that is out of bounds, currently its commented out but needs to be fixed for real at some point
 
-n
+n[ ] make the delete transaction button actually delete a transaction
 
-o
+o[ ] make it so that when a trasaction id is entered into the edit transaction tab that the fields auto populate with the current values
 
-p
+p[x] change the transaction id box in edit transactions tab from a textbox to an autofilled combobox list that the user can then select a transaction id from
 
-q
+q[ ] 
 
 r
 
@@ -264,7 +266,7 @@ z
 
 [ ] if you login with the enter key the computer makes a ping sound. doesnt happen if the login button is pressed though
 
-
+[ ] when a user puts a single quote in a transaction note it breaks the sql query string when posting the transaction to the table
 
 
 #IDEAS ON HOW TO COMPLETE ITEMS ON THE TO DO LIST--------------------------------------------------------------------------------------------

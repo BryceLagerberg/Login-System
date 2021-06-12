@@ -260,6 +260,7 @@ namespace Utilities
                 // Pull in Account Information if a matching Username & Password was found.
                 if (LoggingInUser != null)
                 {
+
                     // Pulls in the Profile data for the Logging In User
                     using (SqlCommand command = connection.CreateCommand())
                     {
@@ -286,8 +287,9 @@ namespace Utilities
                         connection.Close();
                     }
 
-                    //reads sql server output from command execution
+                    // Updates the sql table to show the user as logged in
                     Update("UPDATE [Account Information] SET LoggedIn = 1, LastLogin = '" + DateTime.Now.ToString() + "'  WHERE AccountNumber = " + LoggingInUser.AccountNumber);
+                    
 
                 }
 
@@ -383,7 +385,7 @@ namespace Utilities
         }
 
         //sends a chat message
-        public void SendChat(int accountNumber, int friendsAccountNumber, DateTime time, string message)
+        public void SendChat(int accountNumber, int friendsAccountNumber, string message)
         {
             string queryString = "INSERT INTO[Chat Logs](AccountNumberSender, AccountNumberReceiver, SentTime, Message) VALUES(" + accountNumber + ", " + friendsAccountNumber + ", GETDATE(), '" + message + "');";
             //setup for connection to sql server and database
@@ -437,9 +439,9 @@ namespace Utilities
         }
 
         // Delete a Transaction from the sql table
-        public void DeleteTransaction()
+        public void DeleteTransaction(int TransactionID)
         {
-            string queryString = $"";
+            string queryString = $"DELETE FROM [BudgetTransactions] WHERE [TransactionDate] = '{Globals._LoggedInUser.Transactions[TransactionID].TransactionDate}';";
 
             //setup for connection to sql server and database
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();

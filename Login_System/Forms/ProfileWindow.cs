@@ -238,6 +238,22 @@ namespace Login_System
 
         }
 
+        // open the budget tracker application
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (BTForm1 == null)
+            {
+                BTForm1 = new Budget_Tracker.Forms.Form1();
+                BTForm1.Show();
+                BTForm1.Visible = true;
+            }
+            else
+            {
+                BTForm1.Show();
+                BTForm1.Visible = true;
+            }
+        }
+
         #endregion
 
 
@@ -320,6 +336,12 @@ namespace Login_System
         // Logs the user out 
         public void Logout()
         {
+            // abort threads
+            this.FriendsRefresh.Abort();
+            this.SlideThread.Abort();
+            this.ExpandThread.Abort();
+            BTForm1.AbortThread();
+
             // Log out the user (SQL)
             Globals._SC.Update("UPDATE [Account Information] SET LoggedIn = 0 WHERE AccountNumber = " + Globals._LoggedInUser.AccountNumber);
             Globals._LoggedInUser = null;
@@ -465,29 +487,6 @@ namespace Login_System
 
         #endregion
 
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
 
-        }
-
-        private void groupBox3_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if (BTForm1 == null)
-            {
-                BTForm1 = new Budget_Tracker.Forms.Form1();
-                BTForm1.Show();
-                BTForm1.Visible = true;
-            }
-            else
-            {
-                BTForm1.Show();
-                BTForm1.Visible = true;
-            }
-        }
     }
 }

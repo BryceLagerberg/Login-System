@@ -16,18 +16,14 @@ namespace Budget_Tracker.Forms
     public partial class Form1 : Form
     {
         Thread TransactionRefresh;
-        Thread TransactionRefresh2;
         DateTime? LastRefresh;
 
         public Form1()
         {
             InitializeComponent();
         }
-
-        List<double> _Totals = new List<double>();
         
         
-
         #region Events
         
         // On Load
@@ -108,35 +104,40 @@ namespace Budget_Tracker.Forms
         // Update Transaction button press
         private void button3_Click(object sender, EventArgs e)
         {
-
             // check to see if the transaction is being changed
             if (checkBox1.Checked || checkBox2.Checked || checkBox3.Checked)
             {
-                // add transaction edit to the recent activity (listbox1)
-                listBox1.Items.Add($"Transaction ID# {textBox3.Text} Updated");
-
+                
                 // update transaction info in the loggedinuser transactions data
                 if (checkBox1.Checked)
                 {
-                    Globals._LoggedInUser.Transactions[(Int32.Parse(textBox3.Text) - 1)].TransactionType = comboBox3.Text;
+                    Globals._LoggedInUser.Transactions[comboBox4.SelectedIndex].TransactionType = comboBox3.Text;
                 }
                 if (checkBox2.Checked)
                 {
-                    Globals._LoggedInUser.Transactions[(Int32.Parse(textBox3.Text) - 1)].Note = textBox5.Text;
+                    Globals._LoggedInUser.Transactions[comboBox4.SelectedIndex].Note = textBox5.Text;
                 }
                 if (checkBox3.Checked)
                 {
-                    Globals._LoggedInUser.Transactions[(Int32.Parse(textBox3.Text) - 1)].TransactionValue = (double)numericUpDown3.Value;
+                    Globals._LoggedInUser.Transactions[comboBox4.SelectedIndex].TransactionValue = (double)numericUpDown3.Value;
                 }
+
+                // add transaction edit to the recent activity (listbox1)
+                listBox1.Items.Add($"Transaction ID# {Globals._LoggedInUser.Transactions[comboBox4.SelectedIndex].TransactionID.ToString()} Updated");
 
                 //add empty line for better visual
                 listBox1.Items.Add("");
 
                 // update the transaction info in the sql database
-                Globals._SC.EditTransaction(checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, (Int32.Parse(textBox3.Text) - 1));
+                Globals._SC.EditTransaction(checkBox1.Checked, checkBox2.Checked, checkBox3.Checked, comboBox4.SelectedIndex);
 
-                // refresh the all transactions listbox
+                // clear the items from the transaction id list on the edit transactions tab
+                comboBox4.Items.Clear();
+
+                // clear the all transactions listbox
                 listBox2.Items.Clear();
+
+                // reload all the transactions
                 LastRefresh = null;
 
                 // reset the pie chart stats
@@ -150,7 +151,7 @@ namespace Budget_Tracker.Forms
                 Utilities.PieChartStats.Groceries = 0;
 
                 // clear the edit transaction fields
-                textBox3.Text = null;
+                comboBox4.Text = null;
                 comboBox3.Text = null;
                 textBox5.Text = null;
                 numericUpDown3.ResetText();
@@ -168,8 +169,57 @@ namespace Budget_Tracker.Forms
         // Delete Transaction button press
         private void button4_Click(object sender, EventArgs e)
         {
-            Globals._SC.DeleteTransaction();
+            // check that there is a selected transaction to delete
+            if (comboBox4.Text.Length > 0)
+            {
+                // add transaction edit to the recent activity (listbox1)
+                listBox1.Items.Add($"Transaction ID# {Globals._LoggedInUser.Transactions[comboBox4.SelectedIndex].TransactionID.ToString()} Deleted");
+
+                //add empty line for better visual
+                listBox1.Items.Add("");
+
+                // remove the transaction from the sql transactions table
+                Globals._SC.DeleteTransaction(comboBox4.SelectedIndex);
+
+                // clear the items from the transaction id list on the edit transactions tab
+                comboBox4.Items.Clear();
+
+                // clear the all transactions listbox
+                listBox2.Items.Clear();
+
+                // reload all the transactions
+                LastRefresh = null;
+
+                // reset the pie chart stats
+                Utilities.PieChartStats.PayCheck = 0;
+                Utilities.PieChartStats.Refund = 0;
+                Utilities.PieChartStats.OtherGain = 0;
+                Utilities.PieChartStats.Rent = 0;
+                Utilities.PieChartStats.Transportation = 0;
+                Utilities.PieChartStats.Entertainment = 0;
+                Utilities.PieChartStats.OtherExpense = 0;
+                Utilities.PieChartStats.Groceries = 0;
+
+                // clear the edit transaction fields
+                comboBox4.Text = null;
+                comboBox3.Text = null;
+                textBox5.Text = null;
+                numericUpDown3.ResetText();
+                checkBox1.Checked = false;
+                checkBox2.Checked = false;
+                checkBox3.Checked = false;
+            }
+            
         }
+
+        // selected transaction id changed 
+        private void ComboBox4_IndexChanged(object sender, EventArgs e)
+        {
+            // fill in the edit transactoin fields
+            textBox5.Text = Globals._LoggedInUser.Transactions[(int)comboBox4.SelectedItem - 1].Note;
+            numericUpDown3.Value = (decimal)Globals._LoggedInUser.Transactions[(int)comboBox4.SelectedItem - 1].TransactionValue;
+        }
+
         #endregion
 
 
@@ -210,7 +260,8 @@ namespace Budget_Tracker.Forms
 
                     Thread.Sleep(1000);
                 }
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
 
             }
@@ -234,6 +285,9 @@ namespace Budget_Tracker.Forms
                             listBox2.Items.Add($"{t.TransactionType} ${t.TransactionValue}  Date: {t.TransactionDate.Date.ToShortDateString()}");
                             listBox2.Items.Add($"    Note: {t.Note}");
                             listBox2.Items.Add("");
+
+                            // add transaction id to the combobox4 list
+                            comboBox4.Items.Add(t.TransactionID);
 
                             // add the transaction to the piechartstats
                             if (t.TransactionType.ToString() == "Pay Check")
@@ -374,10 +428,11 @@ namespace Budget_Tracker.Forms
             chart2.Series["Series1"].IsValueShownAsLabel = true;
         }
 
-
-
-
-
+        //abort the transaction thread
+        public void AbortThread()
+        {
+            TransactionRefresh.Abort();
+        }
 
         #endregion
 

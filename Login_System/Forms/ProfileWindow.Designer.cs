@@ -347,7 +347,6 @@ namespace Login_System
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Friends List";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // flowLayoutPanel1
             // 
@@ -391,7 +390,6 @@ namespace Login_System
             this.groupBox3.TabIndex = 26;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Applications";
-            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // button2
             // 

@@ -58,7 +58,7 @@ namespace Login_System
         //message send button
         private void button1_Click(object sender, EventArgs e)
         {
-            Globals._SC.SendChat(Globals._LoggedInUser.AccountNumber,CurrentFriend.AccountNumber,DateTime.Now,textBox1.Text);
+            Globals._SC.SendChat(Globals._LoggedInUser.AccountNumber,CurrentFriend.AccountNumber,textBox1.Text);
 
             textBox1.Text = "";
         }
