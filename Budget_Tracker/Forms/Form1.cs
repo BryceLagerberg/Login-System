@@ -48,7 +48,7 @@ namespace Budget_Tracker.Forms
         {
 
             // check that a transaction catagory was selected
-            if (comboBox1.SelectedItem != null)
+            if (comboBox1.Text != null)
             {
 
             AddGain(comboBox1.Text, (double)numericUpDown1.Value, textBox1.Text);
@@ -58,12 +58,12 @@ namespace Budget_Tracker.Forms
             transactionDate += DateTime.Now.ToLongTimeString();
             
             // add transaction to the sql table
-            Globals._SC.PostTransaction(Globals._LoggedInUser.AccountNumber, transactionDate, (double)numericUpDown1.Value, comboBox1.Text, textBox1.Text);
+            Globals._SC.PostTransaction(Globals._LoggedInUser.AccountNumber, transactionDate, (double)numericUpDown1.Value, comboBox1.Text, textBox1.Text, 1);
 
             // clear the gain fields so its ready for a new transaction
             textBox1.Text = "";
             numericUpDown1.Value = 0;
-            comboBox1.SelectedItem = null;
+            comboBox1.Text = null;
             } else
             {
                 MessageBox.Show("To Post a Transaction please select a Catagory first.");
@@ -75,7 +75,7 @@ namespace Budget_Tracker.Forms
         {
             
             // check that a transaction catagory was selected
-            if (comboBox2.SelectedItem != null)
+            if (comboBox2.Text != null)
             {
                 AddLoss(comboBox2.Text, (double)numericUpDown2.Value, textBox2.Text);
 
@@ -84,12 +84,12 @@ namespace Budget_Tracker.Forms
                 transactionDate += DateTime.Now.ToLongTimeString();
 
                 // add transaction to the sql table
-                Globals._SC.PostTransaction(Globals._LoggedInUser.AccountNumber, transactionDate, (double)numericUpDown2.Value, comboBox2.Text, textBox2.Text);
+                Globals._SC.PostTransaction(Globals._LoggedInUser.AccountNumber, transactionDate, (double)numericUpDown2.Value, comboBox2.Text, textBox2.Text, 0);
 
                 // clear the gain fields so its ready for a new transaction
                 textBox2.Text = "";
                 numericUpDown2.Value = 0;
-                comboBox2.SelectedItem = null;
+                comboBox2.Text = null;
             } else
             {
                 MessageBox.Show("To Post a Transaction please select a Catagory first.");
@@ -218,6 +218,7 @@ namespace Budget_Tracker.Forms
             // fill in the edit transactoin fields
             textBox5.Text = Globals._LoggedInUser.Transactions[(int)comboBox4.SelectedItem - 1].Note;
             numericUpDown3.Value = (decimal)Globals._LoggedInUser.Transactions[(int)comboBox4.SelectedItem - 1].TransactionValue;
+            comboBox3.Text = Globals._LoggedInUser.Transactions[(int)comboBox4.SelectedItem - 1].TransactionType;
         }
 
         #endregion
@@ -258,7 +259,7 @@ namespace Budget_Tracker.Forms
                     // refresh transactions
                     LoadTransactionsDelegate();
 
-                    Thread.Sleep(1000);
+                    Thread.Sleep(5000);
                 }
             }
             catch(Exception ex)
@@ -335,6 +336,24 @@ namespace Budget_Tracker.Forms
                             LastRefresh = t.TransactionDate;
                         }
                     }
+
+                    // add transcation gain types to combobox1 and transaction expense types to combobox2
+                    comboBox1.Items.Clear();
+                    if (Globals._LoggedInUser.GainTypes != null) 
+                    {
+                        foreach (string s in Globals._LoggedInUser.GainTypes)
+                        {
+                            comboBox1.Items.Add(s);
+                        }
+                    }
+                    comboBox2.Items.Clear();
+                    if (Globals._LoggedInUser.ExpenseTypes != null) 
+                    {
+                        foreach (string s in Globals._LoggedInUser.ExpenseTypes)
+                        {
+                            comboBox2.Items.Add(s);
+                        }
+                    }
                 }
                 else
                 {
@@ -360,7 +379,7 @@ namespace Budget_Tracker.Forms
             foreach(Transaction t in Globals._LoggedInUser.Transactions)
             {
                 // check to see if the transaction is a gain
-                if (t.TransactionType == "Other Gain" || t.TransactionType == "Pay Check" || t.TransactionType == "Refund")
+                if (t.GainOrLoss)
                 {
                     Balance += t.TransactionValue;
                     

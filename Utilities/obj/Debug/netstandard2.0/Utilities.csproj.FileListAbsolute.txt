@@ -35,10 +35,10 @@ C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\System.Con
 C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\Accessibility.xml
 C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\System.Deployment.xml
 C:\Users\bryce\Desktop\LoginSystem\Utilities\bin\Debug\netstandard2.0\System.Runtime.Serialization.Formatters.Soap.xml
-C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.csprojAssemblyReference.cache
 C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.AssemblyInfoInputs.cache
 C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.AssemblyInfo.cs
 C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.csproj.CoreCompileInputs.cache
 C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.csproj.CopyComplete
 C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.dll
 C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.pdb
+C:\Users\bryce\Desktop\LoginSystem\Utilities\obj\Debug\netstandard2.0\Utilities.csproj.AssemblyReference.cache

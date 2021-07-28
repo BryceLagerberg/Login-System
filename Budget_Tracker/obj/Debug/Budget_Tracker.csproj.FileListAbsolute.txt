@@ -213,7 +213,6 @@ C:\Users\bryce\Desktop\LoginSystem\Budget_Tracker\bin\Debug\Newtonsoft.Json.dll
 C:\Users\bryce\Desktop\LoginSystem\Budget_Tracker\bin\Debug\Utilities.dll
 C:\Users\bryce\Desktop\LoginSystem\Budget_Tracker\bin\Debug\Utilities.pdb
 C:\Users\bryce\Desktop\LoginSystem\Budget_Tracker\bin\Debug\Newtonsoft.Json.xml
-C:\Users\bryce\Desktop\LoginSystem\Budget_Tracker\obj\Debug\Budget_Tracker.csprojAssemblyReference.cache
 C:\Users\bryce\Desktop\LoginSystem\Budget_Tracker\obj\Debug\Budget_Tracker.exe.config
 C:\Users\bryce\Desktop\LoginSystem\Budget_Tracker\obj\Debug\Budget_Tracker.Forms.Form1.resources
 C:\Users\bryce\Desktop\LoginSystem\Budget_Tracker\obj\Debug\Budget_Tracker.Properties.Resources.resources
@@ -222,3 +221,4 @@ C:\Users\bryce\Desktop\LoginSystem\Budget_Tracker\obj\Debug\Budget_Tracker.cspro
 C:\Users\bryce\Desktop\LoginSystem\Budget_Tracker\obj\Debug\Budget_Tracker.csproj.CopyComplete
 C:\Users\bryce\Desktop\LoginSystem\Budget_Tracker\obj\Debug\Budget_Tracker.exe
 C:\Users\bryce\Desktop\LoginSystem\Budget_Tracker\obj\Debug\Budget_Tracker.pdb
+C:\Users\bryce\Desktop\LoginSystem\Budget_Tracker\obj\Debug\Budget_Tracker.csproj.AssemblyReference.cache

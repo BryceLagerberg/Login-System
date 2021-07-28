@@ -262,7 +262,6 @@ C:\Users\bryce\Desktop\LoginSystem\Login_System\bin\Debug\Budget_Tracker.pdb
 C:\Users\bryce\Desktop\LoginSystem\Login_System\bin\Debug\Budget_Tracker.exe.config
 C:\Users\bryce\Desktop\LoginSystem\Login_System\bin\Debug\Utilities.pdb
 C:\Users\bryce\Desktop\LoginSystem\Login_System\bin\Debug\System.Data.SqlClient.xml
-C:\Users\bryce\Desktop\LoginSystem\Login_System\obj\Debug\Login_System.csprojAssemblyReference.cache
 C:\Users\bryce\Desktop\LoginSystem\Login_System\obj\Debug\Login_System.exe.config
 C:\Users\bryce\Desktop\LoginSystem\Login_System\obj\Debug\Login_System.CreateAccount.resources
 C:\Users\bryce\Desktop\LoginSystem\Login_System\obj\Debug\Login_System.ChatWindow.resources
@@ -274,3 +273,4 @@ C:\Users\bryce\Desktop\LoginSystem\Login_System\obj\Debug\Login_System.csproj.Co
 C:\Users\bryce\Desktop\LoginSystem\Login_System\obj\Debug\Login_System.csproj.CopyComplete
 C:\Users\bryce\Desktop\LoginSystem\Login_System\obj\Debug\Login_System.exe
 C:\Users\bryce\Desktop\LoginSystem\Login_System\obj\Debug\Login_System.pdb
+C:\Users\bryce\Desktop\LoginSystem\Login_System\obj\Debug\Login_System.csproj.AssemblyReference.cache

@@ -340,7 +340,11 @@ namespace Login_System
             this.FriendsRefresh.Abort();
             this.SlideThread.Abort();
             this.ExpandThread.Abort();
-            BTForm1.AbortThread();
+            if(BTForm1.Enabled == true)
+            {
+                BTForm1.AbortThread();
+            }
+
 
             // Log out the user (SQL)
             Globals._SC.Update("UPDATE [Account Information] SET LoggedIn = 0 WHERE AccountNumber = " + Globals._LoggedInUser.AccountNumber);

@@ -307,6 +307,7 @@ namespace Utilities
         public double TransactionValue { get; set; }
         public string TransactionType { get; set; }
         public int TransactionID { get; set; }
+        public Boolean GainOrLoss { get; set; } // gain is true, loss is false
     }
 
 
@@ -333,6 +334,8 @@ namespace Utilities
         public bool LoggedIn { get; set; }
         public List<ChatMessage> Messages { get; set; }
         public List<Transaction> Transactions { get; set; }
+        public List<string> GainTypes { get; set; }
+        public List<string> ExpenseTypes { get; set; }
     }
 
 

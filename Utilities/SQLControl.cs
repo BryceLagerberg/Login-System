@@ -412,9 +412,9 @@ namespace Utilities
         }
 
         // post a transaction to the Sql table
-        public void PostTransaction(int AccountNumber, string Date, double Value, string Catagory, string Notes)
+        public void PostTransaction(int AccountNumber, string Date, double Value, string Catagory, string Notes, int GainOrLoss)
         {
-            string queryString = $"INSERT INTO[BudgetTransactions]([AccountNumber], [TransactionDate], [TransactionValue], [TransactionType], [TransactionNotes]) VALUES({AccountNumber}, '{Date}', {Value}, '{Catagory}', '{Notes}');";
+            string queryString = $"INSERT INTO[BudgetTransactions]([AccountNumber], [TransactionDate], [TransactionValue], [TransactionType], [TransactionNotes], [GainOrLoss]) VALUES({AccountNumber}, '{Date}', {Value}, '{Catagory}', '{Notes}', {GainOrLoss});";
             //setup for connection to sql server and database
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
             csb.DataSource = SQLServer;
@@ -596,8 +596,36 @@ namespace Utilities
                         T.TransactionValue = Double.Parse(reader["TransactionValue"].ToString());
                         T.TransactionType = reader["TransactionType"].ToString();
                         T.Note = reader["TransactionNotes"].ToString();
+                        T.GainOrLoss = (bool)reader["GainOrLoss"];
                         T.TransactionID = transactionID;
-                        
+
+                        // populate the lists of transaction types for gains or losses
+                        if (T.GainOrLoss == true)
+                        {
+                            // check to see if the gain type is already in the list
+                            if(Globals._LoggedInUser.GainTypes == null)
+                            {
+                                Globals._LoggedInUser.GainTypes = new List<string>();
+                            }
+                            if (Globals._LoggedInUser.GainTypes.Contains(T.TransactionType.ToString()) == false)
+                            {
+                                Globals._LoggedInUser.GainTypes.Add(T.TransactionType.ToString());
+                            }
+                        }
+                        else
+                        {
+                            // check to see if the expense type is already in the list
+                            if (Globals._LoggedInUser.ExpenseTypes == null)
+                            {
+                                Globals._LoggedInUser.ExpenseTypes = new List<string>();
+                            }
+                            if (Globals._LoggedInUser.ExpenseTypes.Contains(T.TransactionType.ToString()) == false)
+                            {
+                                Globals._LoggedInUser.ExpenseTypes.Add(T.TransactionType.ToString());
+                            }
+                        }
+
+
                         transactions.Add(T);
                     }
                 }
