@@ -1,11 +1,14 @@
 # Login-System
 
-making a login interface that records stats. Have since expanded the project to record profiles data for the logins to actually access something.
+making a login interface that records a few stats. Have since expanded the project to be able to record profile data for each user.
 Have also added a friends panel that is currently populated with all the created accounts.
 There is also a chat feature accessable by clicking on a friend panel.
 Have added an app panel that is accessable through an expand button that reveals itself when the cursor nears the right side of the profile form.
 Have added a budget tracker app to the app panel that is currently partly usable and my main focus at this time.
 
+6/8/21 UPDATE: Budget Tracker is now almost completely functional, only need to finish the delete transaction button in the edit transactions tab.
+
+7/7/31 UPDATE: Budget Tracker delete transaction works properly now. Currently focusing on cleaning up some bugs and updating some background functions
 
 #THINGS THAT HAVE BEEN DONE/FIXED AND UPLOADED----------------------------------------------------------------------------
 
@@ -197,13 +200,22 @@ Have added a budget tracker app to the app panel that is currently partly usable
 
 94[x] make it so that you can edit more than one part of a transaction at a time (currently you can edit 1 of 3 parts at a time, if 2 or more is attempted it fails)
 
+95[x] make the delete transaction button actually delete a transaction
+
+96[x] make it so that when a trasaction id is entered into the edit transaction tab that the fields auto populate with the current values
+
+97[x] change the transaction id box in edit transactions tab from a textbox to an autofilled combobox list that the user can then select a transaction id from
+
+98[x] fix the table check method so that it checks for all of the tables the program uses now, currently it checks for only 2 tables. also table check doesnt close the sql connection so while it works it throws an error if more than 1 table needs creating    
+
+99
 #THINGS THAT NEED TO BE DONE-------------------------------------------------------------------------------------------------------------
 
 a[ ] *add a change username option?
 
 c[ ] make good flair, remove bad flair
-	[ ] *make a save password checkbox that if checked gives a message saying thats a bad idea and then doesnt remember the password
-	[ ] make the transaction values display in green or red depending on if its a gain or loss
+	1[ ] *make a save password checkbox that if checked gives a message saying thats a bad idea and then doesnt remember the password
+	2[ ] make the transaction values display in green or red depending on if its a gain or loss
 
 d[ ] *add a drag and drop to the profile pictures so you can change easier
 
@@ -225,11 +237,11 @@ l[ ] make the displayed gains and expenses change depending on the date selected
 
 m[ ] Inside of utilities.Functions.LoadSettings there is a reference to Login System.resources that is out of bounds, currently its commented out but needs to be fixed for real at some point
 
-n
+n[ ] add a budget analysis section that compares ur spending habits to the 30(housing)/50(expenses)/20(savings) 
 
-o
+o[ ] add an investments tracking that records your investment contributions (it could graph the total over time and offer a yearly average growth estimate to inspire the user)
 
-p
+p[ ] create an installer window so the user can decide where to save folder structure and the user settings upon first launch if they want a different location
 
 q
 
@@ -258,13 +270,13 @@ z
 
 [ ] fix bug that says wrong username/password when logging in to an already logged in account
 
-[ ] all chat messages are outputing the same message regardless of input when logged in as bobby and sending to bryce, but works fine for other users bobby sends a message to. (havent been able to recreate this bug)
+[ ] all chat messages are outputing the same message regardless of input when logged in as bobby and sending to bryce, but works fine for other users bobby sends a message to. (havent been able to recreate this bug) (i think i recreated this finally)
 
 [ ] after a failed login the login window name always stays as 'Bad Login' it should change back to login window after a successful login, or when error message is closed.
 
 [ ] if you login with the enter key the computer makes a ping sound. doesnt happen if the login button is pressed though
 
-
+[ ] when a user puts a single quote in a transaction note it breaks the sql query string when posting the transaction to the table
 
 
 #IDEAS ON HOW TO COMPLETE ITEMS ON THE TO DO LIST--------------------------------------------------------------------------------------------

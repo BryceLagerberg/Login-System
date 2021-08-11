@@ -29,6 +29,7 @@ namespace Budget_Tracker.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -68,6 +69,7 @@ namespace Budget_Tracker.Forms
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
@@ -80,7 +82,6 @@ namespace Budget_Tracker.Forms
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
@@ -89,6 +90,8 @@ namespace Budget_Tracker.Forms
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.transactionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.transactionBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -103,6 +106,8 @@ namespace Budget_Tracker.Forms
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.transactionBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.transactionBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -261,7 +266,7 @@ namespace Budget_Tracker.Forms
             this.monthCalendar1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.monthCalendar1.BackColor = System.Drawing.Color.Teal;
             this.monthCalendar1.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.monthCalendar1.Location = new System.Drawing.Point(259, 9);
+            this.monthCalendar1.Location = new System.Drawing.Point(258, 9);
             this.monthCalendar1.Margin = new System.Windows.Forms.Padding(7);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 3;
@@ -288,7 +293,7 @@ namespace Budget_Tracker.Forms
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage6);
-            this.tabControl1.Location = new System.Drawing.Point(259, 177);
+            this.tabControl1.Location = new System.Drawing.Point(258, 177);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -324,12 +329,7 @@ namespace Budget_Tracker.Forms
             // 
             // comboBox1
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Pay Check",
-            "Refund",
-            "Other Gain"});
             this.comboBox1.Location = new System.Drawing.Point(22, 52);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(175, 21);
@@ -366,7 +366,7 @@ namespace Budget_Tracker.Forms
             this.numericUpDown1.Location = new System.Drawing.Point(22, 155);
             this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown1.Maximum = new decimal(new int[] {
-            10000,
+            1000000,
             0,
             0,
             0});
@@ -411,14 +411,7 @@ namespace Budget_Tracker.Forms
             // 
             // comboBox2
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "Rent",
-            "Groceries",
-            "Transportation",
-            "Entertainment",
-            "Other Expense"});
             this.comboBox2.Location = new System.Drawing.Point(22, 52);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(175, 21);
@@ -455,7 +448,7 @@ namespace Budget_Tracker.Forms
             this.numericUpDown2.Location = new System.Drawing.Point(22, 155);
             this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown2.Maximum = new decimal(new int[] {
-            10000,
+            1000000,
             0,
             0,
             0});
@@ -485,6 +478,7 @@ namespace Budget_Tracker.Forms
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.Color.Teal;
+            this.tabPage6.Controls.Add(this.comboBox4);
             this.tabPage6.Controls.Add(this.button4);
             this.tabPage6.Controls.Add(this.button3);
             this.tabPage6.Controls.Add(this.comboBox3);
@@ -497,12 +491,21 @@ namespace Budget_Tracker.Forms
             this.tabPage6.Controls.Add(this.label19);
             this.tabPage6.Controls.Add(this.label18);
             this.tabPage6.Controls.Add(this.label17);
-            this.tabPage6.Controls.Add(this.textBox3);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Size = new System.Drawing.Size(219, 262);
             this.tabPage6.TabIndex = 2;
             this.tabPage6.Text = "Edit Transaction";
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(81, 37);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(59, 21);
+            this.comboBox4.TabIndex = 14;
+            this.comboBox4.SelectedIndexChanged += new System.EventHandler(this.ComboBox4_IndexChanged);
             // 
             // button4
             // 
@@ -526,17 +529,7 @@ namespace Budget_Tracker.Forms
             // 
             // comboBox3
             // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Items.AddRange(new object[] {
-            "Pay Check",
-            "Refund",
-            "Other Gain",
-            "Rent",
-            "Groceries",
-            "Transportation",
-            "Entertainment",
-            "Other Expense"});
             this.comboBox3.Location = new System.Drawing.Point(26, 85);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(100, 21);
@@ -582,7 +575,7 @@ namespace Budget_Tracker.Forms
             131072});
             this.numericUpDown3.Location = new System.Drawing.Point(26, 165);
             this.numericUpDown3.Maximum = new decimal(new int[] {
-            10000,
+            1000000,
             0,
             0,
             0});
@@ -632,13 +625,6 @@ namespace Budget_Tracker.Forms
             this.label17.Size = new System.Drawing.Size(25, 13);
             this.label17.TabIndex = 1;
             this.label17.Text = "ID#";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(93, 37);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(34, 20);
-            this.textBox3.TabIndex = 0;
             // 
             // tabControl2
             // 
@@ -709,7 +695,7 @@ namespace Budget_Tracker.Forms
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart2.Series.Add(series1);
-            this.chart2.Size = new System.Drawing.Size(219, 144);
+            this.chart2.Size = new System.Drawing.Size(220, 144);
             this.chart2.TabIndex = 1;
             this.chart2.Text = "chart2";
             title1.Name = "Title1";
@@ -734,12 +720,20 @@ namespace Budget_Tracker.Forms
             series2.Legend = "Legend1";
             series2.Name = "Series1";
             this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(219, 144);
+            this.chart1.Size = new System.Drawing.Size(220, 144);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             title2.Name = "Title1";
             title2.Text = "Expenses";
             this.chart1.Titles.Add(title2);
+            // 
+            // transactionBindingSource
+            // 
+            this.transactionBindingSource.DataSource = typeof(Utilities.Transaction);
+            // 
+            // transactionBindingSource1
+            // 
+            this.transactionBindingSource1.DataSource = typeof(Utilities.Transaction);
             // 
             // Form1
             // 
@@ -747,7 +741,7 @@ namespace Budget_Tracker.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Turquoise;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(496, 474);
+            this.ClientSize = new System.Drawing.Size(495, 474);
             this.Controls.Add(this.tabControl2);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.monthCalendar1);
@@ -778,6 +772,8 @@ namespace Budget_Tracker.Forms
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.transactionBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.transactionBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -833,9 +829,11 @@ namespace Budget_Tracker.Forms
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.BindingSource transactionBindingSource;
+        private System.Windows.Forms.BindingSource transactionBindingSource1;
     }
 }
 

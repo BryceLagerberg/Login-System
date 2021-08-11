@@ -57,7 +57,7 @@ namespace Utilities
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
             csb.InitialCatalog = DataBase;
             csb.DataSource = SQLServer;
-            //csb.IntegratedSecurity = true;
+            csb.IntegratedSecurity = true;
             csb.UserID = "guest";
             csb.Password = "guest";
 
@@ -85,13 +85,16 @@ namespace Utilities
             using (SqlConnection Connection = new SqlConnection(ConnectionString))
             using (SqlCommand command = Connection.CreateCommand())
             {
-                command.CommandText = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Account Logins' or TABLE_NAME = 'Account Information'";
+                command.CommandText = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Account Logins' or TABLE_NAME = 'Account Information' or TABLE_NAME = 'Chat Logs' or TABLE_NAME = 'BudgetTransactions';";
                 //makes connection to sql server
                 Connection.Open();
 
                 //Check to see what tables exist
                 bool AccountLogins = false;
                 bool AccountInformation = false;
+                bool ChatLogs = false;
+                bool BudgetTransactions = false;
+
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
 
@@ -107,6 +110,14 @@ namespace Utilities
                         {
                             AccountLogins = true;
                         }
+                        else if (Table == "Chat Logs")
+                        {
+                            ChatLogs = true;
+                        }
+                        else if (Table == "BudgetTransactions")
+                        {
+                            BudgetTransactions = true;
+                        }
 
 
 
@@ -114,17 +125,38 @@ namespace Utilities
                 }
 
                 // Create Missing Tables
-                //
                 if (!AccountLogins)
                 {
-                    command.CommandText = "CREATE TABLE " + DataBase + ".dbo.[Account Logins] (Username varchar(50), Password varchar(50), AccountNumber int,);";
-                    command.ExecuteReader();
+                    // Creates the Account Logins table (Note: not defining NULL for each table column defaults to allowing NULL)
+                    command.CommandText = "CREATE TABLE " + DataBase + ".dbo.[Account Logins] (Username varchar(50), Password varchar(50), AccountNumber int);";
+                    using (SqlDataReader Reader = command.ExecuteReader())
+                    {
+                    }
                 }
                 if (!AccountInformation)
                 {
-                    // Email, FirstName, LastName, CreatedOn, LastLogin, ProfilePicture, LoggedIn
+                    // Creates the Account Information table (NOTE: not defining NULL for each table column defaults to allowing NULL)
                     command.CommandText = "CREATE TABLE " + DataBase + ".dbo.[Account Information](AccountNumber int, FirstName varchar(50), LastName varchar(50), Email varchar(50), LoggedIn bit, LastLogin datetime, CreatedOn datetime, ProfilePicture varchar(50));";
-                    command.ExecuteReader();
+                    using (SqlDataReader Reader = command.ExecuteReader())
+                    {
+                    }
+                }
+                if (!ChatLogs)
+                {
+                    // Creates the Chat Logs table (Note: not defining NULL for each table column defaults to allowing NULL)
+                    command.CommandText = "CREATE TABLE " + DataBase + ".dbo.[Chat Logs](AccountNumberSender varchar(10), AccountNumberReceiver varchar(10), SentTime datetime, Message varchar(100));";
+                    using (SqlDataReader Reader = command.ExecuteReader())
+                    {
+                    }
+
+                }
+                if (!BudgetTransactions)
+                {
+                    // Creates the BudgetTransactions table
+                    command.CommandText = "CREATE TABLE " + DataBase + ".dbo.[BudgetTransactions](AccountNumber varchar(10) NOT NULL, TransactionDate datetime NOT NULL, TransactionValue varchar(10) NOT NULL, TransactionType varchar(50) NOT NULL, TransactionNotes varchar(100) NULL, GainOrLoss bit NOT NULL);";
+                    using (SqlDataReader Reader = command.ExecuteReader())
+                    {
+                    }
                 }
 
                 Connection.Close();
@@ -260,6 +292,7 @@ namespace Utilities
                 // Pull in Account Information if a matching Username & Password was found.
                 if (LoggingInUser != null)
                 {
+
                     // Pulls in the Profile data for the Logging In User
                     using (SqlCommand command = connection.CreateCommand())
                     {
@@ -286,8 +319,9 @@ namespace Utilities
                         connection.Close();
                     }
 
-                    //reads sql server output from command execution
+                    // Updates the sql table to show the user as logged in
                     Update("UPDATE [Account Information] SET LoggedIn = 1, LastLogin = '" + DateTime.Now.ToString() + "'  WHERE AccountNumber = " + LoggingInUser.AccountNumber);
+                    
 
                 }
 
@@ -383,7 +417,7 @@ namespace Utilities
         }
 
         //sends a chat message
-        public void SendChat(int accountNumber, int friendsAccountNumber, DateTime time, string message)
+        public void SendChat(int accountNumber, int friendsAccountNumber, string message)
         {
             string queryString = "INSERT INTO[Chat Logs](AccountNumberSender, AccountNumberReceiver, SentTime, Message) VALUES(" + accountNumber + ", " + friendsAccountNumber + ", GETDATE(), '" + message + "');";
             //setup for connection to sql server and database
@@ -410,9 +444,9 @@ namespace Utilities
         }
 
         // post a transaction to the Sql table
-        public void PostTransaction(int AccountNumber, string Date, double Value, string Catagory, string Notes)
+        public void PostTransaction(int AccountNumber, string Date, double Value, string Catagory, string Notes, int GainOrLoss)
         {
-            string queryString = $"INSERT INTO[BudgetTransactions]([AccountNumber], [TransactionDate], [TransactionValue], [TransactionType], [TransactionNotes]) VALUES({AccountNumber}, '{Date}', {Value}, '{Catagory}', '{Notes}');";
+            string queryString = $"INSERT INTO[BudgetTransactions]([AccountNumber], [TransactionDate], [TransactionValue], [TransactionType], [TransactionNotes], [GainOrLoss]) VALUES({AccountNumber}, '{Date}', {Value}, '{Catagory}', '{Notes}', {GainOrLoss});";
             //setup for connection to sql server and database
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
             csb.DataSource = SQLServer;
@@ -437,9 +471,9 @@ namespace Utilities
         }
 
         // Delete a Transaction from the sql table
-        public void DeleteTransaction()
+        public void DeleteTransaction(int TransactionID)
         {
-            string queryString = $"";
+            string queryString = $"DELETE FROM [BudgetTransactions] WHERE [TransactionDate] = '{Globals._LoggedInUser.Transactions[TransactionID].TransactionDate}';";
 
             //setup for connection to sql server and database
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
@@ -594,8 +628,36 @@ namespace Utilities
                         T.TransactionValue = Double.Parse(reader["TransactionValue"].ToString());
                         T.TransactionType = reader["TransactionType"].ToString();
                         T.Note = reader["TransactionNotes"].ToString();
+                        T.GainOrLoss = (bool)reader["GainOrLoss"];
                         T.TransactionID = transactionID;
-                        
+
+                        // populate the lists of transaction types for gains or losses
+                        if (T.GainOrLoss == true)
+                        {
+                            // check to see if the gain type is already in the list
+                            if(Globals._LoggedInUser.GainTypes == null)
+                            {
+                                Globals._LoggedInUser.GainTypes = new List<string>();
+                            }
+                            if (Globals._LoggedInUser.GainTypes.Contains(T.TransactionType.ToString()) == false)
+                            {
+                                Globals._LoggedInUser.GainTypes.Add(T.TransactionType.ToString());
+                            }
+                        }
+                        else
+                        {
+                            // check to see if the expense type is already in the list
+                            if (Globals._LoggedInUser.ExpenseTypes == null)
+                            {
+                                Globals._LoggedInUser.ExpenseTypes = new List<string>();
+                            }
+                            if (Globals._LoggedInUser.ExpenseTypes.Contains(T.TransactionType.ToString()) == false)
+                            {
+                                Globals._LoggedInUser.ExpenseTypes.Add(T.TransactionType.ToString());
+                            }
+                        }
+
+
                         transactions.Add(T);
                     }
                 }
