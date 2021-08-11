@@ -207,9 +207,10 @@ namespace Utilities
             System.IO.File.WriteAllText("C:\\Users\\" + System.Environment.UserName + "\\Documents\\Login_System\\Settings.txt", _AllSettings);
         }
 
-        //Load program settings
+        //Load program settings for connecting to the sql database or create 
         public static void LoadSettings()
         {
+            // check to see if the settings file exists
             if (System.IO.File.Exists(Globals._SettingsPath))
             {
                 string FullSettings = System.IO.File.ReadAllText(Globals._SettingsPath);
@@ -231,11 +232,12 @@ namespace Utilities
                     }
                 }
             }
+            // creates the settings folder if it wasnt there already
             else
             {
                 //  TODO
                 // Write the base settings to the computer
-                //System.IO.File.WriteAllText(Globals._SettingsPath, Login_System.Properties.Resources.Settings);
+                System.IO.File.WriteAllText(Globals._SettingsPath, "");
 
             }
         }

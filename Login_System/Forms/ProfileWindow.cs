@@ -340,7 +340,7 @@ namespace Login_System
             this.FriendsRefresh.Abort();
             this.SlideThread.Abort();
             this.ExpandThread.Abort();
-            if(BTForm1.Enabled == true)
+            if(BTForm1 != null)
             {
                 BTForm1.AbortThread();
             }

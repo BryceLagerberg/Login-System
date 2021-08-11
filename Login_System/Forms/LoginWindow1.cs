@@ -50,8 +50,12 @@ namespace Login_System
 
             // Load Last SQL Settings
             Functions.LoadSettings();
-            textBox3.Text = Globals._Settings["SQL Database"];
-            textBox4.Text = Globals._Settings["SQL Server"];
+            if (Globals._Settings.Count > 0)
+            {
+                textBox3.Text = Globals._Settings["SQL Database"];
+                textBox4.Text = Globals._Settings["SQL Server"];
+            }
+
             try
             {
                 if (Globals._Settings["Remember Username"] == "true")
@@ -109,7 +113,7 @@ namespace Login_System
         //changes the SQL server address
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            Globals._SC.SQLServer = textBox4.Text;
+            Globals._SC.SQLServer = textBox4.Text.ToString();
             label5.ForeColor = Color.Gold;
             label5.Text = "Connecting...";
             if (textBox3.Text != "" && textBox4.Text != "")
@@ -186,14 +190,13 @@ namespace Login_System
             if (User != null)
             {
                 User.LoggedIn = true;
-                Functions.SaveSettings("SQL Username", textBox2.Text);
                 Globals._LoggedInUser = User;
 
                 this.Visible = false;
                 PW.Size = new Size(584, 616);
                 PW.Visible = true;
                 textBox1.Text = "";
-                if(Globals._Settings["Remember Username"] == "false") { textBox2.Text = ""; }
+                //if(Globals._Settings["Remember Username"] == "false") { textBox2.Text = ""; }
                 PW.LoadProfile();
 
 
@@ -253,13 +256,19 @@ namespace Login_System
         {
             if (checkBox1.Checked)
             {
-                //save the username to settings file 
+                // save or update remember username setting to true
                 Functions.SaveSettings("Remember Username", "true");
+
+                // save the username to settings file 
+                Functions.SaveSettings("SQL Username", textBox2.Text);
             }
             else
             {
-                //clear saved username from settings file
+                // save or update remember username setting to false
                 Functions.SaveSettings("Remember Username", "false");
+
+                // clear saved username from settings file
+                Functions.SaveSettings("SQL Username", "");
             }
         }
     }

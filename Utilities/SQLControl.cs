@@ -57,7 +57,7 @@ namespace Utilities
             SqlConnectionStringBuilder csb = new SqlConnectionStringBuilder();
             csb.InitialCatalog = DataBase;
             csb.DataSource = SQLServer;
-            //csb.IntegratedSecurity = true;
+            csb.IntegratedSecurity = true;
             csb.UserID = "guest";
             csb.Password = "guest";
 
@@ -85,13 +85,16 @@ namespace Utilities
             using (SqlConnection Connection = new SqlConnection(ConnectionString))
             using (SqlCommand command = Connection.CreateCommand())
             {
-                command.CommandText = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Account Logins' or TABLE_NAME = 'Account Information'";
+                command.CommandText = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Account Logins' or TABLE_NAME = 'Account Information' or TABLE_NAME = 'Chat Logs' or TABLE_NAME = 'BudgetTransactions';";
                 //makes connection to sql server
                 Connection.Open();
 
                 //Check to see what tables exist
                 bool AccountLogins = false;
                 bool AccountInformation = false;
+                bool ChatLogs = false;
+                bool BudgetTransactions = false;
+
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
 
@@ -107,6 +110,14 @@ namespace Utilities
                         {
                             AccountLogins = true;
                         }
+                        else if (Table == "Chat Logs")
+                        {
+                            ChatLogs = true;
+                        }
+                        else if (Table == "BudgetTransactions")
+                        {
+                            BudgetTransactions = true;
+                        }
 
 
 
@@ -114,17 +125,38 @@ namespace Utilities
                 }
 
                 // Create Missing Tables
-                //
                 if (!AccountLogins)
                 {
-                    command.CommandText = "CREATE TABLE " + DataBase + ".dbo.[Account Logins] (Username varchar(50), Password varchar(50), AccountNumber int,);";
-                    command.ExecuteReader();
+                    // Creates the Account Logins table (Note: not defining NULL for each table column defaults to allowing NULL)
+                    command.CommandText = "CREATE TABLE " + DataBase + ".dbo.[Account Logins] (Username varchar(50), Password varchar(50), AccountNumber int);";
+                    using (SqlDataReader Reader = command.ExecuteReader())
+                    {
+                    }
                 }
                 if (!AccountInformation)
                 {
-                    // Email, FirstName, LastName, CreatedOn, LastLogin, ProfilePicture, LoggedIn
+                    // Creates the Account Information table (NOTE: not defining NULL for each table column defaults to allowing NULL)
                     command.CommandText = "CREATE TABLE " + DataBase + ".dbo.[Account Information](AccountNumber int, FirstName varchar(50), LastName varchar(50), Email varchar(50), LoggedIn bit, LastLogin datetime, CreatedOn datetime, ProfilePicture varchar(50));";
-                    command.ExecuteReader();
+                    using (SqlDataReader Reader = command.ExecuteReader())
+                    {
+                    }
+                }
+                if (!ChatLogs)
+                {
+                    // Creates the Chat Logs table (Note: not defining NULL for each table column defaults to allowing NULL)
+                    command.CommandText = "CREATE TABLE " + DataBase + ".dbo.[Chat Logs](AccountNumberSender varchar(10), AccountNumberReceiver varchar(10), SentTime datetime, Message varchar(100));";
+                    using (SqlDataReader Reader = command.ExecuteReader())
+                    {
+                    }
+
+                }
+                if (!BudgetTransactions)
+                {
+                    // Creates the BudgetTransactions table
+                    command.CommandText = "CREATE TABLE " + DataBase + ".dbo.[BudgetTransactions](AccountNumber varchar(10) NOT NULL, TransactionDate datetime NOT NULL, TransactionValue varchar(10) NOT NULL, TransactionType varchar(50) NOT NULL, TransactionNotes varchar(100) NULL, GainOrLoss bit NOT NULL);";
+                    using (SqlDataReader Reader = command.ExecuteReader())
+                    {
+                    }
                 }
 
                 Connection.Close();

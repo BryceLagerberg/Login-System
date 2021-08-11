@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\bryce\\Desktop\\LoginSystem\\Utilities\\Utilities.csproj": {}
+    "C:\\Users\\bryce\\Desktop\\Login System Project\\Utilities\\Utilities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\bryce\\Desktop\\LoginSystem\\Utilities\\Utilities.csproj": {
+    "C:\\Users\\bryce\\Desktop\\Login System Project\\Utilities\\Utilities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\bryce\\Desktop\\LoginSystem\\Utilities\\Utilities.csproj",
+        "projectUniqueName": "C:\\Users\\bryce\\Desktop\\Login System Project\\Utilities\\Utilities.csproj",
         "projectName": "Utilities",
-        "projectPath": "C:\\Users\\bryce\\Desktop\\LoginSystem\\Utilities\\Utilities.csproj",
+        "projectPath": "C:\\Users\\bryce\\Desktop\\Login System Project\\Utilities\\Utilities.csproj",
         "packagesPath": "C:\\Users\\bryce\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\bryce\\Desktop\\LoginSystem\\Utilities\\obj\\",
+        "outputPath": "C:\\Users\\bryce\\Desktop\\Login System Project\\Utilities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\bryce\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -26,7 +26,6 @@
         },
         "frameworks": {
           "netstandard2.0": {
-            "targetAlias": "netstandard2.0",
             "projectReferences": {}
           }
         },
@@ -38,7 +37,6 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "targetAlias": "netstandard2.0",
           "dependencies": {
             "Microsoft.NETCore.Platforms": {
               "target": "Package",
@@ -93,7 +91,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
