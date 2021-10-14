@@ -161,7 +161,8 @@ namespace Login_System
 
             // Clear Old Text
             textBox1.Text = "";
-
+            ListBox LB2 = (ListBox)tabControl1.SelectedTab.Controls["listBox" + CurrentFriend.AccountNumber.ToString()];
+            LB2.Items.Clear();
             LastRefresh = DateTime.MinValue;
 
         }
@@ -176,7 +177,6 @@ namespace Login_System
                     if (CurrentFriend != null && Globals._LoggedInUser != null)
                     {
                         // Load Messages Between You and Current friend
-                        CurrentFriend.Messages = Globals._SC.GetMessages(Globals._LoggedInUser.AccountNumber, CurrentFriend.AccountNumber);
                         CurrentFriend.Messages = Globals._SC.GetMessages(Globals._LoggedInUser.AccountNumber, CurrentFriend.AccountNumber);
                        
                         // Refresh Messages
